@@ -7,7 +7,7 @@ public class WalkState : PlayerState
 {
     private Vector2 inputDirection;
 
-    public WalkState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputReader controls) : base(player, cc, cam, controls)
+    public WalkState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputManager controls) : base(player, cc, cam, controls)
     {
     }
 
@@ -31,7 +31,7 @@ public class WalkState : PlayerState
         {
             player.SwitchState(new SlideState(player, cc, cam, controls));
         }
-        else if (controls.JumpButton && player.IsGrounded())
+        else if (controls.JumpDown && player.IsGrounded())
         {
             player.SetY(player.Jump);
         }

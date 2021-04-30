@@ -9,14 +9,14 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] private float ySensitivity = 100.0f;
     [SerializeField] private Transform cam;
 
-    private PlayerInputReader controls;
+    private PlayerInputManager controls;
     private float xAxis;
     private float yAxis;
     private float xRotation;
 
     private void Awake()
     {
-        controls = GetComponent<PlayerInputReader>();
+        controls = GetComponent<PlayerInputManager>();
         xRotation = cam.localRotation.x;
     }
 
@@ -24,8 +24,8 @@ public class FirstPersonCamera : MonoBehaviour
     {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
-            xAxis = controls.LookX * xSensitivity * Time.deltaTime;
-            yAxis = controls.LookY * ySensitivity * Time.deltaTime;
+            xAxis = controls.LookDir.x * xSensitivity * Time.deltaTime;
+            yAxis = controls.LookDir.y * ySensitivity * Time.deltaTime;
         }
         
         xRotation -= yAxis;

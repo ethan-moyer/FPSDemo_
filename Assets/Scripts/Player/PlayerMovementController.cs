@@ -13,7 +13,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float acceleration = 1f;
     [SerializeField] private float jump = 10f;
     [SerializeField] private float gravity = 10f;
-    private PlayerInputReader controls;
+    private PlayerInputManager controls;
     private CharacterController cc;
     private PlayerState currentState;
     private float slopeAngle;
@@ -30,7 +30,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Awake()
     {
-        controls = GetComponent<PlayerInputReader>();
+        controls = GetComponent<PlayerInputManager>();
         cc = GetComponent<CharacterController>();
         SwitchState(new AirState(this, cc, cam, controls));
     }

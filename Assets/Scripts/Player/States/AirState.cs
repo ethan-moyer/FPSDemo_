@@ -7,7 +7,7 @@ public class AirState : PlayerState
 {
     private Vector2 inputDirection;
 
-    public AirState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputReader controls) : base(player, cc, cam, controls)
+    public AirState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputManager controls) : base(player, cc, cam, controls)
     {
     }
 
@@ -19,7 +19,6 @@ public class AirState : PlayerState
 
     public override void OnStateExit()
     {
-        controls.JumpButton = false;
         player.SetY(0f);
     }
 

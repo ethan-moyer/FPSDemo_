@@ -7,9 +7,9 @@ public class PlayerState
     protected PlayerMovementController player;
     protected CharacterController cc;
     protected Transform cam;
-    protected PlayerInputReader controls;
+    protected PlayerInputManager controls;
 
-    public PlayerState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputReader controls)
+    public PlayerState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputManager controls)
     {
         this.player = player;
         this.cc = cc;
