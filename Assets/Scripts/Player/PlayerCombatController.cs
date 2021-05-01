@@ -46,14 +46,14 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Update()
     {
-        if (controls.WeaponSwitchDown && currentWeapon.currentState != Weapon.States.Busy)
+        if (controls.WeaponSwitchDown && currentWeapon.currentState == Weapon.States.Idle)
         {
             StartCoroutine(SwitchWeapon());
         }
 
-        if (controls.WeaponFireDown && currentWeapon.currentState != Weapon.States.Busy)
+        if (controls.WeaponFireHeld)
         {
-            StartCoroutine(currentWeapon.Fire());
+            currentWeapon.Fire();
         }
     }
 }

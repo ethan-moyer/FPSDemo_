@@ -8,6 +8,7 @@ public class WeaponData : ScriptableObject
     [Header("Base Attributes")]
     public string weaponName;
     public int weaponID;
+    public Sprite crosshair;
     public float damage;
     public float rateOfFire;
     public int maxAmmo;

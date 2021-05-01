@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Magnum
   weaponID: 0
+  crosshair: {fileID: 21300000, guid: 7497536af9d41fe429cd167a41fd3f76, type: 3}
   damage: 17
-  rateOfFire: 1.7
+  rateOfFire: 2.86
   maxAmmo: 64
   magAmmo: 8
   reloadTime: 1.017

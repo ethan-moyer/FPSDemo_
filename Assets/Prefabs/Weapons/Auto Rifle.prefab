@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8113865088636734369}
   - component: {fileID: 2546105491393527358}
   - component: {fileID: 373879096478437161}
+  - component: {fileID: 4552621740731268365}
   m_Layer: 0
   m_Name: Auto Rifle
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3177203043372056065}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0.029851}
-  m_LocalScale: {x: 0.090457, y: 0.090457, z: 0.14914}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &8113865088636734369
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -40,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3177203043372056065}
-  m_Mesh: {fileID: -5495902117074765545, guid: ffc4c5aacc5aeba4694332c8305300cd, type: 3}
+  m_Mesh: {fileID: -5495902117074765545, guid: 78275277f16564a4dbb9a716ba46f14d, type: 3}
 --- !u!23 &2546105491393527358
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -93,6 +94,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 1a5895d42825f5f418276e26ec8e7e31, type: 2}
-  controller: {fileID: 0}
-  cam: {fileID: 0}
   currentAmmo: -1
+  currentState: 0
+--- !u!95 &4552621740731268365
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177203043372056065}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 0fce681a79cad7d48abd4298a6c905de, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

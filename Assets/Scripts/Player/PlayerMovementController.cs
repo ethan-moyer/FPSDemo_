@@ -40,6 +40,8 @@ public class PlayerMovementController : MonoBehaviour
         //Update State & Apply Motion
         currentState.Update();
         cc.Move(MoveDirection * Time.deltaTime);
+
+        Debug.Log($"CC: {cc.velocity}. MoveDir: {moveDirection}. CC: {cc.isGrounded}. {IsGrounded()}.");
     }
 
     public void SwitchState(PlayerState state)
@@ -63,6 +65,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public bool IsGrounded()
     {
+        //Slope Detection
         RaycastHit hit;
         gameObject.layer = 2;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f, slideMask))
@@ -72,13 +75,16 @@ public class PlayerMovementController : MonoBehaviour
             SlopeTangent = Vector3.Cross(u, normal);
             slopeAngle = Vector3.Angle(Vector3.up, normal);
         }
-        bool grounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
         gameObject.layer = 9;
+
+        //Grounded Detection
+        bool grounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
         return grounded;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        //Start falling if head is hit.
         gameObject.layer = 2;
         if (Physics.CheckSphere(transform.position + Vector3.up * (cc.height / 2), 0.5f, groundMask))
         {
@@ -86,7 +92,14 @@ public class PlayerMovementController : MonoBehaviour
         }
         gameObject.layer = 9;
 
-        if (hit.rigidbody != null)
+        //Check for edge hanging and push player back.
+        if (cc.isGrounded == true && IsGrounded() == false)
+        {
+            cc.Move(hit.normal * 0.1f);
+        }
+
+        //Push Props
+        if (hit.gameObject.layer == 12 && hit.rigidbody != null)
         {
             hit.rigidbody.AddForceAtPosition(cc.velocity * 0.1f, hit.point, ForceMode.Impulse);
         }

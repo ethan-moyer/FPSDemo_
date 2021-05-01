@@ -1,20 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    [Header("Components")]
     [SerializeField] protected WeaponData data;
-    [Header("Properties")]
     [SerializeField] protected int currentAmmo;
 
     protected Animator animator;
     protected PlayerCombatController controller;
     protected PlayerInputManager controls;
     protected Transform cam;
+    protected float timeTillNextFire = 0f;
 
-    public enum States { Busy, Idle };
+    public enum States { Busy, Idle, Firing };
     public States currentState;
 
     public int ID { get { return data.weaponID; } }
@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour
         this.controller = controller;
         this.cam = cam;
         this.controls = controls;
+        timeTillNextFire = 0f;
         if (currentAmmo == -1)
             currentAmmo = data.maxAmmo;
     }
@@ -36,8 +37,9 @@ public class Weapon : MonoBehaviour
     //When you switch to this weapon.
     public IEnumerator Equip() 
     {
-        currentState = States.Busy;
         gameObject.SetActive(true);
+        timeTillNextFire = 0f;
+        currentState = States.Busy;
         yield return new WaitForSeconds(0.25f);
         currentState = States.Idle;
     }
@@ -52,12 +54,36 @@ public class Weapon : MonoBehaviour
     }
 
     //When the weapon is fired.
-    public virtual IEnumerator Fire()
+    public virtual void Fire()
     {
-        currentState = States.Busy;
-        Debug.Log("Fire.");
-        animator.SetTrigger("Fire");
-        yield return new WaitForSeconds(data.rateOfFire);
-        currentState = States.Idle;
+        if (timeTillNextFire == 0f && currentState == States.Idle)
+        {
+            currentState = States.Firing;
+            animator.SetTrigger("Fire");
+            timeTillNextFire = 1 / data.rateOfFire;
+
+            RaycastHit hit;
+            controller.gameObject.layer = 2;
+            if (Physics.Raycast(cam.position, cam.forward, out hit))
+            {
+                Debug.Log(hit.transform.name);
+                if (hit.rigidbody != null)
+                    hit.rigidbody.AddForce(cam.forward * 200f);
+            }
+            controller.gameObject.layer = 9;
+        }
+    }
+
+    private void Update()
+    {
+        if (timeTillNextFire > 0f)
+        {
+            timeTillNextFire -= Time.deltaTime;
+        }
+        else if (currentState == States.Firing)
+        {
+            timeTillNextFire = 0f;
+            currentState = States.Idle;
+        }
     }
 }

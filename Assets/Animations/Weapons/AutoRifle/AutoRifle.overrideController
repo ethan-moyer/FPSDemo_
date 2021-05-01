@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AutoRifle
+  m_Controller: {fileID: 9100000, guid: cec04f3b06100ef49a178c3a29de85dc, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 1dacb2e68130b0a43bfd920d3df30fb1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a6ef6c64093959a44adc287a6ac39566, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: df918e91b3021504db2f01656b667018, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7c2f2f327038ef4458e7149159aaa53c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9558bcffcc27e2e4c9e442366b659d44, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e53c68a7d59d15c4aa97200dea2cd589, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a52ac9fe7987e434899e93d4ba6e6fc2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7477c79cc9f06f74a8fb5286ed496588, type: 2}

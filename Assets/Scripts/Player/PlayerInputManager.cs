@@ -12,6 +12,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool JumpDown { get { return GetButtonDown(input.Player.Jump); } }
     public bool WeaponSwitchDown { get { return GetButtonDown(input.Player.WeaponSwitch); } }
     public bool WeaponFireDown { get { return GetButtonDown(input.Player.Fire); } }
+    public bool WeaponFireHeld { get { return GetButton(input.Player.Fire); } }
 
     private void Awake()
     {
