@@ -23,7 +23,7 @@ public class PlayerCombatController : MonoBehaviour
             if (w != null)
             {
                 w.SetUp(this, cam, controls);
-                weapons.Add(w.ID, w);
+                weapons.Add(w.WeaponID, w);
             }
         }
         if (weapons.ContainsKey(currentID) && weapons.ContainsKey(secondID))
@@ -46,7 +46,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Update()
     {
-        if (controls.WeaponSwitchDown && currentWeapon.currentState == Weapon.States.Idle)
+        if (controls.WeaponSwitchDown && currentWeapon.CanSwitch)
         {
             StartCoroutine(SwitchWeapon());
         }

@@ -99,9 +99,9 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         //Push Props
-        if (hit.gameObject.layer == 12 && hit.rigidbody != null)
+        if (hit.gameObject.layer == 12 && hit.gameObject.GetComponent<Prop>() != null)
         {
-            hit.rigidbody.AddForceAtPosition(cc.velocity * 0.1f, hit.point, ForceMode.Impulse);
+            hit.gameObject.GetComponent<Prop>().Hit(hit.point, cc.velocity * 0.1f);
         }
     }
 
