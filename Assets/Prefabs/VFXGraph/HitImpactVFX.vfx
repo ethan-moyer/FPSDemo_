@@ -119,10 +119,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: -270
-    y: -206
-    width: 3975
-    height: 2184
+    x: -245
+    y: -149
+    width: 3925
+    height: 2291
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d4c867f6b72b714dbb5fd1780afe208, type: 3}
-  m_Name: HitImpactDecalVFX
+  m_Name: HitImpactVFX
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 0}
   m_Children:
@@ -200,7 +200,7 @@ VisualEffectResource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HitImpactDecalVFX
+  m_Name: HitImpactVFX
   m_Graph: {fileID: 114350483966674976}
   m_ShaderSources:
   - compute: 1
@@ -1593,7 +1593,7 @@ VisualEffectResource:
       PARTICLE_PER_STRIP_COUNT);\r\n            InitStripAttributes(index, attributes,
       stripData);\r\n#endif\r\n\t\t\t\r\n\t\t\t{\n\t\t\t    ConformToSphere( /*inout
       */attributes.velocity, attributes.position, attributes.mass, float3(0, 0, 0),
-      (float)1, (float)5, (float)20, (float)0.100000001, (float)50, deltaTime_a);\n\t\t\t}\n\t\t\tEulerIntegration(
+      (float)1, (float)9.23999977, (float)20, (float)0.100000001, (float)50, deltaTime_a);\n\t\t\t}\n\t\t\tEulerIntegration(
       /*inout */attributes.position, attributes.velocity, deltaTime_a);\n\t\t\tAge(
       /*inout */attributes.age, deltaTime_a);\n\t\t\tReap(attributes.age, attributes.lifetime, 
       /*inout */attributes.alive);\n\t\t\t\n\r\n\r\n\t\t\tif (attributes.alive)\r\n\t\t\t{\r\n\t\t\t\tattributeBuffer.Store3((index
@@ -1623,8 +1623,8 @@ VisualEffectResource:
       stripData = GetStripDataFromParticleIndex(index, PARTICLE_PER_STRIP_COUNT);\r\n       
       InitStripAttributes(index, attributes, stripData);\r\n#endif\r\n\t\t\r\n\t\t{\n\t\t   
       ConformToSphere( /*inout */attributes.velocity, attributes.position, attributes.mass,
-      float3(0, 0, 0), (float)1, (float)5, (float)20, (float)0.100000001, (float)50,
-      deltaTime_a);\n\t\t}\n\t\tEulerIntegration( /*inout */attributes.position,
+      float3(0, 0, 0), (float)1, (float)9.23999977, (float)20, (float)0.100000001,
+      (float)50, deltaTime_a);\n\t\t}\n\t\tEulerIntegration( /*inout */attributes.position,
       attributes.velocity, deltaTime_a);\n\t\tAge( /*inout */attributes.age, deltaTime_a);\n\t\tReap(attributes.age,
       attributes.lifetime,  /*inout */attributes.alive);\n\t\t\n\r\n\t\tattributeBuffer.Store3((index
       * 0x8 + 0x0) << 2,asuint(attributes.position));\n\t\tattributeBuffer.Store3((index
@@ -3055,7 +3055,7 @@ VisualEffectResource:
         - m_ExpressionIndex: 20
           m_Value: 20
         - m_ExpressionIndex: 21
-          m_Value: 5
+          m_Value: 9.24
         - m_ExpressionIndex: 24
           m_Value: 0.4
         - m_ExpressionIndex: 25
@@ -3788,7 +3788,7 @@ VisualEffectResource:
         index: 46
       params:
       - nameId: sortPriority
-        index: 1
+        index: 3
       processor: {fileID: 0}
       shaderSourceIndex: 2
   - type: 1
@@ -3860,7 +3860,7 @@ VisualEffectResource:
         index: 46
       params:
       - nameId: sortPriority
-        index: 2
+        index: 1
       processor: {fileID: 0}
       shaderSourceIndex: 5
   - type: 1
@@ -3932,7 +3932,7 @@ VisualEffectResource:
         index: 46
       params:
       - nameId: sortPriority
-        index: 3
+        index: 2
       processor: {fileID: 0}
       shaderSourceIndex: 8
   - type: 1
@@ -4637,7 +4637,7 @@ MonoBehaviour:
   colorMapping: 0
   uvMode: 0
   useSoftParticle: 1
-  sortPriority: 1
+  sortPriority: 3
   sort: 0
   indirectDraw: 0
   castShadows: 0
@@ -6160,7 +6160,7 @@ MonoBehaviour:
   colorMapping: 0
   uvMode: 0
   useSoftParticle: 1
-  sortPriority: 2
+  sortPriority: 1
   sort: 0
   indirectDraw: 0
   castShadows: 0
@@ -8045,7 +8045,7 @@ MonoBehaviour:
   colorMapping: 0
   uvMode: 0
   useSoftParticle: 1
-  sortPriority: 3
+  sortPriority: 2
   sort: 0
   indirectDraw: 0
   castShadows: 0
@@ -9036,7 +9036,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 5
+      m_SerializableObject: 9.24
     m_Space: 2147483647
   m_Property:
     name: attractionSpeed

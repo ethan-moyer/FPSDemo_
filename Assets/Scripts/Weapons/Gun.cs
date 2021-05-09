@@ -6,6 +6,8 @@ using UnityEngine.VFX;
 public class Gun : Weapon
 {
     [Header("Gun Attributes")]
+    [SerializeField] private float maxRange = 80f;
+    [SerializeField] private float maxOffset = 5f;
     [SerializeField] private int magAmmo;
     [SerializeField] private float reloadTime;
     [SerializeField] private GameObject muzzleFlash;
@@ -48,7 +50,8 @@ public class Gun : Weapon
 
             RaycastHit hit;
             controller.gameObject.layer = 2;
-            if (Physics.Raycast(cam.position, cam.forward, out hit))
+            Vector3 randDirection = (cam.forward.normalized * maxRange) + (cam.right.normalized * Random.Range(-1f, 1f) * maxOffset) + (cam.up.normalized * Random.Range(-1f, 1f) * maxOffset);
+            if (Physics.Raycast(cam.position, randDirection, out hit, maxRange))
             {
                 if (hit.transform.gameObject.layer == 12 && hit.transform.GetComponent<Prop>() != null)
                 {
@@ -90,6 +93,17 @@ public class Gun : Weapon
         {
             timeTillNextFire = 0f;
             currentState = States.Idle;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (cam != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(cam.position, cam.forward.normalized * maxRange);
+
+            Gizmos.DrawLine(cam.position, cam.forward.normalized * maxRange + cam.right);
         }
     }
 }
