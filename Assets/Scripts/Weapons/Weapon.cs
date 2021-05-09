@@ -8,7 +8,8 @@ public abstract class Weapon : MonoBehaviour
     [Header("Weapon Attributes")]
     [SerializeField] protected string weaponName = "Weapon";
     [SerializeField] protected int weaponID = 0;
-    [SerializeField] private Sprite reticle = null;
+    [SerializeField] public Sprite reticle = null;
+    [SerializeField] public float reticleSize = 0.1f;
     [SerializeField] protected float damage = 0f;
     [SerializeField] protected float fireRate = 0f;
     [SerializeField] protected int currentAmmo = -1;
