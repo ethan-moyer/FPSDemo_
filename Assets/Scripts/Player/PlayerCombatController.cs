@@ -48,6 +48,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         if (controls.WeaponSwitchDown && currentWeapon.CanSwitch)
         {
+            Debug.Log("Switching");
             StartCoroutine(SwitchWeapon());
         }
 

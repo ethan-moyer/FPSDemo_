@@ -24,7 +24,7 @@ public abstract class Weapon : MonoBehaviour
 
     public abstract bool CanSwitch { get; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
     }

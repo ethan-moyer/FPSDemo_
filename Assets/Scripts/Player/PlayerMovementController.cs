@@ -40,8 +40,8 @@ public class PlayerMovementController : MonoBehaviour
         //Update State & Apply Motion
         currentState.Update();
         cc.Move(MoveDirection * Time.deltaTime);
-
-        Debug.Log($"CC: {cc.velocity}. MoveDir: {moveDirection}. CC: {cc.isGrounded}. {IsGrounded()}.");
+        
+        //Debug.Log($"CC: {cc.velocity}. MoveDir: {moveDirection}. CC: {cc.isGrounded}. {IsGrounded()}.");
     }
 
     public void SwitchState(PlayerState state)
