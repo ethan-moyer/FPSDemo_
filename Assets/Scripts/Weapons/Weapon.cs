@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [Header("Weapon Attributes")]
+    [Header("Weapon Identification")]
     [SerializeField] protected string weaponName = "Weapon";
     [SerializeField] protected int weaponID = 0;
+    [Header("Aiming Attribtes")]
     [SerializeField] public Sprite reticle = null;
     [SerializeField] public float reticleSize = 0.1f;
+    [SerializeField] public float maxRange = 80f;
+    [SerializeField] protected float coneRadius = 5f;
+    [Header("Firing Attributes")]
     [SerializeField] protected float damage = 0f;
     [SerializeField] protected float fireRate = 0f;
     [SerializeField] protected int currentAmmo = -1;
@@ -22,6 +26,8 @@ public abstract class Weapon : MonoBehaviour
     protected float timeTillNextFire = 0f;
 
     public int WeaponID => weaponID;
+
+    public float MaxAngle { get { return Vector3.Angle(cam.forward.normalized, cam.forward.normalized + cam.right.normalized); } }
 
     public abstract bool CanSwitch { get; }
 

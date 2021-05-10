@@ -59,35 +59,34 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Update()
     {
+        //Input
         if (controls.WeaponSwitchDown && currentWeapon.CanSwitch)
         {
             StartCoroutine(SwitchWeapon());
         }
-
         if (controls.WeaponFireHeld)
         {
             currentWeapon.Fire();
         }
+        if (controls.WeaponReloadDown && currentWeapon is Gun g)
+        {
+            StartCoroutine(g.Reload());
+        }
 
+
+        //Objects within reticle
         RaycastHit hit;
         gameObject.layer = 2;
-        if (currentWeapon != null && Physics.SphereCast(cam.position, currentWeapon.reticleSize, cam.forward, out hit))
+        if (currentWeapon != null && Physics.SphereCast(cam.position, currentWeapon.reticleSize, cam.forward, out hit, currentWeapon.maxRange))
         {
-            Debug.Log(hit.transform.name);
-            hudReticle.color = Color.red;
+            if (hit.transform.gameObject.layer == 12)
+                hudReticle.color = Color.red;
+            else
+                hudReticle.color = Color.white;
         }
         else
         {
             hudReticle.color = Color.white;
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (currentWeapon != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(cam.position + cam.forward, currentWeapon.reticleSize);
         }
     }
 }
