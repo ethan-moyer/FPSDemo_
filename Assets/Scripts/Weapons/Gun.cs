@@ -16,9 +16,19 @@ public class Gun : Weapon
 
     public override bool CanSwitch => currentState == States.Idle;
 
-    protected override void Awake()
+    public override void SetUp(PlayerCombatController controller, Transform cam, PlayerInputManager controls)
     {
-        base.Awake();
+        base.SetUp(controller, cam, controls);
+        if (magAmmo <= currentAmmo)
+        {
+            currentMagAmmo = magAmmo;
+            currentAmmo -= magAmmo;
+        }
+        else
+        {
+            currentMagAmmo += currentAmmo;
+            currentAmmo = 0;
+        }
     }
 
     public override IEnumerator Equip()
@@ -70,6 +80,11 @@ public class Gun : Weapon
             }
             controller.gameObject.layer = 9;
         }
+    }
+
+    public override string AmmoAsText()
+    {
+        return $"{currentMagAmmo} {currentAmmo}";
     }
 
     /// <summary>

@@ -36,7 +36,7 @@ public abstract class Weapon : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void SetUp(PlayerCombatController controller, Transform cam, PlayerInputManager controls)
+    public virtual void SetUp(PlayerCombatController controller, Transform cam, PlayerInputManager controls)
     {
         this.controller = controller;
         this.cam = cam;
@@ -54,4 +54,6 @@ public abstract class Weapon : MonoBehaviour
 
     //When the weapon is fired.
     public abstract void Fire();
+
+    public abstract string AmmoAsText();
 }

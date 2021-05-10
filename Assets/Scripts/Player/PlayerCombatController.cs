@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class PlayerCombatController : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Image hudReticle;
+    [SerializeField] private TextMeshProUGUI hudAmmo;
     [SerializeField] private Transform cam;
     [SerializeField] private Transform weaponsContainer;
     [SerializeField] private int currentID;
@@ -34,6 +36,7 @@ public class PlayerCombatController : MonoBehaviour
             StartCoroutine(weapons[currentID].Equip());
             currentWeapon = weapons[currentID];
             UpdateReticle();
+            UpdateAmmoText();
         }
     }
 
@@ -44,6 +47,7 @@ public class PlayerCombatController : MonoBehaviour
         yield return StartCoroutine(weapons[secondID].Equip());
         currentWeapon = weapons[secondID];
         UpdateReticle();
+        UpdateAmmoText();
 
         int tempID = currentID;
         currentID = secondID;
@@ -55,6 +59,11 @@ public class PlayerCombatController : MonoBehaviour
         hudReticle.gameObject.SetActive(true);
         hudReticle.sprite = currentWeapon.reticle;
         hudReticle.rectTransform.localScale = Vector3.one * currentWeapon.reticleSize;
+    }
+
+    private void UpdateAmmoText()
+    {
+        hudAmmo.text = currentWeapon.AmmoAsText();
     }
 
     private void Update()
@@ -72,7 +81,7 @@ public class PlayerCombatController : MonoBehaviour
         {
             StartCoroutine(g.Reload());
         }
-
+        UpdateAmmoText();
 
         //Objects within reticle
         RaycastHit hit;
@@ -88,5 +97,6 @@ public class PlayerCombatController : MonoBehaviour
         {
             hudReticle.color = Color.white;
         }
+        gameObject.layer = 9;
     }
 }
