@@ -11,11 +11,6 @@ public class Gun : Weapon
     [SerializeField] private GameObject muzzleFlash;
     private int currentMagAmmo;
 
-    private enum States { Idle, Busy, Firing, Reloading };
-    private States currentState = States.Busy;
-
-    public override bool CanSwitch => currentState == States.Idle;
-
     public override void SetUp(PlayerCombatController controller, Transform cam, PlayerInputManager controls)
     {
         base.SetUp(controller, cam, controls);
@@ -31,23 +26,6 @@ public class Gun : Weapon
         }
     }
 
-    public override IEnumerator Equip()
-    {
-        gameObject.SetActive(true);
-        timeTillNextFire = 0f;
-        currentState = States.Busy;
-        yield return new WaitForSeconds(0.25f);
-        currentState = States.Idle;
-    }
-
-    public override IEnumerator Unequip()
-    {
-        currentState = States.Busy;
-        animator.SetTrigger("Unequip");
-        yield return new WaitForSeconds(0.25f);
-        gameObject.SetActive(false);
-    }
-
     /// <summary>
     /// This method is used for firing the gun. Fires a single ray with a randomized direction based on the cone radius, and the response depends on the layer of the hit object.
     /// </summary>
@@ -55,11 +33,12 @@ public class Gun : Weapon
     {
         if (timeTillNextFire == 0f && currentState == States.Idle && currentMagAmmo > 0)
         {
-            currentState = States.Firing;
             muzzleFlash.GetComponent<VisualEffect>().Play();
             animator.SetTrigger("Fire");
+            currentState = States.Firing;
             timeTillNextFire = 1 / fireRate;
             currentMagAmmo -= 1;
+            controller.UpdateAmmoText($"{currentMagAmmo} {currentAmmo}");
 
             RaycastHit hit;
             controller.gameObject.layer = 2;
@@ -82,11 +61,6 @@ public class Gun : Weapon
         }
     }
 
-    public override string AmmoAsText()
-    {
-        return $"{currentMagAmmo} {currentAmmo}";
-    }
-
     /// <summary>
     /// This method handles reloading the weapon. Pauses control while the animation plays and ammo is transfered into magAmmo if possible.
     /// </summary>
@@ -98,7 +72,7 @@ public class Gun : Weapon
             int neededAmmo = magAmmo - currentMagAmmo;
             if (neededAmmo > 0 && currentAmmo > 0)
             {
-                currentState = States.Reloading;
+                currentState = States.Busy;
                 animator.SetTrigger("Reload");
                 yield return new WaitForSeconds(reloadTime);
 
@@ -115,6 +89,7 @@ public class Gun : Weapon
 
                 currentState = States.Idle;
             }
+            controller.UpdateAmmoText($"{currentMagAmmo} {currentAmmo}");
         }
         else
         {
@@ -147,5 +122,12 @@ public class Gun : Weapon
             timeTillNextFire = 0f;
             currentState = States.Idle;
         }
+
+        animator.SetFloat("Speed", controls.WalkDir.magnitude);
+    }
+
+    protected override void UpdateAmmoText()
+    {
+        controller.UpdateAmmoText($"{currentMagAmmo} {currentAmmo}");
     }
 }

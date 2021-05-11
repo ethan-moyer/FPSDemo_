@@ -24,18 +24,24 @@ public abstract class Weapon : MonoBehaviour
     protected PlayerInputManager controls;
     protected Transform cam;
     protected float timeTillNextFire = 0f;
+    protected enum States { Idle, Busy, Firing };
+    protected States currentState;
 
     public int WeaponID => weaponID;
-
+    public bool IsIdle => currentState == States.Idle;
     public float MaxAngle { get { return Vector3.Angle(cam.forward.normalized, cam.forward.normalized + cam.right.normalized); } }
-
-    public abstract bool CanSwitch { get; }
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Handles tying this weapon to a player.
+    /// </summary>
+    /// <param name="controller">The PlayerCombatController to link it to.</param>
+    /// <param name="cam">The camera of the player to link it to.</param>
+    /// <param name="controls">The PlayerInputManager to link it to.</param>
     public virtual void SetUp(PlayerCombatController controller, Transform cam, PlayerInputManager controls)
     {
         this.controller = controller;
@@ -46,14 +52,41 @@ public abstract class Weapon : MonoBehaviour
             currentAmmo = maxAmmo;
     }
 
-    //When you switch to this weapon.
-    public abstract IEnumerator Equip();
+    /// <summary>
+    /// Handles the action of switching to this weapon.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Equip()
+    {
+        gameObject.SetActive(true);
+        timeTillNextFire = 0f;
+        currentState = States.Busy;
 
-    //When you switch away from this weapon.
-    public abstract IEnumerator Unequip();
+        yield return new WaitForSeconds(0.25f);
 
-    //When the weapon is fired.
+        currentState = States.Idle;
+        controller.ShowReticle(true);
+        controller.UpdateReticle(reticle, reticleSize);
+        UpdateAmmoText();
+    }
+
+    /// <summary>
+    /// Handles the action of switching away from this weapon.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Unequip()
+    {
+        controller.ShowReticle(false);
+        currentState = States.Busy;
+        animator.SetTrigger("Unequip");
+        yield return new WaitForSeconds(0.25f);
+        gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Handles the firing of the weapon.
+    /// </summary>
     public abstract void Fire();
 
-    public abstract string AmmoAsText();
+    protected abstract void UpdateAmmoText();
 }

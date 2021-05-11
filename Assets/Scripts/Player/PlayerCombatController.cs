@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+/// <summary>
+/// This component handles the combat aspects for playable characters.
+/// This includes: managing weapons, handling combat input (shooting, reloading, etc.), player health, and updating the HUD.
+/// This component should be added to the root player prefab along with PlayerInput, PlayerMomvementController, PlayerInputManager, and FirstPersonCamera.
+/// </summary>
 public class PlayerCombatController : MonoBehaviour
 {
     [Header("Components")]
@@ -14,6 +19,7 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private Transform weaponsContainer;
     [SerializeField] private int currentID;
     [SerializeField] private int secondID;
+
     private PlayerInputManager controls;
     private Dictionary<int, Weapon> weapons;
     private Weapon currentWeapon;
@@ -35,8 +41,6 @@ public class PlayerCombatController : MonoBehaviour
         {
             StartCoroutine(weapons[currentID].Equip());
             currentWeapon = weapons[currentID];
-            UpdateReticle();
-            UpdateAmmoText();
         }
     }
 
@@ -46,30 +50,33 @@ public class PlayerCombatController : MonoBehaviour
         yield return StartCoroutine(weapons[currentID].Unequip());
         yield return StartCoroutine(weapons[secondID].Equip());
         currentWeapon = weapons[secondID];
-        UpdateReticle();
-        UpdateAmmoText();
 
         int tempID = currentID;
         currentID = secondID;
         secondID = tempID;
     }
 
-    private void UpdateReticle()
+    public void ShowReticle(bool shouldShow)
     {
-        hudReticle.gameObject.SetActive(true);
-        hudReticle.sprite = currentWeapon.reticle;
-        hudReticle.rectTransform.localScale = Vector3.one * currentWeapon.reticleSize;
+        hudReticle.gameObject.SetActive(shouldShow);
     }
 
-    private void UpdateAmmoText()
+    public void UpdateReticle(Sprite newReticle, float newSize)
     {
-        hudAmmo.text = currentWeapon.AmmoAsText();
+        hudReticle.gameObject.SetActive(true);
+        hudReticle.sprite = newReticle;
+        hudReticle.rectTransform.localScale = Vector3.one * newSize;
+    }
+
+    public void UpdateAmmoText(string newText)
+    {
+        hudAmmo.text = newText;
     }
 
     private void Update()
     {
         //Input
-        if (controls.WeaponSwitchDown && currentWeapon.CanSwitch)
+        if (controls.WeaponSwitchDown && currentWeapon.IsIdle)
         {
             StartCoroutine(SwitchWeapon());
         }
@@ -81,7 +88,6 @@ public class PlayerCombatController : MonoBehaviour
         {
             StartCoroutine(g.Reload());
         }
-        UpdateAmmoText();
 
         //Objects within reticle
         RaycastHit hit;
