@@ -82,11 +82,11 @@ public class PlayerCombatController : MonoBehaviour
         }
         if (controls.WeaponFireHeld)
         {
-            currentWeapon.Fire();
+            currentWeapon.PrimaryAction();
         }
-        if (controls.WeaponReloadDown && currentWeapon is Gun g)
+        if (controls.WeaponReloadDown)
         {
-            StartCoroutine(g.Reload());
+            currentWeapon.ReloadAction();
         }
 
         //Objects within reticle

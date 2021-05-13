@@ -84,9 +84,19 @@ public abstract class Weapon : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the firing of the weapon.
+    /// Handles the action corresponding to the left-mouse/right-trigger.
     /// </summary>
-    public abstract void Fire();
+    public abstract void PrimaryAction();
+
+    /// <summary>
+    /// Handles the action corresponding to the right-mouse/left-trigger.
+    /// </summary>
+    public abstract void SecondaryAction();
+
+    /// <summary>
+    /// Handles the action corresponding to the R-key/west button.
+    /// </summary>
+    public abstract void ReloadAction();
 
     protected abstract void UpdateAmmoText();
 }

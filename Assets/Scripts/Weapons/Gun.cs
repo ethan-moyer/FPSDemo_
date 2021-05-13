@@ -6,10 +6,10 @@ using UnityEngine.VFX;
 public class Gun : Weapon
 {
     [Header("Gun Attributes")]
-    [SerializeField] private int magAmmo;
-    [SerializeField] private float reloadTime;
-    [SerializeField] private GameObject muzzleFlash;
-    private int currentMagAmmo;
+    [SerializeField] protected int magAmmo;
+    [SerializeField] protected float reloadTime;
+    [SerializeField] protected GameObject muzzleFlash;
+    protected int currentMagAmmo;
 
     public override void SetUp(PlayerCombatController controller, Transform cam, PlayerInputManager controls)
     {
@@ -26,12 +26,29 @@ public class Gun : Weapon
         }
     }
 
+    public override void PrimaryAction()
+    {
+        if (currentState == States.Idle)
+            Fire();
+    }
+
+    public override void SecondaryAction()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ReloadAction()
+    {
+        if (currentState == States.Idle)
+            StartCoroutine(Reload());
+    }
+
     /// <summary>
     /// This method is used for firing the gun. Fires a single ray with a randomized direction based on the cone radius, and the response depends on the layer of the hit object.
     /// </summary>
-    public override void Fire()
+    protected virtual void Fire()
     {
-        if (timeTillNextFire == 0f && currentState == States.Idle && currentMagAmmo > 0)
+        if (timeTillNextFire == 0f && currentMagAmmo > 0)
         {
             muzzleFlash.GetComponent<VisualEffect>().Play();
             animator.SetTrigger("Fire");
@@ -67,34 +84,27 @@ public class Gun : Weapon
     /// <returns></returns>
     public IEnumerator Reload()
     {
-        if (currentState == States.Idle)
+        int neededAmmo = magAmmo - currentMagAmmo;
+        if (neededAmmo > 0 && currentAmmo > 0)
         {
-            int neededAmmo = magAmmo - currentMagAmmo;
-            if (neededAmmo > 0 && currentAmmo > 0)
+            currentState = States.Busy;
+            animator.SetTrigger("Reload");
+            yield return new WaitForSeconds(reloadTime);
+
+            if (neededAmmo <= currentAmmo)
             {
-                currentState = States.Busy;
-                animator.SetTrigger("Reload");
-                yield return new WaitForSeconds(reloadTime);
-
-                if (neededAmmo <= currentAmmo)
-                {
-                    currentMagAmmo += neededAmmo;
-                    currentAmmo -= neededAmmo;
-                }
-                else
-                {
-                    currentMagAmmo += currentAmmo;
-                    currentAmmo = 0;
-                }
-
-                currentState = States.Idle;
+                currentMagAmmo += neededAmmo;
+                currentAmmo -= neededAmmo;
             }
-            controller.UpdateAmmoText($"{currentMagAmmo} {currentAmmo}");
+            else
+            {
+                currentMagAmmo += currentAmmo;
+                currentAmmo = 0;
+            }
+
+            currentState = States.Idle;
         }
-        else
-        {
-            yield break;
-        }
+        controller.UpdateAmmoText($"{currentMagAmmo} {currentAmmo}");
     }
 
     /// <summary>
@@ -103,7 +113,7 @@ public class Gun : Weapon
     /// <param name="index">The index of the particle in the object pooler.</param>
     /// <param name="position">The position to place the particle.</param>
     /// <param name="normal">The normal vector of the hit surface.</param>
-    private void PlaceParticle(int index, Vector3 position, Vector3 normal)
+    protected void PlaceParticle(int index, Vector3 position, Vector3 normal)
     {
         GameObject hitEffect = ObjectPooler.SharedInstance.GetPooledObject(index);
         hitEffect.transform.position = position;
