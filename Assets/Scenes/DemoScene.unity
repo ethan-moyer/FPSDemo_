@@ -312,6 +312,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 08 60
       objectReference: {fileID: 0}
+    - target: {fileID: 1660485228, guid: d1f3dd8fd3923e64f96b5a712c7af8fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2017234852, guid: d1f3dd8fd3923e64f96b5a712c7af8fe, type: 3}
       propertyPath: currentID
       value: 2
@@ -324,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 1678176368984412449, guid: d1f3dd8fd3923e64f96b5a712c7af8fe,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 4294967295
+      value: 7991
       objectReference: {fileID: 0}
     - target: {fileID: 1678176369222646584, guid: d1f3dd8fd3923e64f96b5a712c7af8fe,
         type: 3}
@@ -8301,7 +8305,7 @@ Transform:
   m_Father: {fileID: 331606606}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
---- !u!114 &868164699
+--- !u!114 &775679394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9761,7 +9765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: 5b33875497b4a824aac3e69de886ba1b, type: 2}
   m_StaticLightingSkyUniqueID: 1
-  m_SkySettings: {fileID: 868164699}
+  m_SkySettings: {fileID: 775679394}
   m_SkySettingsFromProfile: {fileID: -6031330784033868857, guid: 5b33875497b4a824aac3e69de886ba1b,
     type: 2}
 --- !u!4 &1367321813
@@ -11301,6 +11305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2069846493}
   - component: {fileID: 2069846495}
+  - component: {fileID: 2069846492}
   m_Layer: 0
   m_Name: Multiplayer Manager
   m_TagString: Untagged
@@ -11308,6 +11313,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2069846492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069846491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf9988b51c0be94aa9914c45d5b41e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMask:
+    serializedVersion: 2
+    m_Bits: 7991
 --- !u!4 &2069846493
 Transform:
   m_ObjectHideFlags: 0
@@ -11334,13 +11354,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_MaxPlayerCount: 2
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2069846492}
+        m_MethodName: OnPlayerJoined
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
