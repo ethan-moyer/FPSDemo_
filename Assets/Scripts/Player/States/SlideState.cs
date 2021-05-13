@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlideState : PlayerState
 {
     private Vector2 inputDirection;
-    public SlideState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputManager controls) : base(player, cc, cam, controls)
+    public SlideState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputReader controls) : base(player, cc, cam, controls)
     {
     }
 

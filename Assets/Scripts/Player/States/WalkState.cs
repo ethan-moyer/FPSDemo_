@@ -7,7 +7,7 @@ public class WalkState : PlayerState
 {
     private Vector2 inputDirection;
 
-    public WalkState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputManager controls) : base(player, cc, cam, controls)
+    public WalkState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputReader controls) : base(player, cc, cam, controls)
     {
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponSway : MonoBehaviour
 {
-    [SerializeField] private PlayerInputManager controls;
+    [SerializeField] private PlayerInputReader controls;
     [SerializeField] private float swayAmount;
     [SerializeField] private float maxRotX;
     [SerializeField] private float maxRotY;

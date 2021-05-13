@@ -8,19 +8,19 @@ public class MultiplayerManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private int maxPlayers;
     [SerializeField] private Vector3 spawnPoint;
-    private List<PlayerInputManager> players;
+    private List<PlayerInputReader> players;
 
     /*private void Awake()
     {
-        if (playerPrefab.GetComponent<PlayerInputManager>() == null)
+        if (playerPrefab.GetComponent<PlayerInputReader>() == null)
         {
-            Debug.LogWarning("PlayerPrefab has no PlayerInputManager component.");
+            Debug.LogWarning("PlayerPrefab has no PlayerInputReader component.");
             return;
         }
 
         for (int i = 0; i < maxPlayers; ++i)
         {
-            PlayerInputManager newPlayer = Instantiate(playerPrefab, spawnPoint, Quaternion.identity).GetComponent<PlayerInputManager>();
+            PlayerInputReader newPlayer = Instantiate(playerPrefab, spawnPoint, Quaternion.identity).GetComponent<PlayerInputReader>();
             if (i == 0)
             {
                 newPlayer.AssignDevice(Keyboard.current);

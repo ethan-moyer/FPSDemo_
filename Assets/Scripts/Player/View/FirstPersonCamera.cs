@@ -9,14 +9,14 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] private float ySensitivity = 100.0f;
     [SerializeField] private Transform cam;
 
-    private PlayerInputManager controls;
+    private PlayerInputReader controls;
     private float xAxis;
     private float yAxis;
     private float xRotation;
 
     private void Awake()
     {
-        controls = GetComponent<PlayerInputManager>();
+        controls = GetComponent<PlayerInputReader>();
         xRotation = cam.localRotation.x;
     }
 

@@ -21,7 +21,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected Animator animator;
     protected PlayerCombatController controller;
-    protected PlayerInputManager controls;
+    protected PlayerInputReader controls;
     protected Transform cam;
     protected float timeTillNextFire = 0f;
     protected enum States { Idle, Busy, Firing };
@@ -41,8 +41,8 @@ public abstract class Weapon : MonoBehaviour
     /// </summary>
     /// <param name="controller">The PlayerCombatController to link it to.</param>
     /// <param name="cam">The camera of the player to link it to.</param>
-    /// <param name="controls">The PlayerInputManager to link it to.</param>
-    public virtual void SetUp(PlayerCombatController controller, Transform cam, PlayerInputManager controls)
+    /// <param name="controls">The PlayerInputReader to link it to.</param>
+    public virtual void SetUp(PlayerCombatController controller, Transform cam, PlayerInputReader controls)
     {
         this.controller = controller;
         this.cam = cam;

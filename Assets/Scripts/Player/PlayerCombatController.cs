@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// This component handles the combat aspects for playable characters.
 /// This includes: managing weapons, handling combat input (shooting, reloading, etc.), player health, and updating the HUD.
-/// This component should be added to the root player prefab along with PlayerInput, PlayerMomvementController, PlayerInputManager, and FirstPersonCamera.
+/// This component should be added to the root player prefab along with PlayerInput, PlayerMomvementController, PlayerInputReader, and FirstPersonCamera.
 /// </summary>
 public class PlayerCombatController : MonoBehaviour
 {
@@ -20,13 +20,13 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private int currentID;
     [SerializeField] private int secondID;
 
-    private PlayerInputManager controls;
+    private PlayerInputReader controls;
     private Dictionary<int, Weapon> weapons;
     private Weapon currentWeapon;
 
     private void Awake()
     {
-        controls = GetComponent<PlayerInputManager>();
+        controls = GetComponent<PlayerInputReader>();
         weapons = new Dictionary<int, Weapon>();
         foreach (Transform t in weaponsContainer)
         {

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using static UnityEngine.InputSystem.InputAction;
 
-public class PlayerInputManager : MonoBehaviour
+public class PlayerInputReader : MonoBehaviour
 {
     public Vector2 WalkDir { get; set; }
     public Vector2 LookDir { get; set; }
