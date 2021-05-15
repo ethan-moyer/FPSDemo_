@@ -11,9 +11,9 @@ public class Gun : Weapon
     [SerializeField] protected GameObject muzzleFlash;
     protected int currentMagAmmo;
 
-    public override void SetUp(PlayerCombatController controller, Transform cam, PlayerInputReader controls)
+    public override void SetUp(PlayerCombatController controller, Transform cam, PlayerInputReader controls, Animator animator)
     {
-        base.SetUp(controller, cam, controls);
+        base.SetUp(controller, cam, controls, animator);
         if (magAmmo <= currentAmmo)
         {
             currentMagAmmo = magAmmo;

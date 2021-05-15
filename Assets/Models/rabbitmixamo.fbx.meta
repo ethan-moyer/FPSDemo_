@@ -9,6 +9,9 @@ ModelImporter:
   - first:
       74: 4781951162920444690
     second: Armature|ArmatureAction
+  - first:
+      74: -6535707143619692296
+    second: Armature|Action2 (1)
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -38,11 +41,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|ArmatureAction
-      takeName: Armature|ArmatureAction
+      name: Armature|Action2 (1)
+      takeName: Armature|Action2
       internalID: 0
       firstFrame: 0
-      lastFrame: 49
+      lastFrame: 89
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

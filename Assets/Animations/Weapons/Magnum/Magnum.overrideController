@@ -9,13 +9,15 @@ AnimatorOverrideController:
   m_Name: Magnum
   m_Controller: {fileID: 9100000, guid: cec04f3b06100ef49a178c3a29de85dc, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 1dacb2e68130b0a43bfd920d3df30fb1, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 1dacb2e68130b0a43bfd920d3df30fb1, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: df918e91b3021504db2f01656b667018, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: df918e91b3021504db2f01656b667018, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: a52ac9fe7987e434899e93d4ba6e6fc2, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: a52ac9fe7987e434899e93d4ba6e6fc2, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 9558bcffcc27e2e4c9e442366b659d44, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 9558bcffcc27e2e4c9e442366b659d44, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 1c38402295cca954090375c27c1e23cd, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 1c38402295cca954090375c27c1e23cd, type: 2}
+  - m_OriginalClip: {fileID: -5154504331251089435, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+      type: 3}
+    m_OverrideClip: {fileID: -5154504331251089435, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+      type: 3}
+  - m_OriginalClip: {fileID: -4154900423893413223, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+      type: 3}
+    m_OverrideClip: {fileID: -4154900423893413223, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+      type: 3}
+  - m_OriginalClip: {fileID: -5533726921053159883, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+      type: 3}
+    m_OverrideClip: {fileID: -5533726921053159883, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+      type: 3}

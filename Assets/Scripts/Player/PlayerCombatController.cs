@@ -13,6 +13,10 @@ using UnityEngine.UI;
 public class PlayerCombatController : MonoBehaviour
 {
     [Header("Components")]
+    [SerializeField] private Transform viewModelPivot;
+    [SerializeField] private GameObject viewModel;
+    [SerializeField] private Animator viewModelAnimator;
+    [SerializeField] private GameObject worldModel;
     [SerializeField] private Image hudReticle;
     [SerializeField] private TextMeshProUGUI hudAmmo;
     [SerializeField] private Transform cam;
@@ -33,7 +37,7 @@ public class PlayerCombatController : MonoBehaviour
             Weapon w = t.GetComponent<Weapon>();
             if (w != null)
             {
-                w.SetUp(this, cam, controls);
+                w.SetUp(this, cam, controls, viewModelAnimator);
                 weapons.Add(w.WeaponID, w);
             }
         }
@@ -71,6 +75,25 @@ public class PlayerCombatController : MonoBehaviour
     public void UpdateAmmoText(string newText)
     {
         hudAmmo.text = newText;
+    }
+
+    public void UpdateModel(WeaponModel newModel, bool updatingWorldModel)
+    {
+        if (updatingWorldModel == true)
+        {
+            worldModel.GetComponent<MeshFilter>().mesh = newModel.model;
+            worldModel.GetComponent<MeshRenderer>().materials = newModel.materials;
+            worldModel.transform.localPosition = newModel.offset;
+            worldModel.transform.localScale = newModel.scale;
+        }
+        else
+        {
+            viewModel.GetComponent<MeshFilter>().mesh = newModel.model;
+            viewModel.GetComponent<MeshRenderer>().materials = newModel.materials;
+            viewModelAnimator.runtimeAnimatorController = newModel.animator;
+            viewModelPivot.localPosition = newModel.offset;
+            viewModelPivot.localScale = newModel.scale;
+        }
     }
 
     private void Update()
