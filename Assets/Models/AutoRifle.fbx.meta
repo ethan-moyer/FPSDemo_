@@ -2,7 +2,31 @@ fileFormatVersion: 2
 guid: 78275277f16564a4dbb9a716ba46f14d
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -5451648059967187391
+    second: Cube|Equip
+  - first:
+      74: -4828548317358185830
+    second: Cube|Fire
+  - first:
+      74: 2131864205095655572
+    second: Cube|Idle
+  - first:
+      74: 5662886646882478057
+    second: Cube|Reload
+  - first:
+      74: -4761320727336426216
+    second: AutoRifle|Equip
+  - first:
+      74: 7087153982308362123
+    second: AutoRifle|Fire
+  - first:
+      74: -8553145434809549282
+    second: AutoRifle|Idle
+  - first:
+      74: -5311678509150948424
+    second: AutoRifle|Reload
   externalObjects: {}
   materials:
     materialImportMode: 1

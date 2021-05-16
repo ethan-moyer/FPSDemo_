@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] private Transform cam = null;
     [SerializeField] private Transform groundCheck = null;
+    [Header("Ground & Slopes")]
     [SerializeField] private float groundRadius = 0.5f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask slideMask;
+    [Header("Movement Attributes")]
     [SerializeField] private float walkSpeed = 10f;
     [SerializeField] private float acceleration = 1f;
     [SerializeField] private float jump = 10f;
     [SerializeField] private float gravity = 10f;
+
     private PlayerInputReader controls;
     private CharacterController cc;
     private PlayerState currentState;

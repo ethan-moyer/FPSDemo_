@@ -182,17 +182,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shotgun
   weaponID: 2
-  animator: {fileID: 4323934651546386186}
   viewModel:
     model: {fileID: 3814378201483603881, guid: 3180fca6b4ad7d741b154962b6cdac25, type: 3}
     materials:
     - {fileID: 2100000, guid: a5589f44cddf4734b8d3fddd5cc6c9dc, type: 2}
-    offset: {x: 0, y: 0, z: 0}
-    scale: {x: 0, y: 0, z: 0}
+    animator: {fileID: 22100000, guid: a359a42b907578642b20a85e74f9566e, type: 2}
+    offset: {x: 0.108, y: -0.11, z: 0.034}
+    scale: {x: 0.1, y: 0.1, z: 0.1}
   worldModel:
     model: {fileID: 3814378201483603881, guid: 3180fca6b4ad7d741b154962b6cdac25, type: 3}
     materials:
     - {fileID: 2100000, guid: a5589f44cddf4734b8d3fddd5cc6c9dc, type: 2}
+    animator: {fileID: 0}
     offset: {x: 0, y: 0, z: 0}
     scale: {x: 0, y: 0, z: 0}
   reticle: {fileID: 21300000, guid: dffe51e9e633ec44eb11b567a73a9cec, type: 3}

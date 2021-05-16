@@ -2,7 +2,19 @@ fileFormatVersion: 2
 guid: 3180fca6b4ad7d741b154962b6cdac25
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 7469933335797160465
+    second: Shotgun|Equip
+  - first:
+      74: -638464783690361892
+    second: Shotgun|Fire
+  - first:
+      74: -72189951653738543
+    second: Shotgun|Idle
+  - first:
+      74: 4500668894454925544
+    second: Shotgun|Reload
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -69,7 +81,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []

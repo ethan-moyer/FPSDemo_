@@ -14,6 +14,7 @@ public class PlayerInputReader : MonoBehaviour
     public bool WeaponFireDown { get; set; }
     public bool WeaponFireHeld { get; set; }
     public bool WeaponReloadDown { get; set; }
+    public bool WeaponInteractDown { get; set; }
 
     public void OnWalk(CallbackContext ctx)
     {
@@ -61,11 +62,18 @@ public class PlayerInputReader : MonoBehaviour
             WeaponReloadDown = true;
     }
 
+    public void OnInteract(CallbackContext ctx)
+    {
+        if (ctx.performed)
+            WeaponInteractDown = true;
+    }
+
     private void LateUpdate()
     {
         JumpDown = false;
         WeaponSwitchDown = false;
         WeaponFireDown = false;
         WeaponReloadDown = false;
+        WeaponInteractDown = false;
     }
 }

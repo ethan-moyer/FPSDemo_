@@ -1,117 +1,119 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
-[Serializable]
-public struct WeaponModel
-{
-    public Mesh model;
-    public Material[] materials;
-    public RuntimeAnimatorController animator;
-    public Vector3 offset;
-    public Vector3 scale;
-}
 
 public abstract class Weapon : MonoBehaviour
 {
     [Header("Weapon Identification")]
-    [SerializeField] protected string weaponName = "Weapon";
     [SerializeField] protected int weaponID = 0;
+    [SerializeField] protected string weaponName = "";
     [Header("Models")]
     [SerializeField] protected WeaponModel viewModel;
     [SerializeField] protected WeaponModel worldModel;
-    [Header("Aiming Attribtes")]
-    [SerializeField] public Sprite reticle = null;
-    [SerializeField] public float reticleSize = 0.1f;
-    [SerializeField] public float maxRange = 80f;
+    [SerializeField] protected WeaponEffect particleEffect;
+    [Header("Aiming")]
+    [SerializeField] private Sprite reticle = null;
+    [SerializeField] private float reticleScale = 0.1f;
+    [SerializeField] protected float maxDistance = 80f;
     [SerializeField] protected float coneRadius = 5f;
-    [Header("Firing Attributes")]
+    [Header("Attack Attributes")]
     [SerializeField] protected float damage = 0f;
     [SerializeField] protected float fireRate = 0f;
     [SerializeField] protected int currentAmmo = -1;
-    [SerializeField] protected int maxAmmo = 0;
-
-    protected Animator animator;
-    protected PlayerCombatController controller;
-    protected PlayerInputReader controls;
-    protected Transform cam;
-    protected float timeTillNextFire = 0f;
+    [SerializeField] protected int maxAmmo = 100;
+    protected Animator animator = null;
+    protected Transform cam = null;
+    protected PlayerCombatController combatController = null;
+    protected PlayerInputReader controls = null;
     protected enum States { Idle, Busy, Firing };
     protected States currentState;
+    protected float timeTillNextFire = 0f;
 
-    public int WeaponID => weaponID;
-    public bool IsIdle => currentState == States.Idle;
-    public float MaxAngle { get { return Vector3.Angle(cam.forward.normalized, cam.forward.normalized + cam.right.normalized); } }
-
-    /// <summary>
-    /// Handles tying this weapon to a player.
-    /// </summary>
-    /// <param name="controller">The PlayerCombatController to link it to.</param>
-    /// <param name="cam">The camera of the player to link it to.</param>
-    /// <param name="controls">The PlayerInputReader to link it to.</param>
-    public virtual void SetUp(PlayerCombatController controller, Transform cam, PlayerInputReader controls, Animator animator)
+    public int WeaponID
     {
-        this.controller = controller;
+        get { return weaponID; }
+    }
+
+    public bool IsIdle
+    {
+        get { return currentState == States.Idle; }
+    }
+
+    public WeaponModel ViewModel
+    {
+        get { return viewModel; }
+    }
+
+    public WeaponModel WorldModel
+    {
+        get { return worldModel; }
+    }
+
+    public WeaponEffect ParticleEffect
+    {
+        get { return particleEffect; }
+    }
+
+    public (Sprite, float) ReticleData
+    {
+        get { return (reticle, reticleScale); }
+    }
+
+    public virtual void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator)
+    {
+        this.combatController = combatController;
         this.cam = cam;
         this.controls = controls;
         this.animator = animator;
-        timeTillNextFire = 0f;
-        if (currentAmmo == -1)
-            currentAmmo = maxAmmo;
+        AddAmmo(currentAmmo);
     }
 
-    /// <summary>
-    /// Handles the action of switching to this weapon.
-    /// </summary>
-    /// <returns></returns>
+    public void AddAmmo(int newAmmo)
+    {
+        if (newAmmo == -1)
+            currentAmmo = maxAmmo;
+        else
+            currentAmmo = Mathf.Min(currentAmmo + newAmmo, maxAmmo);
+    }
+
     public IEnumerator Equip()
     {
-        float timeStart = Time.time;
         gameObject.SetActive(true);
         timeTillNextFire = 0f;
         currentState = States.Busy;
-        controller.UpdateModel(worldModel, true);
-        controller.UpdateModel(viewModel, false);
+        combatController.UpdateAmmoText(AmmoToText());
 
         yield return new WaitForSeconds(0.25f);
 
         currentState = States.Idle;
-        controller.ShowReticle(true);
-        controller.UpdateReticle(reticle, reticleSize);
-        UpdateAmmoText();
-        Debug.Log(Time.time - timeStart);
     }
 
-    /// <summary>
-    /// Handles the action of switching away from this weapon.
-    /// </summary>
-    /// <returns></returns>
     public IEnumerator Unequip()
     {
-        controller.ShowReticle(false);
         currentState = States.Busy;
         animator.SetTrigger("Unequip");
+
         yield return new WaitForSeconds(0.25f);
+
         gameObject.SetActive(false);
-        Debug.Log("Unequip time up.");
+    }
+    
+    protected void PlaceEffect(int index, Vector3 position, Vector3 normal)
+    {
+        GameObject hitEffect = ObjectPooler.SharedInstance.GetPooledObject(index);
+        if (hitEffect != null)
+        {
+            hitEffect.transform.position = position;
+            hitEffect.transform.rotation = Quaternion.LookRotation(normal);
+            hitEffect.SetActive(true);
+        }
     }
 
-    /// <summary>
-    /// Handles the action corresponding to the left-mouse/right-trigger.
-    /// </summary>
     public abstract void PrimaryAction();
 
-    /// <summary>
-    /// Handles the action corresponding to the right-mouse/left-trigger.
-    /// </summary>
     public abstract void SecondaryAction();
 
-    /// <summary>
-    /// Handles the action corresponding to the R-key/west button.
-    /// </summary>
-    public abstract void ReloadAction();
+    public abstract void ThirdAction();
 
-    protected abstract void UpdateAmmoText();
+    public abstract string AmmoToText();
 }

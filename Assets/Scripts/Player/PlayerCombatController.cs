@@ -4,72 +4,99 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
-/// <summary>
-/// This component handles the combat aspects for playable characters.
-/// This includes: managing weapons, handling combat input (shooting, reloading, etc.), player health, and updating the HUD.
-/// This component should be added to the root player prefab along with PlayerInput, PlayerMomvementController, PlayerInputReader, and FirstPersonCamera.
-/// </summary>
 public class PlayerCombatController : MonoBehaviour
 {
-    [Header("Components")]
-    [SerializeField] private Transform viewModelPivot;
-    [SerializeField] private GameObject viewModel;
-    [SerializeField] private Animator viewModelAnimator;
-    [SerializeField] private GameObject worldModel;
-    [SerializeField] private Image hudReticle;
-    [SerializeField] private TextMeshProUGUI hudAmmo;
-    [SerializeField] private Transform cam;
-    [SerializeField] private Transform weaponsContainer;
-    [SerializeField] private int currentID;
-    [SerializeField] private int secondID;
-
+    [Header("Weapons")]
+    [SerializeField] private Transform weaponsContainer = null;
+    [SerializeField] private int currentID = 0;
+    [SerializeField] private int secondID = 1;
+    [Header("Models")]
+    [SerializeField] private Transform viewModelPivot = null;
+    [SerializeField] private GameObject viewModel = null;
+    [SerializeField] private VisualEffect viewEffect = null;
+    [SerializeField] private GameObject worldModel = null;
+    [Header("HUD")]
+    [SerializeField] private Image hudReticle = null;
+    [SerializeField] private TextMeshProUGUI hudAmmo = null;
+    [SerializeField] private Transform cam = null;
+    private MeshFilter viewModelFilter = null;
+    private MeshRenderer viewModelRenderer = null;
+    private Animator viewModelAnimator = null;
     private PlayerInputReader controls;
     private Dictionary<int, Weapon> weapons;
     private Weapon currentWeapon;
 
     private void Awake()
     {
+        viewModelFilter = viewModel.GetComponent<MeshFilter>();
+        viewModelRenderer = viewModel.GetComponent<MeshRenderer>();
+        viewModelAnimator = viewModel.GetComponent<Animator>();
         controls = GetComponent<PlayerInputReader>();
         weapons = new Dictionary<int, Weapon>();
+
         foreach (Transform t in weaponsContainer)
         {
             Weapon w = t.GetComponent<Weapon>();
             if (w != null)
             {
-                w.SetUp(this, cam, controls, viewModelAnimator);
+                w.Init(this, cam, controls, viewModelAnimator);
                 weapons.Add(w.WeaponID, w);
             }
         }
-        if (weapons.ContainsKey(currentID) && weapons.ContainsKey(secondID))
+
+        SwitchTo(currentID);
+    }
+
+    public void SwitchTo(int index)
+    {
+        if (weapons.ContainsKey(index))
         {
+            currentID = index;
             StartCoroutine(weapons[currentID].Equip());
             currentWeapon = weapons[currentID];
+
+            UpdateReticle();
+            UpdateModels();
         }
     }
 
-    private IEnumerator SwitchWeapon()
+    public IEnumerator SwapWeapons()
     {
         hudReticle.gameObject.SetActive(false);
         yield return StartCoroutine(weapons[currentID].Unequip());
-        yield return StartCoroutine(weapons[secondID].Equip());
-        currentWeapon = weapons[secondID];
 
+        currentWeapon = weapons[secondID];
         int tempID = currentID;
         currentID = secondID;
         secondID = tempID;
+
+        UpdateReticle();
+        UpdateModels();
+
+        yield return StartCoroutine(weapons[currentID].Equip());
     }
 
-    public void ShowReticle(bool shouldShow)
+    public void UpdateModels()
     {
-        hudReticle.gameObject.SetActive(shouldShow);
+        //View Model
+        viewModelFilter.mesh = currentWeapon.ViewModel.mesh;
+        viewModelRenderer.materials = currentWeapon.ViewModel.materials;
+        viewModelAnimator.runtimeAnimatorController = currentWeapon.ViewModel.animator;
+        viewModelPivot.localPosition = currentWeapon.ViewModel.offset;
+        viewModelPivot.localScale = currentWeapon.ViewModel.scale;
+        viewEffect.transform.localPosition = currentWeapon.ParticleEffect.offset;
+        viewEffect.transform.localScale = currentWeapon.ParticleEffect.scale;
+        viewEffect.visualEffectAsset = currentWeapon.ParticleEffect.visualEffect;
+        
     }
 
-    public void UpdateReticle(Sprite newReticle, float newSize)
+    public void UpdateReticle()
     {
         hudReticle.gameObject.SetActive(true);
-        hudReticle.sprite = newReticle;
-        hudReticle.rectTransform.localScale = Vector3.one * newSize;
+        hudReticle.sprite = currentWeapon.ReticleData.Item1;
+        hudReticle.rectTransform.localScale = Vector3.one * currentWeapon.ReticleData.Item2;
     }
 
     public void UpdateAmmoText(string newText)
@@ -77,31 +104,11 @@ public class PlayerCombatController : MonoBehaviour
         hudAmmo.text = newText;
     }
 
-    public void UpdateModel(WeaponModel newModel, bool updatingWorldModel)
-    {
-        if (updatingWorldModel == true)
-        {
-            worldModel.GetComponent<MeshFilter>().mesh = newModel.model;
-            worldModel.GetComponent<MeshRenderer>().materials = newModel.materials;
-            worldModel.transform.localPosition = newModel.offset;
-            worldModel.transform.localScale = newModel.scale;
-        }
-        else
-        {
-            viewModel.GetComponent<MeshFilter>().mesh = newModel.model;
-            viewModel.GetComponent<MeshRenderer>().materials = newModel.materials;
-            viewModelAnimator.runtimeAnimatorController = newModel.animator;
-            viewModelPivot.localPosition = newModel.offset;
-            viewModelPivot.localScale = newModel.scale;
-        }
-    }
-
     private void Update()
     {
-        //Input
         if (controls.WeaponSwitchDown && currentWeapon.IsIdle)
         {
-            StartCoroutine(SwitchWeapon());
+            StartCoroutine(SwapWeapons());
         }
         if (controls.WeaponFireHeld)
         {
@@ -109,23 +116,7 @@ public class PlayerCombatController : MonoBehaviour
         }
         if (controls.WeaponReloadDown)
         {
-            currentWeapon.ReloadAction();
+            currentWeapon.ThirdAction();
         }
-
-        //Objects within reticle
-        RaycastHit hit;
-        gameObject.layer = 2;
-        if (currentWeapon != null && Physics.SphereCast(cam.position, currentWeapon.reticleSize, cam.forward, out hit, currentWeapon.maxRange))
-        {
-            if (hit.transform.gameObject.layer == 12)
-                hudReticle.color = Color.red;
-            else
-                hudReticle.color = Color.white;
-        }
-        else
-        {
-            hudReticle.color = Color.white;
-        }
-        gameObject.layer = 9;
     }
 }
