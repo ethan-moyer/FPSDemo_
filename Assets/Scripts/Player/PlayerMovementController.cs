@@ -105,7 +105,7 @@ public class PlayerMovementController : MonoBehaviour
         //Push Props
         if (hit.gameObject.layer == 12 && hit.gameObject.GetComponent<Prop>() != null)
         {
-            hit.gameObject.GetComponent<Prop>().Hit(hit.point, cc.velocity * 0.1f);
+            //hit.gameObject.GetComponent<Prop>().Hit(hit.point, cc.velocity * 0.1f);
         }
     }
 

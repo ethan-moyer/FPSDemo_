@@ -28,6 +28,11 @@ public class PlayerCombatController : MonoBehaviour
     private Dictionary<int, Weapon> weapons;
     private Weapon currentWeapon;
 
+    public Weapon CurrentWeapon
+    {
+        get { return currentWeapon; }
+    }
+
     private void Awake()
     {
         viewModelFilter = viewModel.GetComponent<MeshFilter>();
@@ -46,15 +51,16 @@ public class PlayerCombatController : MonoBehaviour
             }
         }
 
-        SwitchTo(currentID);
+        SwitchTo(currentID, -1);
     }
 
-    public void SwitchTo(int index)
+    public void SwitchTo(int index, int ammo)
     {
         if (weapons.ContainsKey(index))
         {
             currentID = index;
-            StartCoroutine(weapons[currentID].Equip());
+            weapons[index].SetAmmo(ammo);
+            StartCoroutine(weapons[index].Equip());
             currentWeapon = weapons[currentID];
 
             UpdateReticle();

@@ -12,9 +12,14 @@ public class Gun : Weapon
     [SerializeField] protected VisualEffect muzzleFlash = null;
     protected int currentMagAmmo = 0;
 
-    public override void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator, int startingAmmo = -1)
+    public override int CurrentAmmo
     {
-        base.Init(combatController, cam, controls, animator, startingAmmo);
+        get { return currentAmmo + currentMagAmmo; }
+    }
+
+    public override void SetAmmo(int newAmmo)
+    {
+        base.SetAmmo(newAmmo);
         if (maxMagAmmo <= currentAmmo)
         {
             currentMagAmmo = maxMagAmmo;

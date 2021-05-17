@@ -56,16 +56,18 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == 12)
             {
-                /*PropWeapon prop = hit.transform.GetComponent<PropWeapon>();
+                PropWeapon prop = hit.transform.GetComponent<PropWeapon>();
                 if (prop != null)
                 {
                     if (controls.WeaponInteractDown)
                     {
                         Destroy(prop.gameObject);
-                        PropWeapon newProp = Instantiate(combatController.currentWeapon.propPrefab, transform.position, Quaternion.identity).GetComponent<PropWeapon>();
-                        combatController.PickUpWeapon(prop.WeaponID, prop.Ammo);
+                        GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, hit.point + Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
+                        newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.CurrentAmmo;
+                        print(newProp.GetComponent<PropWeapon>().ammo);
+                        combatController.SwitchTo(prop.WeaponID, prop.Ammo);
                     }
-                }*/
+                }
             }
         }
     }

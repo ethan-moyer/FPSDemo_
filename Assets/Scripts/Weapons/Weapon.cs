@@ -11,6 +11,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected WeaponModel viewModel;
     [SerializeField] protected WeaponModel worldModel;
     [SerializeField] protected WeaponEffect particleEffect;
+    [SerializeField] protected GameObject propPrefab;
     [Header("Aiming")]
     [SerializeField] private Sprite reticle = null;
     [SerializeField] private float reticleScale = 0.1f;
@@ -19,7 +20,7 @@ public abstract class Weapon : MonoBehaviour
     [Header("Attack Attributes")]
     [SerializeField] protected float damage = 0f;
     [SerializeField] protected float fireRate = 0f;
-    [SerializeField] protected int currentAmmo = -1;
+    protected int currentAmmo = 0;
     [SerializeField] protected int maxAmmo = 100;
     protected Animator animator = null;
     protected Transform cam = null;
@@ -32,6 +33,11 @@ public abstract class Weapon : MonoBehaviour
     public int WeaponID
     {
         get { return weaponID; }
+    }
+
+    public virtual int CurrentAmmo
+    {
+        get { return currentAmmo; }
     }
 
     public bool IsIdle
@@ -54,26 +60,36 @@ public abstract class Weapon : MonoBehaviour
         get { return particleEffect; }
     }
 
+    public GameObject PropPrefab
+    {
+        get { return propPrefab; }
+    }
+
     public (Sprite, float) ReticleData
     {
         get { return (reticle, reticleScale); }
     }
 
-    public virtual void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator, int startingAmmo = -1)
+    public void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator, int startingAmmo = -1)
     {
         this.combatController = combatController;
         this.cam = cam;
         this.controls = controls;
         this.animator = animator;
-        AddAmmo(startingAmmo);
+        SetAmmo(startingAmmo);
     }
 
-    public void AddAmmo(int newAmmo)
+    public void AddAmmo(int additionalAmmo)
+    {
+        currentAmmo = Mathf.Min(currentAmmo + additionalAmmo, maxAmmo);
+    }
+
+    public virtual void SetAmmo(int newAmmo)
     {
         if (newAmmo == -1)
             currentAmmo = maxAmmo;
         else
-            currentAmmo = Mathf.Min(currentAmmo + newAmmo, maxAmmo);
+            currentAmmo = Mathf.Min(newAmmo, maxAmmo);
     }
 
     public IEnumerator Equip()
