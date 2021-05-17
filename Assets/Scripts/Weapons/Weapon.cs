@@ -59,13 +59,13 @@ public abstract class Weapon : MonoBehaviour
         get { return (reticle, reticleScale); }
     }
 
-    public virtual void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator)
+    public virtual void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator, int startingAmmo = -1)
     {
         this.combatController = combatController;
         this.cam = cam;
         this.controls = controls;
         this.animator = animator;
-        AddAmmo(currentAmmo);
+        AddAmmo(startingAmmo);
     }
 
     public void AddAmmo(int newAmmo)

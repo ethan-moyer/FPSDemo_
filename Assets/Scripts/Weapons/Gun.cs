@@ -12,9 +12,9 @@ public class Gun : Weapon
     [SerializeField] protected VisualEffect muzzleFlash = null;
     protected int currentMagAmmo = 0;
 
-    public override void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator)
+    public override void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator, int startingAmmo = -1)
     {
-        base.Init(combatController, cam, controls, animator);
+        base.Init(combatController, cam, controls, animator, startingAmmo);
         if (maxMagAmmo <= currentAmmo)
         {
             currentMagAmmo = maxMagAmmo;
@@ -123,7 +123,7 @@ public class Gun : Weapon
         if (hitEffect != null)
         {
             hitEffect.transform.position = position;
-            hitEffect.transform.rotation = Quaternion.LookRotation(normal);
+            hitEffect.transform.rotation = Quaternion.Euler(normal);
             hitEffect.SetActive(true);
         }
     }
