@@ -24,6 +24,8 @@ public class PlayerCombatController : MonoBehaviour
     private MeshFilter viewModelFilter = null;
     private MeshRenderer viewModelRenderer = null;
     private Animator viewModelAnimator = null;
+    private MeshFilter worldModelFilter = null;
+    private MeshRenderer worldModelRenderer = null;
     private PlayerInputReader controls;
     private Dictionary<int, Weapon> weapons;
     private Weapon currentWeapon;
@@ -38,6 +40,8 @@ public class PlayerCombatController : MonoBehaviour
         viewModelFilter = viewModel.GetComponent<MeshFilter>();
         viewModelRenderer = viewModel.GetComponent<MeshRenderer>();
         viewModelAnimator = viewModel.GetComponent<Animator>();
+        worldModelFilter = worldModel.GetComponent<MeshFilter>();
+        worldModelRenderer = worldModel.GetComponent<MeshRenderer>();
         controls = GetComponent<PlayerInputReader>();
         weapons = new Dictionary<int, Weapon>();
 
@@ -46,7 +50,7 @@ public class PlayerCombatController : MonoBehaviour
             Weapon w = t.GetComponent<Weapon>();
             if (w != null)
             {
-                w.Init(this, cam, controls, viewModelAnimator);
+                w.Init(this, cam, controls, viewModelAnimator, viewEffect);
                 weapons.Add(w.WeaponID, w);
             }
         }
@@ -92,10 +96,15 @@ public class PlayerCombatController : MonoBehaviour
         viewModelAnimator.runtimeAnimatorController = currentWeapon.ViewModel.animator;
         viewModelPivot.localPosition = currentWeapon.ViewModel.offset;
         viewModelPivot.localScale = currentWeapon.ViewModel.scale;
+        //View Model Visual Effect
         viewEffect.transform.localPosition = currentWeapon.ParticleEffect.offset;
         viewEffect.transform.localScale = currentWeapon.ParticleEffect.scale;
         viewEffect.visualEffectAsset = currentWeapon.ParticleEffect.visualEffect;
-        
+        //World Model
+        worldModelFilter.mesh = currentWeapon.WorldModel.mesh;
+        worldModelRenderer.materials = currentWeapon.WorldModel.materials;
+        worldModel.transform.localPosition = currentWeapon.WorldModel.offset;
+        worldModel.transform.localScale = currentWeapon.WorldModel.scale;
     }
 
     public void UpdateReticle()

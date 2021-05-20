@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
                     if (controls.WeaponInteractDown)
                     {
                         Destroy(prop.gameObject);
-                        GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, hit.point + Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
+                        GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + cam.forward.normalized * 0.6f, combatController.CurrentWeapon.PropPrefab.transform.rotation);
                         newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.CurrentAmmo;
                         print(newProp.GetComponent<PropWeapon>().ammo);
                         combatController.SwitchTo(prop.WeaponID, prop.Ammo);

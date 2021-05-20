@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -18,11 +19,11 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float maxDistance = 80f;
     [SerializeField] protected float coneRadius = 5f;
     [Header("Attack Attributes")]
-    [SerializeField] protected float damage = 0f;
     [SerializeField] protected float fireRate = 0f;
     protected int currentAmmo = 0;
     [SerializeField] protected int maxAmmo = 100;
     protected Animator animator = null;
+    protected VisualEffect effect = null;
     protected Transform cam = null;
     protected PlayerCombatController combatController = null;
     protected PlayerInputReader controls = null;
@@ -70,12 +71,13 @@ public abstract class Weapon : MonoBehaviour
         get { return (reticle, reticleScale); }
     }
 
-    public void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator, int startingAmmo = -1)
+    public void Init(PlayerCombatController combatController, Transform cam, PlayerInputReader controls, Animator animator, VisualEffect effect, int startingAmmo = -1)
     {
         this.combatController = combatController;
         this.cam = cam;
         this.controls = controls;
         this.animator = animator;
+        this.effect = effect;
         SetAmmo(startingAmmo);
     }
 
@@ -121,6 +123,17 @@ public abstract class Weapon : MonoBehaviour
         {
             hitEffect.transform.position = position;
             hitEffect.transform.rotation = Quaternion.LookRotation(normal);
+            hitEffect.SetActive(true);
+        }
+    }
+
+    protected void PlaceHitEffect(int index, Vector3 position, Vector3 normal)
+    {
+        GameObject hitEffect = ObjectPooler.SharedInstance.GetPooledObject(index);
+        if (hitEffect != null)
+        {
+            hitEffect.transform.position = position;
+            hitEffect.transform.rotation = Quaternion.Euler(normal);
             hitEffect.SetActive(true);
         }
     }
