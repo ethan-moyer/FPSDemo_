@@ -14,6 +14,7 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Movement Attributes")]
     [SerializeField] private float walkSpeed = 10f;
     [SerializeField] private float acceleration = 1f;
+    [SerializeField] private float decceleration = 1f;
     [SerializeField] private float jump = 10f;
     [SerializeField] private float gravity = 10f;
 
@@ -26,6 +27,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public float WalkSpeed => walkSpeed;
     public float Acceleration => acceleration;
+    public float Decceleration => decceleration;
     public float Jump => jump;
     public float Gravity => gravity;
     public float SlopeAngle { get { return slopeAngle; } set { slopeAngle = value; } }

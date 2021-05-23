@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6949729372992679739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6949729372992679738}
+  - component: {fileID: 6949729372992679737}
+  m_Layer: 9
+  m_Name: Rocket Launcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6949729372992679738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6949729372992679739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6949729372992679737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6949729372992679739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f14f810edb059a449a6f8123bfb3d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponID: 3
+  weaponName: Rocket Launcher
+  viewModel:
+    mesh: {fileID: -1928178662584927812, guid: 1c8b97d4318c1e8479c97d3b047957b6, type: 3}
+    materials:
+    - {fileID: 2100000, guid: c58723e470ca5394d8d894590502fc00, type: 2}
+    animator: {fileID: 22100000, guid: 8cca763c712304544bfe87675bc2a66c, type: 2}
+    offset: {x: 0.187, y: -0.1253, z: 0.0493}
+    scale: {x: 0.2, y: 0.2, z: 0.1}
+  worldModel:
+    mesh: {fileID: 0}
+    materials: []
+    animator: {fileID: 0}
+    offset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+  particleEffect:
+    visualEffect: {fileID: 8926484042661614526, guid: 7e6eb7595322c5242af3e639057d9a3b,
+      type: 3}
+    offset: {x: -0.073, y: -3.38, z: 0.527}
+    scale: {x: 40, y: 40, z: 40}
+  propPrefab: {fileID: 0}
+  reticle: {fileID: 21300000, guid: 7497536af9d41fe429cd167a41fd3f76, type: 3}
+  reticleScale: 0.1
+  maxDistance: 50
+  coneRadius: 5
+  fireRate: 1
+  maxAmmo: 100
+  maxMagAmmo: 100
+  reloadTime: 2
+  projectile: {fileID: 2156091882128631284, guid: b3d4fc927f3d4304aae69013c46e2cbb,
+    type: 3}
+  launchOffset: {x: 0.8, y: 0, z: 0.4}

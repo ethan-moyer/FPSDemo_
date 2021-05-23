@@ -21,11 +21,17 @@ public class WalkState : PlayerState
 
     public override void Update()
     {
-        inputDirection = controls.WalkDir;
-        Vector3 velocity = player.transform.forward * inputDirection.y + player.transform.right * inputDirection.x;
+        Vector3 velocity = player.transform.forward * controls.WalkDir.y + player.transform.right * controls.WalkDir.x;
         velocity *= player.WalkSpeed;
         velocity.y = player.MoveDirection.y;
-        player.MoveDirection = Vector3.Lerp(player.MoveDirection, velocity, player.Acceleration * Time.deltaTime);
+        if (controls.WalkDir == Vector2.zero)
+        {
+            player.MoveDirection = Vector3.Lerp(player.MoveDirection, velocity, player.Decceleration * Time.deltaTime);
+        }
+        else
+        {
+            player.MoveDirection = Vector3.Lerp(player.MoveDirection, velocity, player.Acceleration * Time.deltaTime);
+        }
 
         if (player.IsGrounded() && player.SlopeAngle != 0f && player.SlopeAngle > cc.slopeLimit)
         {

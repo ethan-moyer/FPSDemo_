@@ -12,13 +12,13 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform cam;
-    [SerializeField] private Transform viewModels;
-    [SerializeField] private Transform worldModels;
-    private PlayerCombatController combatController;
-    private PlayerMovementController movementController;
-    private PlayerInputReader controls;
-    private CharacterController cc;
+    [SerializeField] private Transform cam = null;
+    [SerializeField] private Transform viewModels = null;
+    [SerializeField] private Transform worldModels = null;
+    private PlayerCombatController combatController = null;
+    private PlayerMovementController movementController = null;
+    private PlayerInputReader controls = null;
+    private CharacterController cc = null;
 
     private void Awake()
     {
@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
         camera.cullingMask &= ~(1 << worldLayer);
         ChangeLayerRecursive(worldModels, worldLayer);
         ChangeLayerRecursive(viewModels, viewLayer);
+    }
+
+    public void PhysicsHit(Vector3 direction, float strength)
+    {
+        movementController.MoveDirection += direction * strength;
     }
 
     private void Update()

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Launcher : ReloadableWeapon
 {
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private float launchOffset;
+    [SerializeField] private Rocket projectile;
+    [SerializeField] private Vector3 launchOffset;
 
     protected override void Fire()
     {
@@ -18,8 +18,20 @@ public class Launcher : ReloadableWeapon
             animator.SetTrigger("Fire");
             combatController.UpdateAmmoText(AmmoToText());
 
-            Rocket newProjectile = Instantiate(projectile, cam.position + cam.forward.normalized * launchOffset, projectile.transform.rotation).GetComponent<Rocket>();
-            newProjectile.direction = cam.forward;
+            Rocket newProjectile = Instantiate(projectile, cam.TransformPoint(launchOffset), Quaternion.LookRotation(cam.forward)).GetComponent<Rocket>();
+            newProjectile.player = combatController.gameObject;
+
+            RaycastHit hit;
+            combatController.gameObject.layer = 2;
+            if (Physics.Raycast(cam.position, cam.forward, out hit, maxDistance))
+            {
+                newProjectile.direction = (hit.point - cam.TransformPoint(launchOffset)).normalized;
+            }
+            else
+            {
+                newProjectile.direction = cam.forward;
+            }
+            combatController.gameObject.layer = 9;
         }
     }
 }

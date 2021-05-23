@@ -33,8 +33,15 @@ public class Explosive : MonoBehaviour
                         Prop prop = hit.transform.GetComponent<Prop>();
                         if (prop != null)
                         {
-                            Debug.Log("Hit prop");
                             prop.Hit(point, hit.normal * falloff * -100f);
+                        }
+                    }
+                    if (hit.transform.gameObject.layer == 9)
+                    {
+                        PlayerController player = hit.transform.GetComponent<PlayerController>();
+                        if (player != null)
+                        {
+                            player.PhysicsHit(point - transform.position, falloff * damage * 0.15f);
                         }
                     }
                 }

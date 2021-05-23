@@ -132,7 +132,7 @@ public abstract class Weapon : MonoBehaviour
         GameObject hitEffect = ObjectPooler.SharedInstance.GetPooledObject(index);
         if (hitEffect != null)
         {
-            hitEffect.transform.position = position;
+            hitEffect.transform.position = position + normal*0.1f;
             hitEffect.transform.rotation = Quaternion.Euler(normal);
             hitEffect.SetActive(true);
         }
