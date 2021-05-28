@@ -46,6 +46,14 @@
                     "interactions": "Press(behavior=2)"
                 },
                 {
+                    "name": "Zoom",
+                    "type": "Button",
+                    "id": "273d4b06-b97e-4a3e-996e-078f80c8ce1c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.3)"
+                },
+                {
                     "name": "WeaponSwitch",
                     "type": "Button",
                     "id": "caeb9106-9b63-4e48-b881-4b34d8ef1164",
@@ -376,6 +384,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1010012c-ae0e-4d9e-93d4-e58b525ab7da",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0d003485-911d-4049-b916-ad37fe9fab69",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

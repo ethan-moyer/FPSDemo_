@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2156091882128631285
+--- !u!1 &862478903126388313
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2156091882128631287}
-  - component: {fileID: 5836370496554114922}
-  - component: {fileID: 4375415015950965426}
-  - component: {fileID: 2156091882128631284}
+  - component: {fileID: 5586893376668223842}
+  - component: {fileID: 5010584103301766149}
+  - component: {fileID: 210694977134804813}
   m_Layer: 0
-  m_Name: Rocket
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2156091882128631287
+--- !u!4 &5586893376668223842
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156091882128631285}
+  m_GameObject: {fileID: 862478903126388313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.696947, y: 0.81, z: 0.46412924}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
-  m_Children:
-  - {fileID: 5785641586753044385}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 2156091882128631287}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5836370496554114922
+--- !u!33 &5010584103301766149
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156091882128631285}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4375415015950965426
+  m_GameObject: {fileID: 862478903126388313}
+  m_Mesh: {fileID: 1988216149656743765, guid: b9ad2ba1e7e763042887afa344092383, type: 3}
+--- !u!23 &210694977134804813
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2156091882128631285}
+  m_GameObject: {fileID: 862478903126388313}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -81,6 +79,41 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &2156091882128631285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2156091882128631287}
+  - component: {fileID: 2156091882128631284}
+  - component: {fileID: 7798542855982790661}
+  - component: {fileID: 6241526731334778740}
+  m_Layer: 0
+  m_Name: Rocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2156091882128631287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156091882128631285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.696947, y: 0.81, z: 0.46412924}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_Children:
+  - {fileID: 5586893376668223842}
+  - {fileID: 5785641586753044385}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2156091882128631284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,8 +134,38 @@ MonoBehaviour:
     m_Bits: 4608
   direction: {x: 0, y: 0, z: 1}
   player: {fileID: 0}
-  speed: 20
-  rocketRadius: 0.2
+  speed: 25
+  rocketRadius: 0.25
+--- !u!136 &7798542855982790661
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156091882128631285}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.05}
+--- !u!54 &6241526731334778740
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156091882128631285}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1001 &8823414685654479975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,6 +178,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket Trail
       objectReference: {fileID: 0}
+    - target: {fileID: 3042650725755784131, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042650725755784132, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3042650725755784132, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -124,6 +197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042650725755784132, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3042650725755784134, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
@@ -138,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 3042650725755784134, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.68
+      value: -0.449
       objectReference: {fileID: 0}
     - target: {fileID: 3042650725755784134, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
@@ -163,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 3042650725755784134, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3042650725755784134, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
@@ -183,17 +261,17 @@ PrefabInstance:
     - target: {fileID: 3042650725755784134, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3042650725755784134, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3042650725755784134, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2e2fa07d4e03214b8bb4c759b5c9f68, type: 3}

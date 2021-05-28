@@ -20,8 +20,11 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float coneRadius = 5f;
     [Header("Attack Attributes")]
     [SerializeField] protected float fireRate = 0f;
+    [SerializeField] protected bool stayZoomed = false;
+    protected bool isZoomed = false;
     protected int currentAmmo = 0;
     [SerializeField] protected int maxAmmo = 100;
+
     protected Animator animator = null;
     protected VisualEffect effect = null;
     protected Transform cam = null;
@@ -106,7 +109,7 @@ public abstract class Weapon : MonoBehaviour
         currentState = States.Idle;
     }
 
-    public IEnumerator Unequip()
+    public virtual IEnumerator Unequip()
     {
         currentState = States.Busy;
         animator.SetTrigger("Unequip");

@@ -12,6 +12,7 @@ public class PlayerInputReader : MonoBehaviour
     public bool JumpDown { get; set; }
     public bool WeaponSwitchDown { get; set; }
     public bool WeaponFireDown { get; set; }
+    public bool WeaponZoomDown { get; set; }
     public bool WeaponFireHeld { get; set; }
     public bool WeaponReloadDown { get; set; }
     public bool WeaponInteractDown { get; set; }
@@ -56,6 +57,12 @@ public class PlayerInputReader : MonoBehaviour
         }
     }
 
+    public void OnWeaponZoom(CallbackContext ctx)
+    {
+        if (ctx.started)
+            WeaponZoomDown = true;
+    }
+
     public void OnReload(CallbackContext ctx)
     {
         if (ctx.started)
@@ -73,6 +80,7 @@ public class PlayerInputReader : MonoBehaviour
         JumpDown = false;
         WeaponSwitchDown = false;
         WeaponFireDown = false;
+        WeaponZoomDown = false;
         WeaponReloadDown = false;
         WeaponInteractDown = false;
     }

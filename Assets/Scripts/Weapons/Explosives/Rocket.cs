@@ -8,22 +8,27 @@ public class Rocket : Explosive
     public GameObject player = null;
     [SerializeField] private float speed = 1f;
     [SerializeField] private float rocketRadius = 1f;
+    private Rigidbody rb;
     private float timer = 0f;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
-        if (Physics.CheckSphere(transform.position, rocketRadius))
-            Explode();
+        rb.velocity = direction * speed;
         timer += Time.deltaTime;
         if (timer >= 10f)
             Destroy(this.gameObject);
     }
 
-    protected override void OnDrawGizmos()
+    private void OnCollisionEnter(Collision collision)
     {
-        base.OnDrawGizmos();
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, rocketRadius);
+        if (collision.gameObject != player)
+        {
+            Explode();
+        }
     }
 }

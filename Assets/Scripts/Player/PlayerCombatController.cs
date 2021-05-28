@@ -88,6 +88,21 @@ public class PlayerCombatController : MonoBehaviour
         yield return StartCoroutine(weapons[currentID].Equip());
     }
 
+    public void ShowViewModels(bool show)
+    {
+        if (show == true)
+        {
+            viewModelFilter.mesh = currentWeapon.ViewModel.mesh;
+            viewEffect.gameObject.SetActive(true);
+            viewEffect.Stop();
+        }
+        else
+        {
+            viewModelFilter.mesh = null;
+            viewEffect.gameObject.SetActive(false);
+        }
+    }
+
     public void UpdateModels()
     {
         //View Model
@@ -128,6 +143,10 @@ public class PlayerCombatController : MonoBehaviour
         if (controls.WeaponFireHeld)
         {
             currentWeapon.PrimaryAction();
+        }
+        if (controls.WeaponZoomDown)
+        {
+            currentWeapon.SecondaryAction();
         }
         if (controls.WeaponReloadDown)
         {

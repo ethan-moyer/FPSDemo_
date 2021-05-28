@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class ReloadableWeapon : Weapon
 {
     [Header("Reloadable")]
+    [SerializeField] protected Camera camera;
     [SerializeField] protected int maxMagAmmo = 0;
     [SerializeField] protected float reloadTime = 1f;
     protected int currentMagAmmo = 0;
@@ -34,23 +35,52 @@ public abstract class ReloadableWeapon : Weapon
         return $"{currentMagAmmo} {currentAmmo}";
     }
 
+    public override IEnumerator Unequip()
+    {
+        if (isZoomed)
+            SecondaryAction();
+        return base.Unequip();
+    }
+
     public override void PrimaryAction()
     {
         if (IsIdle)
         {
+            if (isZoomed && !stayZoomed)
+            {
+                SecondaryAction();
+            }
             Fire();
         }
     }
 
     public override void SecondaryAction()
     {
-        throw new System.NotImplementedException();
+        if ((IsIdle && stayZoomed == false) || ((currentState == States.Idle || currentState == States.Firing) && stayZoomed == true))
+        {
+            if (isZoomed)
+            {
+                isZoomed = false;
+                camera.fieldOfView *= 1.5f;
+                combatController.ShowViewModels(true);
+            }
+            else
+            {
+                isZoomed = true;
+                camera.fieldOfView /= 1.5f;
+                combatController.ShowViewModels(false);
+            }
+        }
     }
 
     public override void ThirdAction()
     {
         if (IsIdle)
         {
+            if (isZoomed)
+            {
+                SecondaryAction();
+            }
             StartCoroutine(Reload());
         }
     }
