@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -86,6 +87,11 @@ public class PlayerMovementController : MonoBehaviour
         //Grounded Detection
         bool grounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
         return grounded;
+    }
+
+    public bool CurrentStateIs(Type type)
+    {
+        return currentState.GetType() == type;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)

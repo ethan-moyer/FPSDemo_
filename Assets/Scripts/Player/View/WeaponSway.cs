@@ -4,36 +4,34 @@ using UnityEngine;
 
 public class WeaponSway : MonoBehaviour
 {
-    [SerializeField] private PlayerInputReader controls;
-    [SerializeField] private float swayAmount;
-    [SerializeField] private float maxRotX;
-    [SerializeField] private float maxRotY;
-    [SerializeField] private float swayAcceleration;
-    private Vector3 startRot;
-    private Vector3 newRot;
+    [Header("Weapon Bobbing")]
+    [SerializeField] private Transform viewModelPivot = null;
+    [SerializeField] private float verticalBobAmount = 0.5f;
+    [SerializeField] private float horizontalBobAmount = 0.5f;
+    [SerializeField] private float bobSpeed = 1f;
+    [Header("Weapon Sway")]
+    [SerializeField] private float verticalSwayAmount = 5f;
+    [SerializeField] private float horizontalSwayAmount = 5f;
+    [SerializeField] private float swaySpeed = 3f;
+    private PlayerMovementController movementController = null;
+    private PlayerInputReader controls = null;
 
-    void Start()
+    private void Awake()
     {
-        startRot = transform.localRotation.eulerAngles;
-        newRot = transform.localRotation.eulerAngles;
+        movementController = GetComponent<PlayerMovementController>();
+        controls = GetComponent<PlayerInputReader>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Mathf.Approximately(controls.LookDir.x, 0f))
-            newRot.y = Mathf.Lerp(newRot.y, startRot.y, swayAcceleration * Time.deltaTime);
-        else
-            newRot.y += controls.LookDir.x * swayAmount * Time.deltaTime;
+        if (movementController.CurrentStateIs(typeof(WalkState)))
+        {
+            float x = horizontalBobAmount * Mathf.Sin(bobSpeed * 2 * Time.time);
+            float y = verticalBobAmount * Mathf.Sin(bobSpeed * Time.time);
+            viewModelPivot.localPosition += new Vector3(y, x, 0f) * controls.WalkDir.magnitude;
 
-        if (Mathf.Approximately(controls.LookDir.y, 0f))
-            newRot.x = Mathf.Lerp(newRot.x, startRot.x, swayAcceleration * Time.deltaTime);
-        else
-            newRot.x -= controls.LookDir.y * swayAmount * Time.deltaTime;
-
-        newRot.x = Mathf.Clamp(newRot.x, -maxRotX, maxRotX);
-        newRot.y = Mathf.Clamp(newRot.y, startRot.y - maxRotY, startRot.y + maxRotY);
-
-        transform.localRotation = Quaternion.Euler(newRot);
+            Quaternion newRotation = Quaternion.Euler(Mathf.Clamp(controls.LookDir.y, -verticalSwayAmount, verticalSwayAmount), Mathf.Clamp(controls.LookDir.x, -horizontalSwayAmount, horizontalSwayAmount), 0f);
+            viewModelPivot.localRotation = Quaternion.Lerp(viewModelPivot.localRotation, newRotation, swaySpeed * Time.deltaTime);
+        }
     }
 }
