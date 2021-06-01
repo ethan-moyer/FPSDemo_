@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2156091882128631287}
+  - component: {fileID: 6472581420597886369}
   - component: {fileID: 2156091882128631284}
   - component: {fileID: 7798542855982790661}
   - component: {fileID: 6241526731334778740}
@@ -106,14 +107,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2156091882128631285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.696947, y: 0.81, z: 0.46412924}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5586893376668223842}
   - {fileID: 5785641586753044385}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6472581420597886369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2156091882128631285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647234393f60b3b49b6df850adc7867d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
+  explosionEffect: 2
+  sphereRadius: 3
+  targets:
+    serializedVersion: 2
+    m_Bits: 6656
 --- !u!114 &2156091882128631284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,16 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f1b375524ee0145a1f25c6eb507247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
-  explosionEffect: 2
-  sphereRadius: 3
-  targets:
-    serializedVersion: 2
-    m_Bits: 4608
-  direction: {x: 0, y: 0, z: 1}
-  player: {fileID: 0}
   speed: 25
-  rocketRadius: 0.25
+  lifetime: 10
 --- !u!136 &7798542855982790661
 CapsuleCollider:
   m_ObjectHideFlags: 0
