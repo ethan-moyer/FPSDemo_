@@ -13,6 +13,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform cam = null;
+    [SerializeField] private LayerMask defaultCullingMask;
     [SerializeField] private Transform viewModels = null;
     [SerializeField] private Transform worldModels = null;
     private PlayerCombatController combatController = null;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
         int worldLayer = 17 + playerIndex;
         int viewLayer = 13 + playerIndex;
         Camera camera = cam.GetComponent<Camera>();
+        camera.cullingMask = defaultCullingMask;
         camera.cullingMask |= 1 << viewLayer;
         camera.cullingMask &= ~(1 << worldLayer);
         ChangeLayerRecursive(worldModels, worldLayer);
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, 3f))
         {
-            if (hit.transform.gameObject.layer == 12)
+            if (hit.transform.gameObject.layer == 11)
             {
                 PropWeapon prop = hit.transform.GetComponent<PropWeapon>();
                 if (prop != null)
@@ -67,9 +69,9 @@ public class PlayerController : MonoBehaviour
                     if (controls.WeaponInteractDown)
                     {
                         Destroy(prop.gameObject);
-                        GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + cam.forward.normalized * 0.6f, combatController.CurrentWeapon.PropPrefab.transform.rotation);
+                        GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position, combatController.CurrentWeapon.PropPrefab.transform.rotation);
                         newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.CurrentAmmo;
-                        print(newProp.GetComponent<PropWeapon>().ammo);
+                        newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 500f);
                         combatController.SwitchTo(prop.WeaponID, prop.Ammo);
                     }
                 }

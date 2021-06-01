@@ -20,7 +20,8 @@ public class PlayerCombatController : MonoBehaviour
     [Header("HUD")]
     [SerializeField] private Image hudReticle = null;
     [SerializeField] private TextMeshProUGUI hudAmmo = null;
-    [SerializeField] private Transform cam = null;
+    [SerializeField] private Camera cam = null;
+    private float startingFOV = 0f;
     private MeshFilter viewModelFilter = null;
     private MeshRenderer viewModelRenderer = null;
     private Animator viewModelAnimator = null;
@@ -37,6 +38,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Awake()
     {
+        startingFOV = cam.fieldOfView;
         viewModelFilter = viewModel.GetComponent<MeshFilter>();
         viewModelRenderer = viewModel.GetComponent<MeshRenderer>();
         viewModelAnimator = viewModel.GetComponent<Animator>();
@@ -50,7 +52,9 @@ public class PlayerCombatController : MonoBehaviour
             Weapon w = t.GetComponent<Weapon>();
             if (w != null)
             {
-                w.Init(this, cam, controls, viewModelAnimator, viewEffect);
+                w.Init(this, cam.transform, controls, viewModelAnimator, viewEffect);
+                w.triggerAnimation.AddListener(this.OnTriggerAnimation);
+                w.changeFOV.AddListener(this.OnChangeFOV);
                 weapons.Add(w.WeaponID, w);
             }
         }
@@ -132,6 +136,25 @@ public class PlayerCombatController : MonoBehaviour
     public void UpdateAmmoText(string newText)
     {
         hudAmmo.text = newText;
+    }
+
+    private void OnTriggerAnimation(string parameter)
+    {
+        viewModelAnimator.SetTrigger(parameter);
+    }
+
+    private void OnChangeFOV(float fovMultiplier)
+    {
+        if (fovMultiplier == -1)
+        {
+            cam.fieldOfView = startingFOV;
+            ShowViewModels(true);
+        }
+        else
+        {
+            cam.fieldOfView = startingFOV * fovMultiplier;
+            ShowViewModels(false);
+        }
     }
 
     private void Update()

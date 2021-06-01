@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class MultiplayerManager : MonoBehaviour
 {
-    [SerializeField] private LayerMask defaultMask;
     private List<PlayerController> players;
 
     private void Awake()

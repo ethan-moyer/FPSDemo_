@@ -5,6 +5,8 @@ using UnityEngine.VFX;
 
 public abstract class Weapon : MonoBehaviour
 {
+    public StringEvent triggerAnimation;
+    public FloatEvent changeFOV;
     [Header("Weapon Identification")]
     [SerializeField] protected int weaponID = 0;
     [SerializeField] protected string weaponName = "";
@@ -18,12 +20,13 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private float reticleScale = 0.1f;
     [SerializeField] protected float maxDistance = 80f;
     [SerializeField] protected float coneRadius = 5f;
+    [SerializeField] protected bool stayZoomed = false;
+    [SerializeField] protected float zoomFOVMultiplier = 0.5f;
     [Header("Attack Attributes")]
     [SerializeField] protected float fireRate = 0f;
-    [SerializeField] protected bool stayZoomed = false;
+    [SerializeField] protected int maxAmmo = 100;
     protected bool isZoomed = false;
     protected int currentAmmo = 0;
-    [SerializeField] protected int maxAmmo = 100;
 
     protected Animator animator = null;
     protected VisualEffect effect = null;
@@ -112,7 +115,7 @@ public abstract class Weapon : MonoBehaviour
     public virtual IEnumerator Unequip()
     {
         currentState = States.Busy;
-        animator.SetTrigger("Unequip");
+        triggerAnimation.Invoke("Unequip");
 
         yield return new WaitForSeconds(0.25f);
 

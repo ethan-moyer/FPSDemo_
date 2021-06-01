@@ -17,7 +17,7 @@ public class Gun : ReloadableWeapon
             timeTillNextFire = 1 / fireRate;
             currentMagAmmo -= 1;
             effect.Play();
-            animator.SetTrigger("Fire");
+            triggerAnimation.Invoke("Fire");
             combatController.UpdateAmmoText(AmmoToText());
 
             RaycastHit hit;
@@ -27,14 +27,14 @@ public class Gun : ReloadableWeapon
                 Vector3 randDirection = (cam.forward.normalized * maxDistance) + (cam.right.normalized * Random.Range(-1f, 1f) * coneRadius) + (cam.up.normalized * Random.Range(-1f, 1f) * coneRadius);
                 if (Physics.Raycast(cam.position, randDirection, out hit, maxDistance))
                 {
-                    if (hit.transform.gameObject.layer == 12)
+                    if (hit.transform.gameObject.layer == 11 || hit.transform.gameObject.layer == 12)
                     {
-                        //Hit a Prop.
+                        //Hit a Pickup or Prop.
+                        PlaceEffect(1, hit.point, hit.normal);
                         Prop prop = hit.transform.GetComponent<Prop>();
                         if (prop != null)
                         {
                             prop.Hit(hit.point, cam.forward * 10f);
-                            PlaceEffect(1, hit.point, hit.normal);
                         }
                     }
                     else if (hit.transform.gameObject.layer == 10)

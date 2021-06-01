@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class ReloadableWeapon : Weapon
 {
     [Header("Reloadable")]
-    [SerializeField] protected Camera camera;
     [SerializeField] protected int maxMagAmmo = 0;
     [SerializeField] protected float reloadTime = 1f;
     protected int currentMagAmmo = 0;
@@ -38,7 +37,7 @@ public abstract class ReloadableWeapon : Weapon
     public override IEnumerator Unequip()
     {
         if (isZoomed)
-            SecondaryAction();
+            Zoom(false);
         return base.Unequip();
     }
 
@@ -48,7 +47,7 @@ public abstract class ReloadableWeapon : Weapon
         {
             if (isZoomed && !stayZoomed)
             {
-                SecondaryAction();
+                Zoom(false);
             }
             Fire();
         }
@@ -58,18 +57,7 @@ public abstract class ReloadableWeapon : Weapon
     {
         if ((IsIdle && stayZoomed == false) || ((currentState == States.Idle || currentState == States.Firing) && stayZoomed == true))
         {
-            if (isZoomed)
-            {
-                isZoomed = false;
-                camera.fieldOfView *= 1.5f;
-                combatController.ShowViewModels(true);
-            }
-            else
-            {
-                isZoomed = true;
-                camera.fieldOfView /= 1.5f;
-                combatController.ShowViewModels(false);
-            }
+            Zoom(true);
         }
     }
 
@@ -78,14 +66,34 @@ public abstract class ReloadableWeapon : Weapon
         if (IsIdle)
         {
             if (isZoomed)
-            {
-                SecondaryAction();
-            }
+                Zoom(false);
             StartCoroutine(Reload());
         }
     }
 
     protected abstract void Fire();
+
+    protected virtual void Zoom(bool shouldZoom)
+    {
+        if (shouldZoom == true)
+        {
+            if (isZoomed)
+            {
+                isZoomed = false;
+                changeFOV.Invoke(-1);
+            }
+            else
+            {
+                isZoomed = true;
+                changeFOV.Invoke(zoomFOVMultiplier);
+            }
+        }
+        else
+        {
+            isZoomed = false;
+            changeFOV.Invoke(-1);
+        }
+    }
 
     protected IEnumerator Reload()
     {
@@ -93,7 +101,7 @@ public abstract class ReloadableWeapon : Weapon
         if (neededAmmo > 0 && currentAmmo > 0)
         {
             currentState = States.Busy;
-            animator.SetTrigger("Reload");
+            triggerAnimation.Invoke("Reload");
 
             yield return new WaitForSeconds(reloadTime);
 
