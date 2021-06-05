@@ -29,6 +29,7 @@ public class PlayerCombatController : MonoBehaviour
     private MeshFilter worldModelFilter = null;
     private MeshRenderer worldModelRenderer = null;
     private PlayerInputReader controls;
+    private FirstPersonCamera firstPersonCamera;
     private Dictionary<int, Weapon> weapons;
     private Weapon currentWeapon;
 
@@ -51,6 +52,7 @@ public class PlayerCombatController : MonoBehaviour
         worldModelFilter = worldModel.GetComponent<MeshFilter>();
         worldModelRenderer = worldModel.GetComponent<MeshRenderer>();
         controls = GetComponent<PlayerInputReader>();
+        firstPersonCamera = GetComponent<FirstPersonCamera>();
         weapons = new Dictionary<int, Weapon>();
 
         foreach (Transform t in weaponsContainer)
@@ -155,11 +157,13 @@ public class PlayerCombatController : MonoBehaviour
         if (fovMultiplier == -1)
         {
             StartCoroutine(ChangeFOVOverTime(startingFOV));
+            firstPersonCamera.zoomed = false;
             ShowViewModels(true);
         }
         else
         {
             StartCoroutine(ChangeFOVOverTime(startingFOV * fovMultiplier));
+            firstPersonCamera.zoomed = true;
             ShowViewModels(false);
         }
     }

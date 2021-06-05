@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
+    [HideInInspector] public bool zoomed = false;
     [SerializeField] private float xSensitivity = 100.0f;
     [SerializeField] private float ySensitivity = 100.0f;
+    [SerializeField] private float zoomedPercent = .5f;
     [SerializeField] private Transform cam;
 
     private PlayerInputReader controls;
@@ -26,6 +28,11 @@ public class FirstPersonCamera : MonoBehaviour
         {
             xAxis = controls.LookDir.x * xSensitivity * Time.deltaTime;
             yAxis = controls.LookDir.y * ySensitivity * Time.deltaTime;
+            if (zoomed)
+            {
+                xAxis *= zoomedPercent;
+                yAxis *= zoomedPercent;
+            }
         }
         
         xRotation -= yAxis;
