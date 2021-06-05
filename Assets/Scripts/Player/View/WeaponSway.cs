@@ -15,6 +15,7 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] private float swaySpeed = 3f;
     private PlayerMovementController movementController = null;
     private PlayerInputReader controls = null;
+    private float timer;
 
     private void Awake()
     {
@@ -24,14 +25,16 @@ public class WeaponSway : MonoBehaviour
 
     private void Update()
     {
-        if (movementController.CurrentStateIs(typeof(WalkState)))
+        if (movementController.CurrentStateIs(typeof(WalkState)) && controls.WalkDir.magnitude > 0.01f)
         {
-            float x = horizontalBobAmount * Mathf.Sin(bobSpeed * 2 * Time.time);
-            float y = verticalBobAmount * Mathf.Sin(bobSpeed * Time.time);
+            float x = horizontalBobAmount * Mathf.Sin(bobSpeed * 2 * timer);
+            float y = verticalBobAmount * Mathf.Sin(bobSpeed * timer);
             viewModelPivot.localPosition += new Vector3(y, x, 0f) * controls.WalkDir.magnitude;
 
             Quaternion newRotation = Quaternion.Euler(Mathf.Clamp(controls.LookDir.y, -verticalSwayAmount, verticalSwayAmount), Mathf.Clamp(controls.LookDir.x, -horizontalSwayAmount, horizontalSwayAmount), 0f);
             viewModelPivot.localRotation = Quaternion.Lerp(viewModelPivot.localRotation, newRotation, swaySpeed * Time.deltaTime);
+
+            timer += Time.deltaTime;    
         }
     }
 }

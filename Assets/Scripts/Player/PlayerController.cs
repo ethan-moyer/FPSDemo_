@@ -58,25 +58,33 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //Looking at Weapon Props
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, 3f))
         {
-            if (hit.transform.gameObject.layer == 11)
+            if (hit.transform.gameObject.layer == 12)
             {
                 PropWeapon prop = hit.transform.GetComponent<PropWeapon>();
-                if (prop != null)
+                if (prop != null && controls.WeaponInteractDown && prop.WeaponID != combatController.CurrentWeapon.WeaponID && prop.WeaponID != combatController.SecondWeapon.WeaponID)
                 {
-                    if (controls.WeaponInteractDown)
-                    {
-                        Destroy(prop.gameObject);
-                        GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position, combatController.CurrentWeapon.PropPrefab.transform.rotation);
-                        newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.CurrentAmmo;
-                        newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 500f);
-                        combatController.SwitchTo(prop.WeaponID, prop.Ammo);
-                    }
+                    Destroy(prop.gameObject);
+                    GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position, combatController.CurrentWeapon.PropPrefab.transform.rotation);
+                    newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.CurrentAmmo;
+                    newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 500f);
+                    combatController.SwitchTo(prop.WeaponID, prop.Ammo);
                 }
             }
         }
+    }
+
+    public bool OnHitWeaponProp(int weaponID, int ammo)
+    {
+        if (combatController.CurrentWeapon.WeaponID == weaponID)
+            return combatController.CurrentWeapon.AddAmmo(ammo);
+        else if (combatController.SecondWeapon.WeaponID == weaponID)
+            return combatController.SecondWeapon.AddAmmo(ammo);
+        else
+            return false;
     }
 
     private void ChangeLayerRecursive(Transform obj, int newLayer)

@@ -28,7 +28,7 @@ public class Explosive : MonoBehaviour
                 float falloff = 1 - (Vector3.Distance(transform.position, hit.point) / sphereRadius);
                 if (hit.transform == collider.transform)
                 {
-                    if (hit.transform.gameObject.layer == 11 || hit.transform.gameObject.layer == 12)
+                    if (hit.transform.gameObject.layer == 12)
                     {
                         Prop prop = hit.transform.GetComponent<Prop>();
                         if (prop != null)

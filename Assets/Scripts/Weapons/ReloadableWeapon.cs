@@ -45,11 +45,14 @@ public abstract class ReloadableWeapon : Weapon
     {
         if (IsIdle)
         {
-            if (isZoomed && !stayZoomed)
+            if (timeTillNextFire == 0f && currentMagAmmo > 0)
             {
-                Zoom(false);
+                if (isZoomed && !stayZoomed)
+                {
+                    Zoom(false);
+                }
+                Fire();
             }
-            Fire();
         }
     }
 
@@ -116,7 +119,7 @@ public abstract class ReloadableWeapon : Weapon
                 currentAmmo = 0;
             }
             currentState = States.Idle;
-            combatController.UpdateAmmoText(AmmoToText());
+            updateAmmoText.Invoke(AmmoToText());
         }
     }
 

@@ -21,6 +21,7 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private Image hudReticle = null;
     [SerializeField] private TextMeshProUGUI hudAmmo = null;
     [SerializeField] private Camera cam = null;
+    [SerializeField] private float zoomTime = 1f;
     private float startingFOV = 0f;
     private MeshFilter viewModelFilter = null;
     private MeshRenderer viewModelRenderer = null;
@@ -34,6 +35,11 @@ public class PlayerCombatController : MonoBehaviour
     public Weapon CurrentWeapon
     {
         get { return currentWeapon; }
+    }
+
+    public Weapon SecondWeapon
+    {
+        get { return weapons[secondID]; }
     }
 
     private void Awake()
@@ -54,6 +60,7 @@ public class PlayerCombatController : MonoBehaviour
             {
                 w.Init(this, cam.transform, controls, viewModelAnimator, viewEffect);
                 w.triggerAnimation.AddListener(this.OnTriggerAnimation);
+                w.updateAmmoText.AddListener(this.UpdateAmmoText);
                 w.changeFOV.AddListener(this.OnChangeFOV);
                 weapons.Add(w.WeaponID, w);
             }
@@ -147,13 +154,24 @@ public class PlayerCombatController : MonoBehaviour
     {
         if (fovMultiplier == -1)
         {
-            cam.fieldOfView = startingFOV;
+            StartCoroutine(ChangeFOVOverTime(startingFOV));
             ShowViewModels(true);
         }
         else
         {
-            cam.fieldOfView = startingFOV * fovMultiplier;
+            StartCoroutine(ChangeFOVOverTime(startingFOV * fovMultiplier));
             ShowViewModels(false);
+        }
+    }
+
+    private IEnumerator ChangeFOVOverTime(float newFOV)
+    {
+        float timer = 0f;
+        while (timer < zoomTime)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newFOV, timer / zoomTime);
+            timer += Time.deltaTime;
+            yield return null;
         }
     }
 

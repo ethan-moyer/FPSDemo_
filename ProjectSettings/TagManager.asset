@@ -16,7 +16,7 @@ TagManager:
   - PostProcessing
   - Player
   - Terrain
-  - Pickups
+  - IgnorePlayer
   - Props
   - ViewModel_0
   - ViewModel_1

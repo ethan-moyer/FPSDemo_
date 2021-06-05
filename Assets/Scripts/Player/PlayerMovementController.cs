@@ -85,7 +85,7 @@ public class PlayerMovementController : MonoBehaviour
         gameObject.layer = 9;
 
         //Grounded Detection
-        bool grounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
+        bool grounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask, QueryTriggerInteraction.Ignore);
         return grounded;
     }
 

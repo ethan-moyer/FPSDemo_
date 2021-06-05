@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public abstract class Weapon : MonoBehaviour
 {
     public StringEvent triggerAnimation;
+    public StringEvent updateAmmoText;
     public FloatEvent changeFOV;
     [Header("Weapon Identification")]
     [SerializeField] protected int weaponID = 0;
@@ -87,9 +88,18 @@ public abstract class Weapon : MonoBehaviour
         SetAmmo(startingAmmo);
     }
 
-    public void AddAmmo(int additionalAmmo)
+    public bool AddAmmo(int additionalAmmo)
     {
-        currentAmmo = Mathf.Min(currentAmmo + additionalAmmo, maxAmmo);
+        if (CurrentAmmo == maxAmmo)
+        {
+            return false;
+        }
+        else
+        {
+            currentAmmo = Mathf.Min(currentAmmo + additionalAmmo, maxAmmo);
+            updateAmmoText.Invoke(AmmoToText());
+            return true;
+        }
     }
 
     public virtual void SetAmmo(int newAmmo)
@@ -105,7 +115,7 @@ public abstract class Weapon : MonoBehaviour
         gameObject.SetActive(true);
         timeTillNextFire = 0f;
         currentState = States.Busy;
-        combatController.UpdateAmmoText(AmmoToText());
+        updateAmmoText.Invoke(AmmoToText());
 
         yield return new WaitForSeconds(0.25f);
 
@@ -122,7 +132,7 @@ public abstract class Weapon : MonoBehaviour
         gameObject.SetActive(false);
     }
     
-    protected void PlaceEffect(int index, Vector3 position, Vector3 normal)
+    protected GameObject PlaceEffect(int index, Vector3 position, Vector3 normal)
     {
         GameObject hitEffect = ObjectPooler.SharedInstance.GetPooledObject(index);
         if (hitEffect != null)
@@ -130,7 +140,9 @@ public abstract class Weapon : MonoBehaviour
             hitEffect.transform.position = position;
             hitEffect.transform.rotation = Quaternion.LookRotation(normal);
             hitEffect.SetActive(true);
+            return hitEffect;
         }
+        return null;
     }
 
     protected void PlaceHitEffect(int index, Vector3 position, Vector3 normal)

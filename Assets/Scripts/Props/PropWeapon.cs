@@ -9,4 +9,13 @@ public class PropWeapon : Prop
 
     public int WeaponID => weaponID;
     public int Ammo { get { return ammo; } set { value = ammo; } }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 9)
+        {
+            if (other.gameObject.GetComponent<PlayerController>().OnHitWeaponProp(weaponID, ammo))
+                Destroy(this.gameObject);
+        }
+    }
 }
