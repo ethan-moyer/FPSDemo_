@@ -16,25 +16,25 @@ public class Sniper : ReloadableWeapon
             {
                 zoomLevel = 1;
                 isZoomed = true;
-                changeFOV.Invoke(zoomFOVMultiplier);
+                ChangeFOV.Invoke(zoomFOVMultiplier);
             }
             else if (zoomLevel == 1)
             {
                 zoomLevel = 2;
                 isZoomed = true;
-                changeFOV.Invoke(secondZoomFOVMultiplier);
+                ChangeFOV.Invoke(secondZoomFOVMultiplier);
             }
             else
             {
                 zoomLevel = 0;
                 isZoomed = false;
-                changeFOV.Invoke(-1);
+                ChangeFOV.Invoke(-1);
             }
         }
         else
         {
             isZoomed = false;
-            changeFOV.Invoke(-1);
+            ChangeFOV.Invoke(-1);
         }
     }
 
@@ -44,34 +44,13 @@ public class Sniper : ReloadableWeapon
         timeTillNextFire = 1 / fireRate;
         currentMagAmmo -= 1;
         effect.Play();
-        triggerAnimation.Invoke("Fire");
+        TriggerAnimation.Invoke("Fire");
         combatController.UpdateAmmoText(AmmoToText());
         GameObject sniperTrail = ObjectPooler.SharedInstance.GetPooledObject(3);
 
-        RaycastHit hit;
         combatController.gameObject.layer = 2;
         Vector3 randDirection = (cam.forward.normalized * maxDistance) + (cam.right.normalized * Random.Range(-1f, 1f) * coneRadius) + (cam.up.normalized * Random.Range(-1f, 1f) * coneRadius);
-        Vector3 endPoint = cam.position + cam.forward * maxDistance;
-
-        if (Physics.Raycast(cam.position, randDirection, out hit, maxDistance))
-        {
-            endPoint = hit.point;
-            if (hit.transform.gameObject.layer == 12)
-            {
-                //Hit a Pickup or Prop.
-                PlaceEffect(1, hit.point, hit.normal);
-                Prop prop = hit.transform.GetComponent<Prop>();
-                if (prop != null)
-                {
-                    prop.Hit(hit.point, cam.forward * 10f);
-                }
-            }
-            else if (hit.transform.gameObject.layer == 10)
-            {
-                //Hit Terrain.
-                PlaceEffect(0, hit.point, hit.normal);
-            }
-        }
+        Vector3 endPoint = ShootRay(randDirection);
         sniperTrail.GetComponent<SniperTrail>().Positions = new Vector3[] { cam.TransformPoint(viewModel.offset), endPoint };
         sniperTrail.SetActive(true);
         

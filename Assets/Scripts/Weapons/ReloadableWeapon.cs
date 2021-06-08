@@ -11,7 +11,7 @@ public abstract class ReloadableWeapon : Weapon
 
     public override int CurrentAmmo
     {
-        get { return currentAmmo + currentMagAmmo; }
+        get { return currentAmmo; }
     }
 
     public override void SetAmmo(int newAmmo)
@@ -83,18 +83,18 @@ public abstract class ReloadableWeapon : Weapon
             if (isZoomed)
             {
                 isZoomed = false;
-                changeFOV.Invoke(-1);
+                ChangeFOV.Invoke(-1);
             }
             else
             {
                 isZoomed = true;
-                changeFOV.Invoke(zoomFOVMultiplier);
+                ChangeFOV.Invoke(zoomFOVMultiplier);
             }
         }
         else
         {
             isZoomed = false;
-            changeFOV.Invoke(-1);
+            ChangeFOV.Invoke(-1);
         }
     }
 
@@ -104,7 +104,7 @@ public abstract class ReloadableWeapon : Weapon
         if (neededAmmo > 0 && currentAmmo > 0)
         {
             currentState = States.Busy;
-            triggerAnimation.Invoke("Reload");
+            TriggerAnimation.Invoke("Reload");
 
             yield return new WaitForSeconds(reloadTime);
 
@@ -119,7 +119,7 @@ public abstract class ReloadableWeapon : Weapon
                 currentAmmo = 0;
             }
             currentState = States.Idle;
-            updateAmmoText.Invoke(AmmoToText());
+            UpdateAmmoText.Invoke(AmmoToText());
         }
     }
 

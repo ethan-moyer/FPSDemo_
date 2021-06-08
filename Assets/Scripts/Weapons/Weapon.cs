@@ -5,9 +5,9 @@ using UnityEngine.VFX;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public StringEvent triggerAnimation;
-    public StringEvent updateAmmoText;
-    public FloatEvent changeFOV;
+    public StringEvent TriggerAnimation;
+    public StringEvent UpdateAmmoText;
+    public FloatEvent ChangeFOV;
     [Header("Weapon Identification")]
     [SerializeField] protected int weaponID = 0;
     [SerializeField] protected string weaponName = "";
@@ -24,6 +24,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected bool stayZoomed = false;
     [SerializeField] protected float zoomFOVMultiplier = 0.5f;
     [Header("Attack Attributes")]
+    [SerializeField] protected float HPDamage = 0;
+    [SerializeField] protected float SPDamage = 0;
     [SerializeField] protected float fireRate = 0f;
     [SerializeField] protected int maxAmmo = 100;
     protected bool isZoomed = false;
@@ -97,7 +99,6 @@ public abstract class Weapon : MonoBehaviour
         else
         {
             currentAmmo = Mathf.Min(currentAmmo + additionalAmmo, maxAmmo);
-            updateAmmoText.Invoke(AmmoToText());
             return true;
         }
     }
@@ -115,7 +116,7 @@ public abstract class Weapon : MonoBehaviour
         gameObject.SetActive(true);
         timeTillNextFire = 0f;
         currentState = States.Busy;
-        updateAmmoText.Invoke(AmmoToText());
+        UpdateAmmoText.Invoke(AmmoToText());
 
         yield return new WaitForSeconds(0.25f);
 
@@ -125,7 +126,7 @@ public abstract class Weapon : MonoBehaviour
     public virtual IEnumerator Unequip()
     {
         currentState = States.Busy;
-        triggerAnimation.Invoke("Unequip");
+        TriggerAnimation.Invoke("Unequip");
 
         yield return new WaitForSeconds(0.25f);
 
@@ -145,15 +146,40 @@ public abstract class Weapon : MonoBehaviour
         return null;
     }
 
-    protected void PlaceHitEffect(int index, Vector3 position, Vector3 normal)
+    protected Vector3 ShootRay(Vector3 direction)
     {
-        GameObject hitEffect = ObjectPooler.SharedInstance.GetPooledObject(index);
-        if (hitEffect != null)
+        RaycastHit hit;
+        gameObject.layer = 2;
+        if (Physics.Raycast(cam.position, direction, out hit, maxDistance))
         {
-            hitEffect.transform.position = position + normal*0.1f;
-            hitEffect.transform.rotation = Quaternion.Euler(normal);
-            hitEffect.SetActive(true);
+            if (hit.transform.gameObject.layer == 9)
+            {
+                //Hit a Player.
+                PlayerController player = hit.transform.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    player.DamageHit(HPDamage, SPDamage);
+                }
+            }
+            if (hit.transform.gameObject.layer == 12)
+            {
+                //Hit a Pickup or Prop.
+                PlaceEffect(1, hit.point, hit.normal);
+                Prop prop = hit.transform.GetComponent<Prop>();
+                if (prop != null)
+                {
+                    prop.Hit(hit.point, cam.forward * 10f);
+                }
+            }
+            else if (hit.transform.gameObject.layer == 10)
+            {
+                //Hit Terrain.
+                PlaceEffect(0, hit.point, hit.normal);
+            }
+            return hit.point;
         }
+        gameObject.layer = 9;
+        return cam.position + direction * maxDistance;
     }
 
     public abstract void PrimaryAction();

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Launcher : ReloadableWeapon
 {
-    [SerializeField] private Projectile projectile;
-    [SerializeField] private Vector3 launchOffset;
+    [SerializeField] private Projectile projectile = null;
+    [SerializeField] private Vector3 launchOffset = Vector3.zero;
 
     protected override void Fire()
     {
@@ -13,7 +13,7 @@ public class Launcher : ReloadableWeapon
         timeTillNextFire = 1 / fireRate;
         currentMagAmmo -= 1;
         effect.Play();
-        triggerAnimation.Invoke("Fire");
+        TriggerAnimation.Invoke("Fire");
         combatController.UpdateAmmoText(AmmoToText());
 
         Rocket newProjectile = Instantiate(projectile, cam.TransformPoint(launchOffset), Quaternion.LookRotation(cam.forward)).GetComponent<Rocket>();

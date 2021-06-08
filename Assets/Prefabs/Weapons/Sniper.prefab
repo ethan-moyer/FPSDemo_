@@ -46,6 +46,9 @@ MonoBehaviour:
   triggerAnimation:
     m_PersistentCalls:
       m_Calls: []
+  updateAmmoText:
+    m_PersistentCalls:
+      m_Calls: []
   changeFOV:
     m_PersistentCalls:
       m_Calls: []
@@ -56,8 +59,8 @@ MonoBehaviour:
     materials:
     - {fileID: 2100000, guid: 3457aabf6f1211043a2bea4b29ecc24b, type: 2}
     animator: {fileID: 22100000, guid: 5979c3c4cd4f05e429e0b8c2ff66a071, type: 2}
-    offset: {x: 0.14, y: -0.11, z: 0.16}
-    scale: {x: 0.3, y: 0.3, z: 0.2}
+    offset: {x: 0.1179, y: -0.0959, z: 0.122}
+    scale: {x: 0.2, y: 0.2, z: 0.1}
   worldModel:
     mesh: {fileID: -8310518740751045040, guid: 357526183e088b34bb972d3119ed0b91, type: 3}
     materials:
@@ -78,10 +81,10 @@ MonoBehaviour:
   coneRadius: 0
   stayZoomed: 1
   zoomFOVMultiplier: 0.5
+  HPDamage: 0
+  SPDamage: 0
   fireRate: 1.7142857
   maxAmmo: 24
   maxMagAmmo: 4
   reloadTime: 1.3333334
-  damage: 80
-  numberOfRays: 1
   secondZoomFOVMultiplier: 0.3

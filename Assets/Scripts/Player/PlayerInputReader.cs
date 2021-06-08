@@ -7,15 +7,15 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputReader : MonoBehaviour
 {
-    public Vector2 WalkDir { get; set; }
-    public Vector2 LookDir { get; set; }
-    public bool JumpDown { get; set; }
-    public bool WeaponSwitchDown { get; set; }
-    public bool WeaponFireDown { get; set; }
-    public bool WeaponZoomDown { get; set; }
-    public bool WeaponFireHeld { get; set; }
-    public bool WeaponReloadDown { get; set; }
-    public bool WeaponInteractDown { get; set; }
+    public Vector2 WalkDir { get; private set; }
+    public Vector2 LookDir { get; private set; }
+    public bool JumpDown { get; private set; }
+    public bool WeaponSwitchDown { get; private set; }
+    public bool WeaponFireDown { get; private set; }
+    public bool WeaponZoomDown { get; private set; }
+    public bool WeaponFireHeld { get; private set; }
+    public bool WeaponReloadDown { get; private set; }
+    public bool WeaponInteractDown { get; private set; }
 
     public void OnWalk(CallbackContext ctx)
     {

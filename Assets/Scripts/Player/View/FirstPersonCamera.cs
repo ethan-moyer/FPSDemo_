@@ -9,7 +9,7 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] private float xSensitivity = 100.0f;
     [SerializeField] private float ySensitivity = 100.0f;
     [SerializeField] private float zoomedPercent = .5f;
-    [SerializeField] private Transform cam;
+    [SerializeField] private Transform cam = null;
 
     private PlayerInputReader controls;
     private float xAxis;

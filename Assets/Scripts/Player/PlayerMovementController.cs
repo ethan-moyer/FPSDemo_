@@ -98,7 +98,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         //Start falling if head is hit.
         gameObject.layer = 2;
-        if (Physics.CheckSphere(transform.position + Vector3.up * (cc.height / 2), 0.5f, groundMask))
+        if (Physics.CheckSphere(transform.position + Vector3.up * (cc.height / 2), 0.5f, groundMask, QueryTriggerInteraction.Ignore))
         {
             moveDirection.y = -1.5f;
         }

@@ -31,12 +31,8 @@ public class PlayerCombatController : MonoBehaviour
     private PlayerInputReader controls;
     private FirstPersonCamera firstPersonCamera;
     private Dictionary<int, Weapon> weapons;
-    private Weapon currentWeapon;
 
-    public Weapon CurrentWeapon
-    {
-        get { return currentWeapon; }
-    }
+    public Weapon CurrentWeapon { get; private set; }
 
     public Weapon SecondWeapon
     {
@@ -61,9 +57,9 @@ public class PlayerCombatController : MonoBehaviour
             if (w != null)
             {
                 w.Init(this, cam.transform, controls, viewModelAnimator, viewEffect);
-                w.triggerAnimation.AddListener(this.OnTriggerAnimation);
-                w.updateAmmoText.AddListener(this.UpdateAmmoText);
-                w.changeFOV.AddListener(this.OnChangeFOV);
+                w.TriggerAnimation.AddListener(this.OnTriggerAnimation);
+                w.UpdateAmmoText.AddListener(this.UpdateAmmoText);
+                w.ChangeFOV.AddListener(this.OnChangeFOV);
                 weapons.Add(w.WeaponID, w);
             }
         }
@@ -78,7 +74,7 @@ public class PlayerCombatController : MonoBehaviour
             currentID = index;
             weapons[index].SetAmmo(ammo);
             StartCoroutine(weapons[index].Equip());
-            currentWeapon = weapons[currentID];
+            CurrentWeapon = weapons[currentID];
 
             UpdateReticle();
             UpdateModels();
@@ -90,7 +86,7 @@ public class PlayerCombatController : MonoBehaviour
         hudReticle.gameObject.SetActive(false);
         yield return StartCoroutine(weapons[currentID].Unequip());
 
-        currentWeapon = weapons[secondID];
+        CurrentWeapon = weapons[secondID];
         int tempID = currentID;
         currentID = secondID;
         secondID = tempID;
@@ -105,7 +101,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         if (show == true)
         {
-            viewModelFilter.mesh = currentWeapon.ViewModel.mesh;
+            viewModelFilter.mesh = CurrentWeapon.ViewModel.mesh;
             viewEffect.gameObject.SetActive(true);
             viewEffect.Stop();
         }
@@ -119,27 +115,27 @@ public class PlayerCombatController : MonoBehaviour
     public void UpdateModels()
     {
         //View Model
-        viewModelFilter.mesh = currentWeapon.ViewModel.mesh;
-        viewModelRenderer.materials = currentWeapon.ViewModel.materials;
-        viewModelAnimator.runtimeAnimatorController = currentWeapon.ViewModel.animator;
-        viewModelPivot.localPosition = currentWeapon.ViewModel.offset;
-        viewModelPivot.localScale = currentWeapon.ViewModel.scale;
+        viewModelFilter.mesh = CurrentWeapon.ViewModel.mesh;
+        viewModelRenderer.materials = CurrentWeapon.ViewModel.materials;
+        viewModelAnimator.runtimeAnimatorController = CurrentWeapon.ViewModel.animator;
+        viewModelPivot.localPosition = CurrentWeapon.ViewModel.offset;
+        viewModelPivot.localScale = CurrentWeapon.ViewModel.scale;
         //View Model Visual Effect
-        viewEffect.transform.localPosition = currentWeapon.ParticleEffect.offset;
-        viewEffect.transform.localScale = currentWeapon.ParticleEffect.scale;
-        viewEffect.visualEffectAsset = currentWeapon.ParticleEffect.visualEffect;
+        viewEffect.transform.localPosition = CurrentWeapon.ParticleEffect.offset;
+        viewEffect.transform.localScale = CurrentWeapon.ParticleEffect.scale;
+        viewEffect.visualEffectAsset = CurrentWeapon.ParticleEffect.visualEffect;
         //World Model
-        worldModelFilter.mesh = currentWeapon.WorldModel.mesh;
-        worldModelRenderer.materials = currentWeapon.WorldModel.materials;
-        worldModel.transform.localPosition = currentWeapon.WorldModel.offset;
-        worldModel.transform.localScale = currentWeapon.WorldModel.scale;
+        worldModelFilter.mesh = CurrentWeapon.WorldModel.mesh;
+        worldModelRenderer.materials = CurrentWeapon.WorldModel.materials;
+        worldModel.transform.localPosition = CurrentWeapon.WorldModel.offset;
+        worldModel.transform.localScale = CurrentWeapon.WorldModel.scale;
     }
 
     public void UpdateReticle()
     {
         hudReticle.gameObject.SetActive(true);
-        hudReticle.sprite = currentWeapon.ReticleData.Item1;
-        hudReticle.rectTransform.localScale = Vector3.one * currentWeapon.ReticleData.Item2;
+        hudReticle.sprite = CurrentWeapon.ReticleData.Item1;
+        hudReticle.rectTransform.localScale = Vector3.one * CurrentWeapon.ReticleData.Item2;
     }
 
     public void UpdateAmmoText(string newText)
@@ -181,21 +177,21 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Update()
     {
-        if (controls.WeaponSwitchDown && currentWeapon.IsIdle)
+        if (controls.WeaponSwitchDown && CurrentWeapon.IsIdle)
         {
             StartCoroutine(SwapWeapons());
         }
         if (controls.WeaponFireHeld)
         {
-            currentWeapon.PrimaryAction();
+            CurrentWeapon.PrimaryAction();
         }
         if (controls.WeaponZoomDown)
         {
-            currentWeapon.SecondaryAction();
+            CurrentWeapon.SecondaryAction();
         }
         if (controls.WeaponReloadDown)
         {
-            currentWeapon.ThirdAction();
+            CurrentWeapon.ThirdAction();
         }
     }
 }

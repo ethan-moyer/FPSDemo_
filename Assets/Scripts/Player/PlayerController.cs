@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Attached to a player and is responsible for player methods that don't fall under CombatController or MovementController.
@@ -12,14 +13,30 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    public int PlayerID { get; set; }
+    public IntEvent Die;
     [SerializeField] private Transform cam = null;
     [SerializeField] private LayerMask defaultCullingMask;
     [SerializeField] private Transform viewModels = null;
     [SerializeField] private Transform worldModels = null;
+    [SerializeField] private GameObject hudCanvas = null;
+    [SerializeField] private GameObject respawnCanvas = null;
+    [SerializeField] private Image hudHealthBar = null;
+    [Header("Hit Points")]
+    [SerializeField] private int maxHP = 40;
+    [SerializeField] private int maxSP = 75;
+    [SerializeField] private float HPRegenDelay = 10f;
+    [SerializeField] private float HPRegenRate = 9;
+    [SerializeField] private float SPRegenDelay = 5f;
+    [SerializeField] private float SPRegenRate = 50;
     private PlayerCombatController combatController = null;
     private PlayerMovementController movementController = null;
     private PlayerInputReader controls = null;
     private CharacterController cc = null;
+    private float currentHP = 40;
+    private float currentSP = 75;
+    private float HPRegenTimer = 0f;
+    private float SPRegenTimer = 0f;
 
     private void Awake()
     {
@@ -51,13 +68,103 @@ public class PlayerController : MonoBehaviour
         ChangeLayerRecursive(viewModels, viewLayer);
     }
 
+    public void UpdateCanvasScale()
+    {
+        CanvasScaler canvasScaler = hudCanvas.GetComponent<CanvasScaler>();
+        Camera camera = cam.GetComponent<Camera>();
+        canvasScaler.referenceResolution = new Vector2(1920 / camera.rect.width, 1080 / camera.rect.width);
+    }
+
     public void PhysicsHit(Vector3 direction, float strength)
     {
         movementController.MoveDirection += direction * strength;
     }
 
+    public void DamageHit(float HPDamage, float SPDamage)
+    {
+        if (currentSP > 0)
+        {
+            currentSP = Mathf.Max(0, currentSP - SPDamage);
+            SPRegenTimer = 0f;
+        }
+        if (currentSP == 0)
+        {
+            currentHP -= HPDamage;
+            if (currentHP <= 0)
+            {
+                Die.Invoke(PlayerID);
+            }
+            else
+            {
+                HPRegenTimer = 0f;
+            }
+        }
+        hudHealthBar.fillAmount = (currentHP + currentSP) / (maxHP + maxSP);
+    }
+
+    public void Respawn(Vector3 spawnPoint, Vector3 newRotation)
+    {
+        Enable();
+        currentHP = maxHP;
+        currentSP = maxSP;
+        hudHealthBar.fillAmount = 1;
+        transform.rotation = Quaternion.Euler(newRotation);
+        movementController.MoveDirection = Vector3.zero;
+        cc.SimpleMove(Vector3.zero);
+        transform.position = spawnPoint;
+    }
+
+    public void Enable()
+    {
+        movementController.enabled = true;
+        combatController.enabled = true;
+        cc.enabled = true;
+        worldModels.gameObject.SetActive(true);
+        hudCanvas.SetActive(true);
+        respawnCanvas.SetActive(false);
+        this.enabled = true;
+    }
+
+    public void Disable()
+    {
+        movementController.enabled = false;
+        combatController.enabled = false;
+        cc.enabled = false;
+        worldModels.gameObject.SetActive(false);
+        hudCanvas.SetActive(false);
+        respawnCanvas.SetActive(true);
+        this.enabled = false;
+    }
+
     private void Update()
     {
+        //Hit Point Regen
+        if (HPRegenTimer >= HPRegenDelay)
+        {
+            if (currentHP < maxHP)
+            {
+                currentHP = Mathf.Min(currentHP + (HPRegenRate * Time.deltaTime), maxHP);
+                hudHealthBar.fillAmount = (currentHP + currentSP) / (maxHP + maxSP);
+            }
+        }
+        else
+        {
+            HPRegenTimer += Time.deltaTime;
+        }
+
+        if (SPRegenTimer >= SPRegenDelay)
+        {
+            if (currentSP < maxSP)
+            {
+                currentSP = Mathf.Min(currentSP + (SPRegenRate * Time.deltaTime), maxSP);
+                hudHealthBar.fillAmount = (currentHP + currentSP) / (maxHP + maxSP);
+            }
+        }
+        else
+        {
+            SPRegenTimer += Time.deltaTime;
+        }
+        
         //Looking at Weapon Props
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, 3f))
@@ -68,9 +175,9 @@ public class PlayerController : MonoBehaviour
                 if (prop != null && controls.WeaponInteractDown && prop.WeaponID != combatController.CurrentWeapon.WeaponID && prop.WeaponID != combatController.SecondWeapon.WeaponID)
                 {
                     Destroy(prop.gameObject);
-                    GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position, combatController.CurrentWeapon.PropPrefab.transform.rotation);
+                    GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + 0.5f * Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
                     newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.CurrentAmmo;
-                    newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 500f);
+                    newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 10000f);
                     combatController.SwitchTo(prop.WeaponID, prop.Ammo);
                 }
             }
@@ -80,7 +187,15 @@ public class PlayerController : MonoBehaviour
     public bool OnHitWeaponProp(int weaponID, int ammo)
     {
         if (combatController.CurrentWeapon.WeaponID == weaponID)
-            return combatController.CurrentWeapon.AddAmmo(ammo);
+        {
+            bool addingAmmo = combatController.CurrentWeapon.AddAmmo(ammo);
+            if (addingAmmo)
+            {
+                combatController.CurrentWeapon.UpdateAmmoText.Invoke(combatController.CurrentWeapon.AmmoToText());
+                return true;
+            }
+            return false;
+        }
         else if (combatController.SecondWeapon.WeaponID == weaponID)
             return combatController.SecondWeapon.AddAmmo(ammo);
         else

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Explosive : MonoBehaviour
 {
-    [SerializeField] private float damage = 0f;
+    [SerializeField] private float HPDamage = 0f;
+    [SerializeField] private float SPDamage = 0f;
     [SerializeField] private int explosionEffect = 2;
     [SerializeField] private float sphereRadius;
     [SerializeField] private LayerMask targets;
@@ -28,20 +29,21 @@ public class Explosive : MonoBehaviour
                 float falloff = 1 - (Vector3.Distance(transform.position, hit.point) / sphereRadius);
                 if (hit.transform == collider.transform)
                 {
-                    if (hit.transform.gameObject.layer == 12)
-                    {
-                        Prop prop = hit.transform.GetComponent<Prop>();
-                        if (prop != null)
-                        {
-                            prop.Hit(point, hit.normal * falloff * -70f);
-                        }
-                    }
                     if (hit.transform.gameObject.layer == 9)
                     {
                         PlayerController player = hit.transform.GetComponent<PlayerController>();
                         if (player != null)
                         {
-                            player.PhysicsHit(point - transform.position, falloff * damage * 0.15f);
+                            player.DamageHit(HPDamage * falloff, SPDamage * falloff);
+                            player.PhysicsHit(point - transform.position, falloff * (HPDamage) * 0.15f);
+                        }
+                    }
+                    else if (hit.transform.gameObject.layer == 12)
+                    {
+                        Prop prop = hit.transform.GetComponent<Prop>();
+                        if (prop != null)
+                        {
+                            prop.Hit(point, hit.normal * falloff * -70f);
                         }
                     }
                 }
