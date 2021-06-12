@@ -7,6 +7,8 @@ public abstract class ReloadableWeapon : Weapon
     [Header("Reloadable")]
     [SerializeField] protected int maxMagAmmo = 0;
     [SerializeField] protected float reloadTime = 1f;
+    [SerializeField] protected AudioClip fireClip = null;
+    [SerializeField] protected AudioClip reloadClip = null;
     protected int currentMagAmmo = 0;
 
     public override int CurrentAmmo

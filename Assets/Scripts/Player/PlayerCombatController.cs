@@ -28,8 +28,9 @@ public class PlayerCombatController : MonoBehaviour
     private Animator viewModelAnimator = null;
     private MeshFilter worldModelFilter = null;
     private MeshRenderer worldModelRenderer = null;
-    private PlayerInputReader controls;
-    private FirstPersonCamera firstPersonCamera;
+    private PlayerInputReader controls = null;
+    private FirstPersonCamera firstPersonCamera = null;
+    private VirtualAudioSource audioSource = null;
     private Dictionary<int, Weapon> weapons;
 
     public Weapon CurrentWeapon { get; private set; }
@@ -49,6 +50,7 @@ public class PlayerCombatController : MonoBehaviour
         worldModelRenderer = worldModel.GetComponent<MeshRenderer>();
         controls = GetComponent<PlayerInputReader>();
         firstPersonCamera = GetComponent<FirstPersonCamera>();
+        audioSource = GetComponent<VirtualAudioSource>();
         weapons = new Dictionary<int, Weapon>();
 
         foreach (Transform t in weaponsContainer)
@@ -60,6 +62,7 @@ public class PlayerCombatController : MonoBehaviour
                 w.TriggerAnimation.AddListener(this.OnTriggerAnimation);
                 w.UpdateAmmoText.AddListener(this.UpdateAmmoText);
                 w.ChangeFOV.AddListener(this.OnChangeFOV);
+                w.PlayAudioClip.AddListener(this.OnPlayAudioClip);
                 weapons.Add(w.WeaponID, w);
             }
         }
@@ -173,6 +176,11 @@ public class PlayerCombatController : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+    }
+
+    private void OnPlayAudioClip(AudioClip clip)
+    {
+        audioSource.Play(clip);
     }
 
     private void Update()

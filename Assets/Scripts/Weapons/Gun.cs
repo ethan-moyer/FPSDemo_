@@ -7,13 +7,13 @@ public class Gun : ReloadableWeapon
 {
     [Header("Gun Attributes")]
     [SerializeField] protected int numberOfRays = 1;
-
     protected override void Fire()
     {
         currentState = States.Firing;
         timeTillNextFire = 1 / fireRate;
         currentMagAmmo -= 1;
         effect.Play();
+        PlayAudioClip.Invoke(fireClip);
         TriggerAnimation.Invoke("Fire");
         combatController.UpdateAmmoText(AmmoToText());
 

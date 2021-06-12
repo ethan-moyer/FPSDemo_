@@ -44,6 +44,7 @@ public class Sniper : ReloadableWeapon
         timeTillNextFire = 1 / fireRate;
         currentMagAmmo -= 1;
         effect.Play();
+        PlayAudioClip.Invoke(fireClip);
         TriggerAnimation.Invoke("Fire");
         combatController.UpdateAmmoText(AmmoToText());
         GameObject sniperTrail = ObjectPooler.SharedInstance.GetPooledObject(3);

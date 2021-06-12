@@ -21,6 +21,7 @@ public class MultiplayerManager : MonoBehaviour
             playerController.AssignLayers(input.playerIndex);
             playerController.Die.AddListener(OnPlayerDie);
             players.Add(playerController);
+            VirtualAudioPlayer.SharedInstance.listeners.Add(playerController.transform);
             foreach (PlayerController p in players)
             {
                 p.UpdateCanvasScale();

@@ -9,6 +9,13 @@ public class Explosive : MonoBehaviour
     [SerializeField] private int explosionEffect = 2;
     [SerializeField] private float sphereRadius;
     [SerializeField] private LayerMask targets;
+    [SerializeField] private AudioClip sound = null;
+    private VirtualAudioSource virtualAudioSource;
+
+    private void Awake()
+    {
+        virtualAudioSource = GetComponent<VirtualAudioSource>();
+    }
 
     public void Explode()
     {
@@ -49,6 +56,7 @@ public class Explosive : MonoBehaviour
                 }
             }
         }
+        virtualAudioSource.Play(sound);
         Destroy(this.gameObject);
     }
 

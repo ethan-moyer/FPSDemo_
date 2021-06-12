@@ -8,6 +8,7 @@ public abstract class Weapon : MonoBehaviour
     public StringEvent TriggerAnimation;
     public StringEvent UpdateAmmoText;
     public FloatEvent ChangeFOV;
+    public AudioEvent PlayAudioClip;
     [Header("Weapon Identification")]
     [SerializeField] protected int weaponID = 0;
     [SerializeField] protected string weaponName = "";

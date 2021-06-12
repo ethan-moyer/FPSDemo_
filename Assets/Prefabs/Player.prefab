@@ -1088,6 +1088,7 @@ GameObject:
   - component: {fileID: 1678176370222012915}
   - component: {fileID: 297861465}
   - component: {fileID: 1166165148}
+  - component: {fileID: 6985298266144111605}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -1397,8 +1398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponsContainer: {fileID: 768296828}
-  currentID: 3
-  secondID: 1
+  currentID: 1
+  secondID: 0
   viewModelPivot: {fileID: 3171431669897444856}
   viewModel: {fileID: 5543532003259128607}
   viewEffect: {fileID: 1730375203}
@@ -1426,120 +1427,20 @@ MonoBehaviour:
   verticalSwayAmount: 3
   horizontalSwayAmount: 3
   swaySpeed: 0
---- !u!114 &752613444
+--- !u!114 &6985298266144111605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3772530354692266434}
+  m_GameObject: {fileID: 1678176370222012916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee675781be6edc4eb1f5057bca9fccf, type: 3}
+  m_Script: {fileID: 11500000, guid: ec6a4f223e643f149ba9e6d986300434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerAnimation:
-    m_PersistentCalls:
-      m_Calls: []
-  UpdateAmmoText:
-    m_PersistentCalls:
-      m_Calls: []
-  ChangeFOV:
-    m_PersistentCalls:
-      m_Calls: []
-  weaponID: 2
-  weaponName: Shotgun
-  viewModel:
-    mesh: {fileID: 3814378201483603881, guid: 3180fca6b4ad7d741b154962b6cdac25, type: 3}
-    materials:
-    - {fileID: 2100000, guid: a5589f44cddf4734b8d3fddd5cc6c9dc, type: 2}
-    animator: {fileID: 22100000, guid: a359a42b907578642b20a85e74f9566e, type: 2}
-    offset: {x: 0.108, y: -0.11, z: 0.034}
-    scale: {x: 0.1, y: 0.1, z: 0.1}
-  worldModel:
-    mesh: {fileID: 3814378201483603881, guid: 3180fca6b4ad7d741b154962b6cdac25, type: 3}
-    materials:
-    - {fileID: 2100000, guid: a5589f44cddf4734b8d3fddd5cc6c9dc, type: 2}
-    animator: {fileID: 22100000, guid: a359a42b907578642b20a85e74f9566e, type: 2}
-    offset: {x: 0.564, y: 0.187, z: -0.243}
-    scale: {x: 0.25, y: 0.25, z: 0.25}
-  particleEffect:
-    visualEffect: {fileID: 8926484042661614526, guid: 7e6eb7595322c5242af3e639057d9a3b,
-      type: 3}
-    offset: {x: 0.131, y: -3.24, z: 0.339}
-    scale: {x: 30, y: 30, z: 30}
-  propPrefab: {fileID: 7565804169807250701, guid: 5d171cff0292f14469c69fe75bd61889,
-    type: 3}
-  reticle: {fileID: 21300000, guid: dffe51e9e633ec44eb11b567a73a9cec, type: 3}
-  reticleScale: 0.17
-  maxDistance: 80
-  coneRadius: 7
-  stayZoomed: 0
-  zoomFOVMultiplier: 0.5
-  HPDamage: 18
-  SPDamage: 18
-  fireRate: 1.43
-  maxAmmo: 100
-  maxMagAmmo: 6
-  reloadTime: 1.8
-  numberOfRays: 8
---- !u!114 &467340001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5041992567515222423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee675781be6edc4eb1f5057bca9fccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TriggerAnimation:
-    m_PersistentCalls:
-      m_Calls: []
-  UpdateAmmoText:
-    m_PersistentCalls:
-      m_Calls: []
-  ChangeFOV:
-    m_PersistentCalls:
-      m_Calls: []
-  weaponID: 0
-  weaponName: Magnum
-  viewModel:
-    mesh: {fileID: 157429885028697517, guid: dc7c3db8ad41d014bb3483b5e2d4192f, type: 3}
-    materials:
-    - {fileID: 2100000, guid: b2314e3fc12cbc44197951f177c2d3af, type: 2}
-    animator: {fileID: 22100000, guid: 9e394cf845fcba64f88b247f5e325e34, type: 2}
-    offset: {x: 0.108, y: -0.128, z: 0.144}
-    scale: {x: 0.1, y: 0.1, z: 0.1}
-  worldModel:
-    mesh: {fileID: 157429885028697517, guid: dc7c3db8ad41d014bb3483b5e2d4192f, type: 3}
-    materials:
-    - {fileID: 2100000, guid: b2314e3fc12cbc44197951f177c2d3af, type: 2}
-    animator: {fileID: 22100000, guid: 9e394cf845fcba64f88b247f5e325e34, type: 2}
-    offset: {x: 0.564, y: 0.187, z: -0.016}
-    scale: {x: 0.25, y: 0.25, z: 0.25}
-  particleEffect:
-    visualEffect: {fileID: 8926484042661614526, guid: 7e6eb7595322c5242af3e639057d9a3b,
-      type: 3}
-    offset: {x: 0.15, y: -1.88, z: 0.66}
-    scale: {x: 15, y: 15, z: 15}
-  propPrefab: {fileID: 7162619686322849193, guid: e7d829b032bcb584ab8af0605da7650a,
-    type: 3}
-  reticle: {fileID: 21300000, guid: 7905549c7892fc443a688573bcbf4cad, type: 3}
-  reticleScale: 0.1
-  maxDistance: 80
-  coneRadius: 2
-  stayZoomed: 1
-  zoomFOVMultiplier: 0.5
-  HPDamage: 15
-  SPDamage: 15
-  fireRate: 2.86
-  maxAmmo: 64
-  maxMagAmmo: 8
-  reloadTime: 1
-  numberOfRays: 1
+  volume: 0.7
+  range: 100
 --- !u!1 &5164399149685488523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,63 +1572,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1191983757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5567799075578045568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee675781be6edc4eb1f5057bca9fccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TriggerAnimation:
-    m_PersistentCalls:
-      m_Calls: []
-  UpdateAmmoText:
-    m_PersistentCalls:
-      m_Calls: []
-  ChangeFOV:
-    m_PersistentCalls:
-      m_Calls: []
-  weaponID: 1
-  weaponName: Auto Rifle
-  viewModel:
-    mesh: {fileID: -6850817020174738761, guid: 78275277f16564a4dbb9a716ba46f14d, type: 3}
-    materials:
-    - {fileID: 2100000, guid: 530aff9845f0f6a4db0256b4fd2fec88, type: 2}
-    animator: {fileID: 22100000, guid: 0fce681a79cad7d48abd4298a6c905de, type: 2}
-    offset: {x: 0.077, y: -0.105, z: 0.01}
-    scale: {x: 0.06, y: 0.06, z: 0.05}
-  worldModel:
-    mesh: {fileID: -6850817020174738761, guid: 78275277f16564a4dbb9a716ba46f14d, type: 3}
-    materials:
-    - {fileID: 2100000, guid: 530aff9845f0f6a4db0256b4fd2fec88, type: 2}
-    animator: {fileID: 22100000, guid: 0fce681a79cad7d48abd4298a6c905de, type: 2}
-    offset: {x: 0.526, y: 0.187, z: -0.327}
-    scale: {x: 0.2, y: 0.2, z: 0.2}
-  particleEffect:
-    visualEffect: {fileID: 8926484042661614526, guid: 7e6eb7595322c5242af3e639057d9a3b,
-      type: 3}
-    offset: {x: -0.32, y: -4.33, z: 0.82}
-    scale: {x: 30, y: 30, z: 30}
-  propPrefab: {fileID: 6632588220536559233, guid: 4e9b600b73bc6d844b46fa4851ad0039,
-    type: 3}
-  reticle: {fileID: 21300000, guid: 7497536af9d41fe429cd167a41fd3f76, type: 3}
-  reticleScale: 0.15
-  maxDistance: 80
-  coneRadius: 5
-  stayZoomed: 0
-  zoomFOVMultiplier: 0.5
-  HPDamage: 7.5
-  SPDamage: 7.5
-  fireRate: 10
-  maxAmmo: 100
-  maxMagAmmo: 32
-  reloadTime: 1.333
-  numberOfRays: 1
 --- !u!1 &8256043463921888416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,31 +1658,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 768296828}
     m_Modifications:
-    - target: {fileID: 711018668, guid: 3295ccea416e83f47a7f5f6eda362550, type: 3}
-      propertyPath: coneRadius
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615658276, guid: 3295ccea416e83f47a7f5f6eda362550, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615658277, guid: 3295ccea416e83f47a7f5f6eda362550, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615658277, guid: 3295ccea416e83f47a7f5f6eda362550, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+    - target: {fileID: 467340001, guid: 3295ccea416e83f47a7f5f6eda362550, type: 3}
+      propertyPath: audioSource
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4899938842183091178, guid: 3295ccea416e83f47a7f5f6eda362550,
         type: 3}
       propertyPath: m_Name
       value: Magnum
-      objectReference: {fileID: 0}
-    - target: {fileID: 4899938842183091178, guid: 3295ccea416e83f47a7f5f6eda362550,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4899938842183091180, guid: 3295ccea416e83f47a7f5f6eda362550,
         type: 3}
@@ -1895,16 +1722,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 711018668, guid: 3295ccea416e83f47a7f5f6eda362550, type: 3}
-    - {fileID: 680441660532190745, guid: 3295ccea416e83f47a7f5f6eda362550, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3295ccea416e83f47a7f5f6eda362550, type: 3}
---- !u!1 &5041992567515222423 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4899938842183091178, guid: 3295ccea416e83f47a7f5f6eda362550,
-    type: 3}
-  m_PrefabInstance: {fileID: 142098600930955901}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5041992567515222417 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4899938842183091180, guid: 3295ccea416e83f47a7f5f6eda362550,
@@ -1918,11 +1737,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 768296828}
     m_Modifications:
-    - target: {fileID: 1202864616918025997, guid: 88ea3a7201269374ca8115eb36389679,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 752613444, guid: 88ea3a7201269374ca8115eb36389679, type: 3}
+      propertyPath: fireClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3288ae14ab6c7a84b999316eb3a46ae1, type: 3}
     - target: {fileID: 2110346259759891614, guid: 88ea3a7201269374ca8115eb36389679,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1983,31 +1801,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
-    - target: {fileID: 4237609687824194417, guid: 88ea3a7201269374ca8115eb36389679,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6361660099675242734, guid: 88ea3a7201269374ca8115eb36389679,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6361660099675242734, guid: 88ea3a7201269374ca8115eb36389679,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4323934651546386186, guid: 88ea3a7201269374ca8115eb36389679, type: 3}
-    - {fileID: 6869904809468368262, guid: 88ea3a7201269374ca8115eb36389679, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88ea3a7201269374ca8115eb36389679, type: 3}
---- !u!1 &3772530354692266434 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4237609687824194417, guid: 88ea3a7201269374ca8115eb36389679,
-    type: 3}
-  m_PrefabInstance: {fileID: 1050952596603028147}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1431246846413260333 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2110346259759891614, guid: 88ea3a7201269374ca8115eb36389679,
@@ -2132,14 +1927,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 768296828}
     m_Modifications:
-    - target: {fileID: 415515792, guid: 2e43c382b5ca8d14ebbf86660af2c21e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 415515794, guid: 2e43c382b5ca8d14ebbf86660af2c21e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 415515794, guid: 2e43c382b5ca8d14ebbf86660af2c21e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2148,11 +1935,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Auto Rifle
-      objectReference: {fileID: 0}
-    - target: {fileID: 3177203043372056065, guid: 2e43c382b5ca8d14ebbf86660af2c21e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3177203043372056071, guid: 2e43c382b5ca8d14ebbf86660af2c21e,
         type: 3}
@@ -2209,16 +1991,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 646712624, guid: 2e43c382b5ca8d14ebbf86660af2c21e, type: 3}
-    - {fileID: 4552621740731268365, guid: 2e43c382b5ca8d14ebbf86660af2c21e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e43c382b5ca8d14ebbf86660af2c21e, type: 3}
---- !u!1 &5567799075578045568 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3177203043372056065, guid: 2e43c382b5ca8d14ebbf86660af2c21e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7013083834172889729}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5567799075578045574 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3177203043372056071, guid: 2e43c382b5ca8d14ebbf86660af2c21e,
@@ -2242,6 +2016,11 @@ PrefabInstance:
       propertyPath: SPDamage
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 8472800012540995188, guid: fe8f6ace55ed68c41801f7018fe1c3c7,
+        type: 3}
+      propertyPath: fireClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3288ae14ab6c7a84b999316eb3a46ae1, type: 3}
     - target: {fileID: 8472800012540995189, guid: fe8f6ace55ed68c41801f7018fe1c3c7,
         type: 3}
       propertyPath: m_LocalPosition.x
