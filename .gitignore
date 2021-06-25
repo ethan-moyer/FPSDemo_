@@ -72,3 +72,7 @@ crashlytics-build.properties
 
 #Blender Files
 /BlendFiles
+
+#Audio Files
+*.mp3
+*.mp3.meta
