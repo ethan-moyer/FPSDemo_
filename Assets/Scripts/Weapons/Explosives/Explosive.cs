@@ -10,12 +10,6 @@ public class Explosive : MonoBehaviour
     [SerializeField] private float sphereRadius;
     [SerializeField] private LayerMask targets;
     [SerializeField] private AudioClip sound = null;
-    private VirtualAudioSource virtualAudioSource;
-
-    private void Awake()
-    {
-        virtualAudioSource = GetComponent<VirtualAudioSource>();
-    }
 
     public void Explode()
     {
@@ -24,6 +18,7 @@ public class Explosive : MonoBehaviour
         {
             effect.transform.position = transform.position;
             effect.SetActive(true);
+            effect.GetComponent<VirtualAudioSource>().Play();
         }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, sphereRadius, targets);
@@ -56,7 +51,6 @@ public class Explosive : MonoBehaviour
                 }
             }
         }
-        virtualAudioSource.Play(sound);
         Destroy(this.gameObject);
     }
 

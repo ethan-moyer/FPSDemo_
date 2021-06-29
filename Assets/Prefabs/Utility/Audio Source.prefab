@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4723558315349981133}
   - component: {fileID: 7434405783483291109}
+  - component: {fileID: 1563816313581378344}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -62,23 +63,32 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.002
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.2761078
+      outSlope: -3.2761078
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0.06539536
+    - serializedVersion: 3
+      time: 0.018571666
+      value: 0.94672275
+      inSlope: -3.5265121
+      outSlope: -3.5265121
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.024483938
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.31776482
+      outSlope: -0.31776482
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.23302726
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -127,3 +137,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1563816313581378344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4478805363175764952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed6bf39aa1085a40b384bf159fbcb3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

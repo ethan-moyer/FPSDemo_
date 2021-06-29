@@ -6,6 +6,7 @@ using UnityEngine;
 public class WalkState : PlayerState
 {
     private Vector2 inputDirection;
+    private float footstepsTimer = 0f;
 
     public WalkState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputReader controls) : base(player, cc, cam, controls)
     {
@@ -40,6 +41,7 @@ public class WalkState : PlayerState
         else if (controls.JumpDown && player.IsGrounded())
         {
             player.SetY(player.Jump);
+            player.PlayClip(player.LandingLight);
         }
         else if (player.IsGrounded() == false)
         {
@@ -48,6 +50,16 @@ public class WalkState : PlayerState
         else
         {
             player.SetY(-4f);
+        }
+
+        if (footstepsTimer >= Mathf.PI / 10f && controls.WalkDir.magnitude > 0f)
+        {
+            player.PlayClip(player.Footsteps);
+            footstepsTimer = 0f;
+        }
+        else
+        {
+            footstepsTimer += Time.deltaTime;
         }
     }
 

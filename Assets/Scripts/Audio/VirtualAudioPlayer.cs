@@ -5,6 +5,7 @@ using UnityEngine;
 public class VirtualAudioPlayer : MonoBehaviour
 {
     public List<Transform> listeners;
+    public float pollingRate = 1 / 60;
     [SerializeField] private GameObject audioSourcePrefab = null;
     [SerializeField] private int queueSize = 255;
     public static VirtualAudioPlayer SharedInstance;
@@ -27,6 +28,22 @@ public class VirtualAudioPlayer : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public AudioSource GetAudioSource()
+    {
+        AudioSource newSource;
+        if (audioSources.Peek().gameObject.activeInHierarchy)
+        {
+            newSource = Instantiate(audioSourcePrefab, transform).GetComponent<AudioSource>();
+            audioSources.Enqueue(newSource);
+        }
+        else
+        {
+            newSource = audioSources.Dequeue();
+            audioSources.Enqueue(newSource);
+        }
+        return newSource;
     }
 
     public void Play(VirtualAudioSource virtualAudioSource)

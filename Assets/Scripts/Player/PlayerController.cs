@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
         {
             SPRegenTimer += Time.deltaTime;
         }
-        
+
         //Looking at Weapon Props
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, 3f))

@@ -50,7 +50,7 @@ public class PlayerCombatController : MonoBehaviour
         worldModelRenderer = worldModel.GetComponent<MeshRenderer>();
         controls = GetComponent<PlayerInputReader>();
         firstPersonCamera = GetComponent<FirstPersonCamera>();
-        audioSource = GetComponent<VirtualAudioSource>();
+        audioSource = GetComponents<VirtualAudioSource>()[1];
         weapons = new Dictionary<int, Weapon>();
 
         foreach (Transform t in weaponsContainer)

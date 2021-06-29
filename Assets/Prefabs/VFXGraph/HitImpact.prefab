@@ -12,13 +12,15 @@ GameObject:
   - component: {fileID: 2854400076911704275}
   - component: {fileID: 2854400076911704272}
   - component: {fileID: 5595206046903395400}
+  - component: {fileID: -2348128735750590481}
+  - component: {fileID: 7772669200050649020}
   m_Layer: 0
   m_Name: HitImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2854400076911704274
 Transform:
   m_ObjectHideFlags: 0
@@ -130,3 +132,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 2
+--- !u!114 &-2348128735750590481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2854400076911704273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6a4f223e643f149ba9e6d986300434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  mixerGroup: {fileID: -823178921040504914, guid: 192832ae567ce254d90673950bfc1b28,
+    type: 2}
+  volume: 1
+  range: 2
+  playOnStart: 0
+  loop: 0
+--- !u!114 &7772669200050649020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2854400076911704273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f6030ef067fd945b8341e3b1ef8d21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 030477ee7c0b23049bb32a2531de2ad8, type: 3}
+  - {fileID: 8300000, guid: 2bfc2e55f8b5b2a48af0866042f10248, type: 3}
+  - {fileID: 8300000, guid: 7469a750c4f18c4439b6167986c6ae2c, type: 3}
+  - {fileID: 8300000, guid: 3e5fe621ae45f314caf34ed5b8e62ae8, type: 3}
+  - {fileID: 8300000, guid: 3e4db177d1233c94996051fe17c34a27, type: 3}

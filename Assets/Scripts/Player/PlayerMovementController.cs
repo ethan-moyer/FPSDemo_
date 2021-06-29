@@ -18,10 +18,15 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float decceleration = 1f;
     [SerializeField] private float jump = 10f;
     [SerializeField] private float gravity = 10f;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip footsteps = null;
+    [SerializeField] private AudioClip landingLight = null;
+    [SerializeField] private AudioClip landingHeavy = null;
 
     private PlayerInputReader controls;
     private CharacterController cc;
     private PlayerState currentState;
+    private VirtualAudioSource audioSource;
     private float slopeAngle;
     private Vector3 slopeTangent;
     private Vector3 moveDirection;
@@ -31,14 +36,19 @@ public class PlayerMovementController : MonoBehaviour
     public float Decceleration => decceleration;
     public float Jump => jump;
     public float Gravity => gravity;
+    public AudioClip Footsteps => footsteps;
+    public AudioClip LandingLight => landingLight;
+    public AudioClip LandingHeavy => landingHeavy;
     public float SlopeAngle { get { return slopeAngle; } set { slopeAngle = value; } }
     public Vector3 SlopeTangent { get { return slopeTangent; } set { slopeTangent = value; } }
     public Vector3 MoveDirection { get { return moveDirection; } set { moveDirection = value; } }
+
 
     private void Awake()
     {
         controls = GetComponent<PlayerInputReader>();
         cc = GetComponent<CharacterController>();
+        audioSource = GetComponents<VirtualAudioSource>()[0]; // { movement_sounds, weapon_sounds }
         SwitchState(new AirState(this, cc, cam, controls));
     }
 
@@ -63,6 +73,11 @@ public class PlayerMovementController : MonoBehaviour
         {
             currentState.OnStateEnter();
         }
+    }
+
+    public void PlayClip(AudioClip clip)
+    {
+        audioSource.Play(clip);
     }
 
     public void SetY(float newY)
@@ -113,7 +128,7 @@ public class PlayerMovementController : MonoBehaviour
         //Push Props
         if (hit.gameObject.layer == 12 && hit.gameObject.GetComponent<Prop>() != null)
         {
-            //hit.gameObject.GetComponent<Prop>().Hit(hit.point, cc.velocity * 0.1f);
+            hit.gameObject.GetComponent<Prop>().Hit(hit.point, cc.velocity * 0.3f);
         }
     }
 

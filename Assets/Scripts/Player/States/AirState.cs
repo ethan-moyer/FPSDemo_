@@ -19,6 +19,10 @@ public class AirState : PlayerState
 
     public override void OnStateExit()
     {
+        if (player.MoveDirection.y <= -7f)
+            player.PlayClip(player.LandingHeavy);
+        //else
+            //player.PlayClip(player.LandingLight);
         player.SetY(0f);
     }
 
