@@ -22,6 +22,5 @@ public class Gun : ReloadableWeapon
             Vector3 randDirection = (cam.forward.normalized * maxDistance) + (cam.right.normalized * Random.Range(-1f, 1f) * coneRadius) + (cam.up.normalized * Random.Range(-1f, 1f) * coneRadius);
             ShootRay(randDirection);
         }
-        combatController.gameObject.layer = 9;
     }
 }

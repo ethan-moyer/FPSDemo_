@@ -24,7 +24,6 @@ public class Prop : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         float magnitude = rb.velocity.magnitude;
-        print(magnitude);
         foreach (AudioClipThreshold group in impactClips)
         {
             if (magnitude <= group.threshold)

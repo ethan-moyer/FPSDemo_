@@ -12,6 +12,15 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private Transform weaponsContainer = null;
     [SerializeField] private int currentID = 0;
     [SerializeField] private int secondID = 1;
+    [Header("Grenades")]
+    [SerializeField] private GameObject fragPrefab = null;
+    [SerializeField] private GameObject stickyPrefab = null;
+    private int currentGrenadeType = 0;
+    [SerializeField] private int currentFragAmount = 2;
+    [SerializeField] private int currentStickyAmount = 0;
+    [SerializeField] private int maxGrenadeAmount = 2;
+    [SerializeField] private Vector3 grenadeSpawnOffset = Vector3.zero;
+    [SerializeField] private float throwingForce = 20f;
     [Header("Models")]
     [SerializeField] private Transform viewModelPivot = null;
     [SerializeField] private GameObject viewModel = null;
@@ -200,6 +209,29 @@ public class PlayerCombatController : MonoBehaviour
         if (controls.WeaponReloadDown)
         {
             CurrentWeapon.ThirdAction();
+        }
+        if (controls.ThrowGrenadeDown)
+        {
+            if (CurrentWeapon.IsIdle)
+            {
+                if (currentGrenadeType == 0 && currentFragAmount > 0)
+                {
+                    currentFragAmount -= 1;
+                    Instantiate(fragPrefab, cam.transform.TransformPoint(grenadeSpawnOffset), Quaternion.LookRotation(cam.transform.forward)).GetComponent<Grenade>().SetUp(this.gameObject, cam.transform.forward * throwingForce);
+                }
+                else if (currentGrenadeType == 1 && currentStickyAmount > 0)
+                {
+                    currentStickyAmount -= 1;
+                    Instantiate(stickyPrefab, cam.transform.TransformPoint(grenadeSpawnOffset), Quaternion.LookRotation(cam.transform.forward)).GetComponent<Grenade>().SetUp(this.gameObject, cam.transform.forward * throwingForce);
+                }
+            }
+        }
+        if (controls.SwitchGrenadeDown)
+        {
+            if (currentGrenadeType == 0)
+                currentGrenadeType = 1;
+            else if (currentGrenadeType == 1)
+                currentGrenadeType = 0;
         }
     }
 }

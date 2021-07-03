@@ -9,7 +9,6 @@ public class Explosive : MonoBehaviour
     [SerializeField] private int explosionEffect = 2;
     [SerializeField] private float sphereRadius;
     [SerializeField] private LayerMask targets;
-    [SerializeField] private AudioClip sound = null;
 
     public void Explode()
     {

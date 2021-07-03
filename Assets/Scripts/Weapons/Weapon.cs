@@ -150,7 +150,7 @@ public abstract class Weapon : MonoBehaviour
     protected Vector3 ShootRay(Vector3 direction)
     {
         RaycastHit hit;
-        gameObject.layer = 2;
+        combatController.gameObject.layer = 2;
         if (Physics.Raycast(cam.position, direction, out hit, maxDistance))
         {
             if (hit.transform.gameObject.layer == 9)
@@ -179,7 +179,7 @@ public abstract class Weapon : MonoBehaviour
             }
             return hit.point;
         }
-        gameObject.layer = 9;
+        combatController.gameObject.layer = 9;
         return cam.position + direction * maxDistance;
     }
 

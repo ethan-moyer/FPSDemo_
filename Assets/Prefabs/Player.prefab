@@ -799,7 +799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4459864140050096600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1371,6 +1371,36 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 273d4b06-b97e-4a3e-996e-078f80c8ce1c
     m_ActionName: Player/Zoom[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017234851}
+        m_MethodName: OnThrowGrenade
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 40f3a65d-5a83-4fbc-abfd-0af8144c1c3d
+    m_ActionName: Player/Grenade[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017234851}
+        m_MethodName: OnSwitchGrenade
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ae697648-86a0-4368-978a-6b3b6abab270
+    m_ActionName: Player/SwitchGrenade[/Keyboard/2,/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID/dpad/right]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1479,6 +1509,15 @@ MonoBehaviour:
   weaponsContainer: {fileID: 768296828}
   currentID: 1
   secondID: 0
+  fragPrefab: {fileID: 7064059461981977702, guid: e1b4a57b8927ca340a62e45a884257b2,
+    type: 3}
+  stickyPrefab: {fileID: 2284277317478230508, guid: 5eb48d5128505794ab470fd2b38da0fb,
+    type: 3}
+  currentFragAmount: 2
+  currentStickyAmount: 2
+  maxGrenadeAmount: 2
+  grenadeSpawnOffset: {x: 0, y: 0, z: 0}
+  throwingForce: 15
   viewModelPivot: {fileID: 3171431669897444856}
   viewModel: {fileID: 5543532003259128607}
   viewEffect: {fileID: 1730375203}

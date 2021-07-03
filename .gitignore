@@ -76,3 +76,4 @@ crashlytics-build.properties
 #Audio Files
 *.mp3
 *.mp3.meta
+/Assets/Scripts/ModularWeapons

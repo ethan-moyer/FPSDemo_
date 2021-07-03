@@ -89,6 +89,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.3)""
+                },
+                {
+                    ""name"": ""ThrowGrenade"",
+                    ""type"": ""Button"",
+                    ""id"": ""40f3a65d-5a83-4fbc-abfd-0af8144c1c3d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.3)""
+                },
+                {
+                    ""name"": ""SwitchGrenade"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae697648-86a0-4368-978a-6b3b6abab270"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.3)""
                 }
             ],
             ""bindings"": [
@@ -421,6 +437,61 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06fbb0da-fab4-49b4-a91a-162a7c80518f"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ThrowGrenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45dce291-16f9-4936-ae72-bdd0a57f4a5b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ThrowGrenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e850edc-d7fa-412a-b02f-5c71df432b9e"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SwitchGrenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5c6bf8f-ded7-47f2-b56e-840f68d4de13"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchGrenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f92c1aa-66cc-40f6-ba95-2e2a63ccc8b5"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchGrenade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -466,6 +537,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_WeaponSwitch = m_Player.FindAction("WeaponSwitch", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_ThrowGrenade = m_Player.FindAction("ThrowGrenade", throwIfNotFound: true);
+        m_Player_SwitchGrenade = m_Player.FindAction("SwitchGrenade", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -524,6 +597,8 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_WeaponSwitch;
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_ThrowGrenade;
+    private readonly InputAction m_Player_SwitchGrenade;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -537,6 +612,8 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @WeaponSwitch => m_Wrapper.m_Player_WeaponSwitch;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @ThrowGrenade => m_Wrapper.m_Player_ThrowGrenade;
+        public InputAction @SwitchGrenade => m_Wrapper.m_Player_SwitchGrenade;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -573,6 +650,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @ThrowGrenade.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGrenade;
+                @ThrowGrenade.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGrenade;
+                @ThrowGrenade.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowGrenade;
+                @SwitchGrenade.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchGrenade;
+                @SwitchGrenade.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchGrenade;
+                @SwitchGrenade.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchGrenade;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -604,6 +687,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @ThrowGrenade.started += instance.OnThrowGrenade;
+                @ThrowGrenade.performed += instance.OnThrowGrenade;
+                @ThrowGrenade.canceled += instance.OnThrowGrenade;
+                @SwitchGrenade.started += instance.OnSwitchGrenade;
+                @SwitchGrenade.performed += instance.OnSwitchGrenade;
+                @SwitchGrenade.canceled += instance.OnSwitchGrenade;
             }
         }
     }
@@ -637,5 +726,7 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnWeaponSwitch(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnThrowGrenade(InputAction.CallbackContext context);
+        void OnSwitchGrenade(InputAction.CallbackContext context);
     }
 }
