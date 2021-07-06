@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Destroy(prop.gameObject);
                     GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + 0.5f * Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
-                    newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.CurrentAmmo;
+                    newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.TotalAmmo;
                     newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 10000f);
                     combatController.SwitchTo(prop.WeaponID, prop.Ammo);
                 }
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
             bool addingAmmo = combatController.CurrentWeapon.AddAmmo(ammo);
             if (addingAmmo)
             {
-                combatController.CurrentWeapon.UpdateAmmoText.Invoke(combatController.CurrentWeapon.AmmoToText());
+                combatController.CurrentWeapon.UpdateAmmoText();
                 return true;
             }
             return false;

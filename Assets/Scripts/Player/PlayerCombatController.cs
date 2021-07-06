@@ -40,11 +40,11 @@ public class PlayerCombatController : MonoBehaviour
     private PlayerInputReader controls = null;
     private FirstPersonCamera firstPersonCamera = null;
     private VirtualAudioSource audioSource = null;
-    private Dictionary<int, Weapon> weapons;
+    private Dictionary<int, ModularWeapon> weapons;
 
-    public Weapon CurrentWeapon { get; private set; }
+    public ModularWeapon CurrentWeapon { get; private set; }
 
-    public Weapon SecondWeapon
+    public ModularWeapon SecondWeapon
     {
         get { return weapons[secondID]; }
     }
@@ -60,18 +60,19 @@ public class PlayerCombatController : MonoBehaviour
         controls = GetComponent<PlayerInputReader>();
         firstPersonCamera = GetComponent<FirstPersonCamera>();
         audioSource = GetComponents<VirtualAudioSource>()[1];
-        weapons = new Dictionary<int, Weapon>();
+        weapons = new Dictionary<int, ModularWeapon>();
 
         foreach (Transform t in weaponsContainer)
         {
-            Weapon w = t.GetComponent<Weapon>();
+            ModularWeapon w = t.GetComponent<ModularWeapon>();
             if (w != null)
             {
-                w.Init(this, cam.transform, controls, viewModelAnimator, viewEffect);
-                w.TriggerAnimation.AddListener(this.OnTriggerAnimation);
-                w.UpdateAmmoText.AddListener(this.UpdateAmmoText);
-                w.ChangeFOV.AddListener(this.OnChangeFOV);
-                w.PlayAudioClip.AddListener(this.OnPlayAudioClip);
+                w.Init(this.gameObject, cam.transform, -1);
+                w.TriggeringAnimation.AddListener(this.OnTriggerAnimation);
+                w.UpdatingAmmoText.AddListener(this.UpdateAmmoText);
+                w.ChangingFOV.AddListener(this.OnChangeFOV);
+                w.PlayingAudioClip.AddListener(this.OnPlayAudioClip);
+                w.PlayingEffect.AddListener(this.OnPlayEffect);
                 weapons.Add(w.WeaponID, w);
             }
         }
@@ -162,7 +163,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void OnChangeFOV(float fovMultiplier)
     {
-        if (fovMultiplier == -1)
+        if (fovMultiplier == 1)
         {
             StartCoroutine(ChangeFOVOverTime(startingFOV));
             firstPersonCamera.zoomed = false;
@@ -192,9 +193,14 @@ public class PlayerCombatController : MonoBehaviour
         audioSource.Play(clip);
     }
 
+    private void OnPlayEffect()
+    {
+        viewEffect.Play();
+    }
+
     private void Update()
     {
-        if (controls.WeaponSwitchDown && CurrentWeapon.IsIdle)
+        if (controls.WeaponSwitchDown && CurrentWeapon.CurrentState == ModularWeapon.States.Idle)
         {
             StartCoroutine(SwapWeapons());
         }
@@ -208,11 +214,11 @@ public class PlayerCombatController : MonoBehaviour
         }
         if (controls.WeaponReloadDown)
         {
-            CurrentWeapon.ThirdAction();
+            CurrentWeapon.TertiaryAction();
         }
         if (controls.ThrowGrenadeDown)
         {
-            if (CurrentWeapon.IsIdle)
+            if (CurrentWeapon.CurrentState == ModularWeapon.States.Idle)
             {
                 if (currentGrenadeType == 0 && currentFragAmount > 0)
                 {
