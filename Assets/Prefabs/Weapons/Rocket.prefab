@@ -135,7 +135,6 @@ MonoBehaviour:
   targets:
     serializedVersion: 2
     m_Bits: 6656
-  sound: {fileID: 8300000, guid: e2d9b1461f3dc4049ad6792dc1fbb1e0, type: 3}
 --- !u!114 &2156091882128631284
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,13 +26,13 @@ public abstract class Projectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision col)
     {
-        if (collision.gameObject != player)
+        if (col.gameObject != player)
         {
-            Hit();
+            Hit(col);
         }
     }
 
-    protected abstract void Hit();
+    protected abstract void Hit(Collision col);
 }

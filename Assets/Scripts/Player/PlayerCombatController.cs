@@ -29,6 +29,7 @@ public class PlayerCombatController : MonoBehaviour
     [Header("HUD")]
     [SerializeField] private Image hudReticle = null;
     [SerializeField] private TextMeshProUGUI hudAmmo = null;
+    [SerializeField] private Image hudCooldownMeter = null;
     [SerializeField] private Camera cam = null;
     [SerializeField] private float zoomTime = 1f;
     private float startingFOV = 0f;
@@ -73,6 +74,8 @@ public class PlayerCombatController : MonoBehaviour
                 w.ChangingFOV.AddListener(this.OnChangeFOV);
                 w.PlayingAudioClip.AddListener(this.OnPlayAudioClip);
                 w.PlayingEffect.AddListener(this.OnPlayEffect);
+                if (w is ModularCooldownWeapon cooldown)
+                    cooldown.UpdatingCooldownMeter.AddListener(this.OnUpdateCooldown);
                 weapons.Add(w.WeaponID, w);
             }
         }
@@ -149,6 +152,10 @@ public class PlayerCombatController : MonoBehaviour
         hudReticle.gameObject.SetActive(true);
         hudReticle.sprite = CurrentWeapon.ReticleData.Item1;
         hudReticle.rectTransform.localScale = Vector3.one * CurrentWeapon.ReticleData.Item2;
+        if (CurrentWeapon is ModularCooldownWeapon)
+            hudCooldownMeter.gameObject.SetActive(true);
+        else
+            hudCooldownMeter.gameObject.SetActive(false);
     }
 
     public void UpdateAmmoText(string newText)
@@ -196,6 +203,11 @@ public class PlayerCombatController : MonoBehaviour
     private void OnPlayEffect()
     {
         viewEffect.Play();
+    }
+
+    private void OnUpdateCooldown(float meterAmount)
+    {
+        hudCooldownMeter.fillAmount = meterAmount;
     }
 
     private void Update()

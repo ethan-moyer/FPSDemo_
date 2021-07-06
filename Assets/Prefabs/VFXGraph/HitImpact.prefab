@@ -148,7 +148,7 @@ MonoBehaviour:
   mixerGroup: {fileID: -823178921040504914, guid: 192832ae567ce254d90673950bfc1b28,
     type: 2}
   volume: 1
-  range: 2
+  range: 10
   playOnStart: 0
   loop: 0
 --- !u!114 &7772669200050649020

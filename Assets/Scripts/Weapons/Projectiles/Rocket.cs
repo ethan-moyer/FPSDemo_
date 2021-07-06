@@ -13,7 +13,7 @@ public class Rocket : Projectile
         explosive = GetComponent<Explosive>();
     }
 
-    protected override void Hit()
+    protected override void Hit(Collision collision)
     {
         explosive.Explode();
     }
