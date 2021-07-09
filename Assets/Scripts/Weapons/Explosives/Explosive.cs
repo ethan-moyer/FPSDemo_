@@ -24,27 +24,42 @@ public class Explosive : MonoBehaviour
         foreach(Collider collider in colliders)
         {
             Vector3 point = collider.ClosestPoint(transform.position);
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, point - transform.position, out hit, sphereRadius))
+            if (point == transform.position)
             {
-                float falloff = 1 - (Vector3.Distance(transform.position, hit.point) / sphereRadius);
-                if (hit.transform == collider.transform)
+                if (collider.transform.gameObject.layer == 9)
                 {
-                    if (hit.transform.gameObject.layer == 9)
+                    PlayerController player = collider.transform.GetComponent<PlayerController>();
+                    if (player != null)
                     {
-                        PlayerController player = hit.transform.GetComponent<PlayerController>();
-                        if (player != null)
-                        {
-                            player.DamageHit(HPDamage * falloff, SPDamage * falloff);
-                            player.PhysicsHit(point - transform.position, falloff * (HPDamage) * 0.15f);
-                        }
+                        player.DamageHit(HPDamage, SPDamage, point);
+                        player.PhysicsHit(point - transform.position, HPDamage * 0.15f);
                     }
-                    else if (hit.transform.gameObject.layer == 12)
+                }
+            }
+            else
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, point - transform.position, out hit, sphereRadius))
+                {
+                    float falloff = 1 - (Vector3.Distance(transform.position, hit.point) / sphereRadius);
+                    if (hit.transform == collider.transform)
                     {
-                        Prop prop = hit.transform.GetComponent<Prop>();
-                        if (prop != null)
+                        if (hit.transform.gameObject.layer == 9)
                         {
-                            prop.Hit(point, hit.normal * falloff * -70f);
+                            PlayerController player = hit.transform.GetComponent<PlayerController>();
+                            if (player != null)
+                            {
+                                player.DamageHit(HPDamage * falloff, SPDamage * falloff, hit.point);
+                                player.PhysicsHit(point - transform.position, falloff * HPDamage * 0.15f);
+                            }
+                        }
+                        else if (hit.transform.gameObject.layer == 12)
+                        {
+                            Prop prop = hit.transform.GetComponent<Prop>();
+                            if (prop != null)
+                            {
+                                prop.Hit(point, hit.normal * falloff * -70f);
+                            }
                         }
                     }
                 }

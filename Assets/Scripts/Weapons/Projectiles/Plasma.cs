@@ -14,7 +14,7 @@ public class Plasma : Projectile
             PlayerController hitPlayer = collision.gameObject.GetComponent<PlayerController>();
             if (hitPlayer != null)
             {
-                hitPlayer.DamageHit(HPDamage, SPDamage);
+                hitPlayer.DamageHit(HPDamage, SPDamage, collision.GetContact(0).point);
             }
         }
         else if (collision.gameObject.layer == 10 || collision.gameObject.layer == 12) //Hit terrain or a prop

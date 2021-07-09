@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 3958422720381719273}
   - component: {fileID: 3234416635253015786}
   - component: {fileID: 8719060252621274950}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plasma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3958422720381719284
 Transform:
   m_ObjectHideFlags: 0

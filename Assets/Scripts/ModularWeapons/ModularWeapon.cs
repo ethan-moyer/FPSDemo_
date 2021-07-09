@@ -77,6 +77,8 @@ public abstract class ModularWeapon : MonoBehaviour
         get { return (reticle, reticleScale); }
     }
 
+    public Transform Cam => cam;
+
     //Methods
     public virtual void Init(GameObject player, Transform cam, int ammo)
     {

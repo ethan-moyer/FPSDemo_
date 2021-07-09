@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject hudCanvas = null;
     [SerializeField] private GameObject respawnCanvas = null;
     [SerializeField] private Image hudHealthBar = null;
+    [SerializeField] private Image[] damageIndicators = new Image[4];
     [Header("Hit Points")]
     [SerializeField] private int maxHP = 40;
     [SerializeField] private int maxSP = 75;
@@ -44,6 +45,11 @@ public class PlayerController : MonoBehaviour
         movementController = GetComponent<PlayerMovementController>();
         controls = GetComponent<PlayerInputReader>();
         cc = GetComponent<CharacterController>();
+
+        foreach (Image i in damageIndicators)
+        {
+            i.canvasRenderer.SetAlpha(0f);
+        }
     }
 
     /// <summary>
@@ -80,8 +86,9 @@ public class PlayerController : MonoBehaviour
         movementController.MoveDirection += direction * strength;
     }
 
-    public void DamageHit(float HPDamage, float SPDamage)
+    public void DamageHit(float HPDamage, float SPDamage, Vector3 hitPos)
     {
+        //Apply Damage
         if (currentSP > 0)
         {
             currentSP = Mathf.Max(0, currentSP - SPDamage);
@@ -100,6 +107,34 @@ public class PlayerController : MonoBehaviour
             }
         }
         hudHealthBar.fillAmount = (currentHP + currentSP) / (maxHP + maxSP);
+
+        //Show Hit Indicator
+        Vector3 hitDir = (hitPos - transform.position); hitDir.y = 0f; hitDir.Normalize();
+        float damageDot = Vector3.Dot(transform.forward, hitDir);
+        int indicatorIndex;
+        if (damageDot >= 0.5f)
+        {
+            indicatorIndex = 0;
+        }
+        else if (damageDot <= -0.5f)
+        {
+            indicatorIndex = 2;
+        }
+        else
+        {
+            Vector3 perpendicular = Vector3.Cross(transform.forward, hitDir);
+            if (Vector3.Dot(perpendicular, Vector3.up) > 0f)
+            {
+                indicatorIndex = 1;
+            }
+            else
+            {
+                indicatorIndex = 3;
+            }
+        }
+        print(indicatorIndex);
+        damageIndicators[indicatorIndex].canvasRenderer.SetAlpha(1f);
+        damageIndicators[indicatorIndex].CrossFadeAlpha(0f, 1f, false);
     }
 
     public void Respawn(Vector3 spawnPoint, Vector3 newRotation)
@@ -116,6 +151,10 @@ public class PlayerController : MonoBehaviour
 
     public void Enable()
     {
+        foreach (Image i in damageIndicators)
+        {
+            i.canvasRenderer.SetAlpha(0f);
+        }
         movementController.enabled = true;
         combatController.enabled = true;
         cc.enabled = true;

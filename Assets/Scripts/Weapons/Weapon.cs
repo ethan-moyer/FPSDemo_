@@ -159,7 +159,7 @@ public abstract class Weapon : MonoBehaviour
                 PlayerController player = hit.transform.GetComponent<PlayerController>();
                 if (player != null)
                 {
-                    player.DamageHit(HPDamage, SPDamage);
+                    player.DamageHit(HPDamage, SPDamage, hit.point);
                 }
             }
             if (hit.transform.gameObject.layer == 12)

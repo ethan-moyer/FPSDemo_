@@ -130,7 +130,7 @@ MonoBehaviour:
   sphereRadius: 2
   targets:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 6656
 --- !u!114 &7064059461981977701
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5586893376668223842}
   - component: {fileID: 5010584103301766149}
   - component: {fileID: 210694977134804813}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7798542855982790661}
   - component: {fileID: 6241526731334778740}
   - component: {fileID: 2822693883079336128}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!114 &2822693883079336128
@@ -214,6 +214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3042650725755784131, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3042650725755784132, guid: c2e2fa07d4e03214b8bb4c759b5c9f68,
         type: 3}
