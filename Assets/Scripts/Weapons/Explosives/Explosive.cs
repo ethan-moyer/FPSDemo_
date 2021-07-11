@@ -5,7 +5,7 @@ using UnityEngine;
 public class Explosive : MonoBehaviour
 {
     [SerializeField] private float HPDamage = 0f;
-    [SerializeField] private float SPDamage = 0f;
+    [SerializeField] private float SPMultiplier = 0f;
     [SerializeField] private int explosionEffect = 2;
     [SerializeField] private float sphereRadius;
     [SerializeField] private LayerMask targets;
@@ -31,7 +31,7 @@ public class Explosive : MonoBehaviour
                     PlayerController player = collider.transform.GetComponent<PlayerController>();
                     if (player != null)
                     {
-                        player.DamageHit(HPDamage, SPDamage, point);
+                        player.DamageHit(HPDamage, SPMultiplier, point);
                         player.PhysicsHit(point - transform.position, HPDamage * 0.15f);
                     }
                 }
@@ -49,7 +49,7 @@ public class Explosive : MonoBehaviour
                             PlayerController player = hit.transform.GetComponent<PlayerController>();
                             if (player != null)
                             {
-                                player.DamageHit(HPDamage * falloff, SPDamage * falloff, hit.point);
+                                player.DamageHit(HPDamage * falloff, SPMultiplier * falloff, hit.point);
                                 player.PhysicsHit(point - transform.position, falloff * HPDamage * 0.15f);
                             }
                         }

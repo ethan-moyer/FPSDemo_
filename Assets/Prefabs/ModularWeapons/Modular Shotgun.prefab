@@ -89,7 +89,7 @@ MonoBehaviour:
   attack: {fileID: 675733675037107211}
   zoomLevels:
   - 1
-  - 0.5
+  - 0.8
   stayZoomed: 0
   maxMagAmmo: 6
   reloadTime: 1.8
@@ -106,8 +106,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPDamage: 18
-  SPDamage: 18
+  SPMultiplier: 0.5
   maxDistance: 80
   coneRadius: 7
   numberOfRays: 8
   firingClip: {fileID: 8300000, guid: 3288ae14ab6c7a84b999316eb3a46ae1, type: 3}
+  trail: {fileID: 0}

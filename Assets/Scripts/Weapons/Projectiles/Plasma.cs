@@ -5,7 +5,7 @@ using UnityEngine;
 public class Plasma : Projectile
 {
     [SerializeField] private float HPDamage = 0f;
-    [SerializeField] private float SPDamage = 0f;
+    [SerializeField] private float SPMultiplier = 0f;
 
     protected override void Hit(Collision collision)
     {
@@ -14,12 +14,12 @@ public class Plasma : Projectile
             PlayerController hitPlayer = collision.gameObject.GetComponent<PlayerController>();
             if (hitPlayer != null)
             {
-                hitPlayer.DamageHit(HPDamage, SPDamage, collision.GetContact(0).point);
+                hitPlayer.DamageHit(HPDamage, SPMultiplier, collision.GetContact(0).point);
             }
         }
         else if (collision.gameObject.layer == 10 || collision.gameObject.layer == 12) //Hit terrain or a prop
         {
-            ModularWeapon.PlaceEffect(1, collision.contacts[0].point, collision.contacts[0].normal);
+            ModularWeapon.PlaceEffect(4, collision.contacts[0].point, collision.contacts[0].normal);
             
         }
 

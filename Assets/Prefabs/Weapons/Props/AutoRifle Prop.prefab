@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 8619449546001165857}
   - component: {fileID: 2708641421335994856}
   - component: {fileID: 775521194461540149}
+  - component: {fileID: 3762772666617473602}
   m_Layer: 12
   m_Name: AutoRifle Prop
   m_TagString: Untagged
@@ -179,3 +180,22 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5050221db38b7394bae6068735a601eb, type: 3}
   weaponID: 1
   ammo: 50
+--- !u!114 &3762772666617473602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6632588220536559233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6a4f223e643f149ba9e6d986300434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  mixerGroup: {fileID: -823178921040504914, guid: 192832ae567ce254d90673950bfc1b28,
+    type: 2}
+  volume: 1
+  range: 100
+  playOnStart: 0
+  loop: 0

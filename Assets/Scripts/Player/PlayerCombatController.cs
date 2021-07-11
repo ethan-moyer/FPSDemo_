@@ -32,6 +32,10 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private Image hudCooldownMeter = null;
     [SerializeField] private Camera cam = null;
     [SerializeField] private float zoomTime = 1f;
+    [SerializeField] private Image fragPanel = null;
+    [SerializeField] private TextMeshProUGUI fragCounter = null;
+    [SerializeField] private Image stickyPanel = null;
+    [SerializeField] private TextMeshProUGUI stickyCounter = null;
     private float startingFOV = 0f;
     private MeshFilter viewModelFilter = null;
     private MeshRenderer viewModelRenderer = null;
@@ -80,6 +84,7 @@ public class PlayerCombatController : MonoBehaviour
             }
         }
 
+        UpdateGrenadeCounters();
         SwitchTo(currentID, -1);
     }
 
@@ -163,6 +168,22 @@ public class PlayerCombatController : MonoBehaviour
         hudAmmo.text = newText;
     }
 
+    private void UpdateGrenadeCounters()
+    {
+        if (currentGrenadeType == 0)
+        {
+            fragPanel.color = new Color(fragPanel.color.r, fragPanel.color.g, fragPanel.color.b, 0.59f);
+            stickyPanel.color = new Color(stickyPanel.color.r, stickyPanel.color.g, stickyPanel.color.b, 0.39f);
+        }
+        else if (currentGrenadeType == 1)
+        {
+            fragPanel.color = new Color(fragPanel.color.r, fragPanel.color.g, fragPanel.color.b, 0.39f);
+            stickyPanel.color = new Color(stickyPanel.color.r, stickyPanel.color.g, stickyPanel.color.b, 0.59f);
+        }
+        fragCounter.text = currentFragAmount.ToString();
+        stickyCounter.text = currentStickyAmount.ToString();
+    }
+
     private void OnTriggerAnimation(string parameter)
     {
         viewModelAnimator.SetTrigger(parameter);
@@ -242,6 +263,7 @@ public class PlayerCombatController : MonoBehaviour
                     currentStickyAmount -= 1;
                     Instantiate(stickyPrefab, cam.transform.TransformPoint(grenadeSpawnOffset), Quaternion.LookRotation(cam.transform.forward)).GetComponent<Grenade>().SetUp(this.gameObject, cam.transform.forward * throwingForce);
                 }
+                UpdateGrenadeCounters();
             }
         }
         if (controls.SwitchGrenadeDown)
@@ -250,6 +272,7 @@ public class PlayerCombatController : MonoBehaviour
                 currentGrenadeType = 1;
             else if (currentGrenadeType == 1)
                 currentGrenadeType = 0;
+            UpdateGrenadeCounters();
         }
     }
 }

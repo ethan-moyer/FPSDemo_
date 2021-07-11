@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647234393f60b3b49b6df850adc7867d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPDamage: 120
-  SPDamage: 120
+  HPDamage: 170
+  SPMultiplier: 1
   explosionEffect: 2
   sphereRadius: 3
   targets:

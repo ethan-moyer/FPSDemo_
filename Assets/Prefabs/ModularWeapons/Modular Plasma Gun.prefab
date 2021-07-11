@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4899938842183091180}
   - component: {fileID: 8654080985575526787}
-  - component: {fileID: 2362018519490137687}
+  - component: {fileID: 1865693735301138342}
   m_Layer: 9
   m_Name: Modular Plasma Gun
   m_TagString: Untagged
@@ -62,11 +62,11 @@ MonoBehaviour:
   weaponName: Plasma Gun
   weaponID: 5
   viewModel:
-    mesh: {fileID: 157429885028697517, guid: dc7c3db8ad41d014bb3483b5e2d4192f, type: 3}
+    mesh: {fileID: -6712515009374007970, guid: 1dfe7dce3a0255c4ca4de7cdc674cc5b, type: 3}
     materials:
-    - {fileID: 2100000, guid: 3457aabf6f1211043a2bea4b29ecc24b, type: 2}
-    animator: {fileID: 22100000, guid: 9e394cf845fcba64f88b247f5e325e34, type: 2}
-    offset: {x: 0.108, y: -0.128, z: 0.144}
+    - {fileID: 2100000, guid: c0b14fba9352e8044915e66ca9fe1d54, type: 2}
+    animator: {fileID: 22100000, guid: 0fce681a79cad7d48abd4298a6c905de, type: 2}
+    offset: {x: 0.15, y: -0.11, z: 0.1714}
     scale: {x: 0.1, y: 0.1, z: 0.1}
   worldModel:
     mesh: {fileID: 0}
@@ -75,23 +75,27 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0}
     scale: {x: 0, y: 0, z: 0}
   particleEffect:
-    visualEffect: {fileID: 8926484042661614526, guid: 7e6eb7595322c5242af3e639057d9a3b,
-      type: 3}
+    visualEffect: {fileID: 0}
     offset: {x: 0.15, y: -1.88, z: 0.66}
     scale: {x: 15, y: 15, z: 15}
-  propPrefab: {fileID: 0}
+  propPrefab: {fileID: 8235045913397271556, guid: c447f7c325a74744f98b90d9b71ba7d2,
+    type: 3}
   reticle: {fileID: 21300000, guid: 7905549c7892fc443a688573bcbf4cad, type: 3}
   reticleScale: 0.1
   maxAmmo: 100
-  attackRate: 1
-  attack: {fileID: 2362018519490137687}
+  attackRate: 8.8
+  attack: {fileID: 1865693735301138342}
   zoomLevels:
   - 1
-  - 0.5
+  - 0.8
   stayZoomed: 0
+  UpdatingCooldownMeter:
+    m_PersistentCalls:
+      m_Calls: []
   heatLimit: 1
-  heatPerAttack: 0.1
---- !u!114 &2362018519490137687
+  heatPerAttack: 0.2
+  coolingRate: 0.9
+--- !u!114 &1865693735301138342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,12 +104,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4899938842183091178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b8fe8a143bdf354bb4eb0983b41b305, type: 3}
+  m_Script: {fileID: 11500000, guid: d6465a6e88a24324686c0db940658316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPDamage: 15
-  SPDamage: 15
-  maxDistance: 80
-  coneRadius: 2
-  numberOfRays: 1
-  firingClip: {fileID: 8300000, guid: b0b164d96e45ce3469435d46ef254c47, type: 3}
+  projectile: {fileID: 8719060252621274950, guid: 15645f8fcd6ce8d40bd2e46c263d5c82,
+    type: 3}
+  maxDistance: 100
+  spawnOffset: {x: 0.18, y: -0.122, z: 0.36}
+  firingClip: {fileID: 0}

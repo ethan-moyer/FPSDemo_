@@ -87,7 +87,7 @@ MonoBehaviour:
   reticleScale: 0.05
   maxAmmo: 24
   attackRate: 1.714286
-  attack: {fileID: 0}
+  attack: {fileID: 4817260567674628515}
   zoomLevels:
   - 1
   - 0.5
@@ -107,8 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8fe8a143bdf354bb4eb0983b41b305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPDamage: 60
-  SPDamage: 60
+  HPDamage: 75
+  SPMultiplier: 1
   maxDistance: 100
   coneRadius: 0
   numberOfRays: 1

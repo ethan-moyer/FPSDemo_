@@ -50,6 +50,9 @@ MonoBehaviour:
   UpdatingAmmoText:
     m_PersistentCalls:
       m_Calls: []
+  ChangingFOV:
+    m_PersistentCalls:
+      m_Calls: []
   PlayingAudioClip:
     m_PersistentCalls:
       m_Calls: []
@@ -83,6 +86,10 @@ MonoBehaviour:
   maxAmmo: 8
   attackRate: 1
   attack: {fileID: 7429074805325444005}
+  zoomLevels:
+  - 1
+  - 0.5
+  stayZoomed: 1
   maxMagAmmo: 2
   reloadTime: 2
 --- !u!114 &7429074805325444005

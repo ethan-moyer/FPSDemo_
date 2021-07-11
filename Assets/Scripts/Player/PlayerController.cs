@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Image hudHealthBar = null;
     [SerializeField] private Image[] damageIndicators = new Image[4];
     [Header("Hit Points")]
-    [SerializeField] private int maxHP = 40;
+    [SerializeField] private int maxHP = 75;
     [SerializeField] private int maxSP = 75;
     [SerializeField] private float HPRegenDelay = 10f;
     [SerializeField] private float HPRegenRate = 9;
@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
     private PlayerMovementController movementController = null;
     private PlayerInputReader controls = null;
     private CharacterController cc = null;
-    private float currentHP = 40;
-    private float currentSP = 75;
+    private float currentHP;
+    private float currentSP;
     private float HPRegenTimer = 0f;
     private float SPRegenTimer = 0f;
 
@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
         movementController = GetComponent<PlayerMovementController>();
         controls = GetComponent<PlayerInputReader>();
         cc = GetComponent<CharacterController>();
+
+        currentHP = maxHP;
+        currentSP = maxSP;
 
         foreach (Image i in damageIndicators)
         {
@@ -86,17 +89,20 @@ public class PlayerController : MonoBehaviour
         movementController.MoveDirection += direction * strength;
     }
 
-    public void DamageHit(float HPDamage, float SPDamage, Vector3 hitPos)
+    public void DamageHit(float HPDamage, float SPMultiplier, Vector3 hitPos)
     {
         //Apply Damage
+        float remainingDamage = HPDamage;
         if (currentSP > 0)
         {
-            currentSP = Mathf.Max(0, currentSP - SPDamage);
+            remainingDamage = Mathf.Max(0, (HPDamage * SPMultiplier) - currentSP);
+            currentSP = Mathf.Max(0, currentSP - (HPDamage * SPMultiplier));
             SPRegenTimer = 0f;
         }
-        if (currentSP == 0)
+        
+        if (remainingDamage > 0)
         {
-            currentHP -= HPDamage;
+            currentHP -= remainingDamage;
             if (currentHP <= 0)
             {
                 Die.Invoke(PlayerID);
@@ -217,6 +223,7 @@ public class PlayerController : MonoBehaviour
                     GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + 0.5f * Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
                     newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.TotalAmmo;
                     newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 10000f);
+                    combatController.CurrentWeapon.gameObject.SetActive(false);
                     combatController.SwitchTo(prop.WeaponID, prop.Ammo);
                 }
             }

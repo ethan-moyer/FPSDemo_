@@ -82,7 +82,7 @@ MonoBehaviour:
   propPrefab: {fileID: 7162619686322849193, guid: e7d829b032bcb584ab8af0605da7650a,
     type: 3}
   reticle: {fileID: 21300000, guid: 7905549c7892fc443a688573bcbf4cad, type: 3}
-  reticleScale: 0.1
+  reticleScale: 0.07
   maxAmmo: 64
   attackRate: 2.86
   attack: {fileID: 2362018519490137687}
@@ -104,9 +104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8fe8a143bdf354bb4eb0983b41b305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPDamage: 15
-  SPDamage: 15
+  HPDamage: 25
+  SPMultiplier: 1.2
   maxDistance: 80
   coneRadius: 2
   numberOfRays: 1
   firingClip: {fileID: 8300000, guid: b0b164d96e45ce3469435d46ef254c47, type: 3}
+  trail: {fileID: 0}
