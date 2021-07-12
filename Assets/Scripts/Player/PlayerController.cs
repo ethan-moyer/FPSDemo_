@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject respawnCanvas = null;
     [SerializeField] private Image hudHealthBar = null;
     [SerializeField] private Image[] damageIndicators = new Image[4];
+    [SerializeField] private GameObject shieldObject = null;
     [Header("Hit Points")]
     [SerializeField] private int maxHP = 75;
     [SerializeField] private int maxSP = 75;
@@ -138,9 +139,10 @@ public class PlayerController : MonoBehaviour
                 indicatorIndex = 3;
             }
         }
-        print(indicatorIndex);
         damageIndicators[indicatorIndex].canvasRenderer.SetAlpha(1f);
         damageIndicators[indicatorIndex].CrossFadeAlpha(0f, 1f, false);
+
+        shieldObject.SetActive(true);
     }
 
     public void Respawn(Vector3 spawnPoint, Vector3 newRotation)
@@ -220,9 +222,15 @@ public class PlayerController : MonoBehaviour
                 if (prop != null && controls.WeaponInteractDown && prop.WeaponID != combatController.CurrentWeapon.WeaponID && prop.WeaponID != combatController.SecondWeapon.WeaponID)
                 {
                     Destroy(prop.gameObject);
-                    GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + 0.5f * Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
-                    newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.TotalAmmo;
-                    newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 10000f);
+
+                    //Drop old weapon if theres still ammo
+                    if (combatController.CurrentWeapon.TotalAmmo != 0)
+                    {
+                        GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + 0.5f * Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
+                        newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.TotalAmmo;
+                        newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 10000f);
+                    }
+
                     combatController.CurrentWeapon.gameObject.SetActive(false);
                     combatController.SwitchTo(prop.WeaponID, prop.Ammo);
                 }
