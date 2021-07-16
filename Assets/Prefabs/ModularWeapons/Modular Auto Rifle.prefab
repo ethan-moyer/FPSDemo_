@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPDamage: 7.5
   SPMultiplier: 0.7
-  maxDistance: 80
+  maxDistance: 300
   coneRadius: 5
   numberOfRays: 1
   firingClip: {fileID: 8300000, guid: b0b164d96e45ce3469435d46ef254c47, type: 3}
