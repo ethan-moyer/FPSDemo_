@@ -10,6 +10,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private Transform groundCheck = null;
     [Header("Ground & Slopes")]
     [SerializeField] private float groundRadius = 0.5f;
+    [SerializeField] private float slopeForce = 10f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask slideMask;
     [Header("Movement Attributes")]
@@ -27,8 +28,6 @@ public class PlayerMovementController : MonoBehaviour
     private CharacterController cc;
     private PlayerState currentState;
     private VirtualAudioSource audioSource;
-    private float slopeAngle;
-    private Vector3 slopeTangent;
     private Vector3 moveDirection;
 
     public float WalkSpeed => walkSpeed;
@@ -36,11 +35,12 @@ public class PlayerMovementController : MonoBehaviour
     public float Decceleration => decceleration;
     public float Jump => jump;
     public float Gravity => gravity;
+    public float SlopeForce => slopeForce;
     public AudioClip Footsteps => footsteps;
     public AudioClip LandingLight => landingLight;
     public AudioClip LandingHeavy => landingHeavy;
-    public float SlopeAngle { get { return slopeAngle; } set { slopeAngle = value; } }
-    public Vector3 SlopeTangent { get { return slopeTangent; } set { slopeTangent = value; } }
+    public float SlopeAngle { get; set; }
+    public Vector3 SlopeTangent { get; set; }
     public Vector3 MoveDirection { get { return moveDirection; } set { moveDirection = value; } }
 
 
@@ -92,10 +92,9 @@ public class PlayerMovementController : MonoBehaviour
         gameObject.layer = 2;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f, slideMask))
         {
-            Vector3 normal = hit.normal.normalized;
-            Vector3 u = Vector3.Cross(normal, Vector3.down).normalized;
-            SlopeTangent = Vector3.Cross(u, normal);
-            slopeAngle = Vector3.Angle(Vector3.up, normal);
+            Vector3 u = Vector3.Cross(hit.normal, Vector3.down).normalized;
+            SlopeTangent = Vector3.Cross(u, hit.normal);
+            SlopeAngle = Vector3.Angle(Vector3.up, hit.normal);
         }
         gameObject.layer = 9;
 
@@ -113,9 +112,9 @@ public class PlayerMovementController : MonoBehaviour
     {
         //Start falling if head is hit.
         gameObject.layer = 2;
-        if (Physics.CheckSphere(transform.position + Vector3.up * (cc.height / 2), 0.5f, groundMask, QueryTriggerInteraction.Ignore))
+        if (Physics.CheckSphere(transform.position + Vector3.up * (0.8f), 0.5f, groundMask, QueryTriggerInteraction.Ignore))
         {
-            moveDirection.y = -1.5f;
+            moveDirection.y = -6f;
         }
         gameObject.layer = 9;
 
@@ -135,9 +134,9 @@ public class PlayerMovementController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + Vector3.up * (1), 0.5f);
+        Gizmos.DrawWireSphere(transform.position + Vector3.up * (.8f), 0.5f);
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(new Ray(transform.position, slopeTangent));
+        Gizmos.DrawRay(new Ray(transform.position, SlopeTangent));
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class WalkState : PlayerState
 {
-    private Vector2 inputDirection;
     private float footstepsTimer = 0f;
 
     public WalkState(PlayerMovementController player, CharacterController cc, Transform cam, PlayerInputReader controls) : base(player, cc, cam, controls)
@@ -14,6 +13,8 @@ public class WalkState : PlayerState
 
     public override void OnStateEnter()
     {
+        Debug.Log("Walking");
+        player.SetY(-4f);
     }
 
     public override void OnStateExit()
@@ -22,6 +23,7 @@ public class WalkState : PlayerState
 
     public override void Update()
     {
+        //XZ Movement
         Vector3 velocity = player.transform.forward * controls.WalkDir.y + player.transform.right * controls.WalkDir.x;
         velocity *= player.WalkSpeed;
         velocity.y = player.MoveDirection.y;
@@ -34,24 +36,29 @@ public class WalkState : PlayerState
             player.MoveDirection = Vector3.Lerp(player.MoveDirection, velocity, player.Acceleration * Time.deltaTime);
         }
 
-        if (player.IsGrounded() && player.SlopeAngle != 0f && player.SlopeAngle > cc.slopeLimit)
+        //Y Movement
+        if (player.IsGrounded())
         {
-            player.SwitchState(new SlideState(player, cc, cam, controls));
-        }
-        else if (controls.JumpDown && player.IsGrounded())
-        {
-            player.SetY(player.Jump);
-            player.PlayClip(player.LandingLight);
-        }
-        else if (player.IsGrounded() == false)
-        {
-            player.SwitchState(new AirState(player, cc, cam, controls));
+            if (player.SlopeAngle != 0f && player.SlopeAngle > cc.slopeLimit)
+            {
+                player.SwitchState(new SlideState(player, cc, cam, controls));
+            }
+            else if (controls.JumpDown)
+            {
+                player.SetY(player.Jump);
+                player.PlayClip(player.LandingLight);
+            }
+            else if (player.SlopeAngle > 0f)
+            {
+                player.SetY(-player.SlopeForce);
+            }
         }
         else
         {
-            player.SetY(-4f);
+            player.SwitchState(new AirState(player, cc, cam, controls));
         }
 
+        //Footstep sounds
         if (footstepsTimer >= Mathf.PI / 10f && controls.WalkDir.magnitude > 0f)
         {
             player.PlayClip(player.Footsteps);

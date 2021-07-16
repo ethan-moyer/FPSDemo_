@@ -13,8 +13,6 @@ public class AirState : PlayerState
 
     public override void OnStateEnter()
     {
-        player.SlopeTangent = Vector3.zero;
-        player.SlopeAngle = 0f;
     }
 
     public override void OnStateExit()
