@@ -138,8 +138,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.46137035, y: 2.0012589, z: 1.7071528}
-  m_Center: {x: -0.050085757, y: -0.70397013, z: 0.16318604}
+  m_Size: {x: 0.7475227, y: 2.41011, z: 2.0521796}
+  m_Center: {x: -0.041677475, y: -0.7092881, z: 0.22500288}
 --- !u!54 &7162619686322849186
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -168,5 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c1114fc36fd594ca0491e91d979907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactClips: []
   weaponID: 0
   ammo: 20

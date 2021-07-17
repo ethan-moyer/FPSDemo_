@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 0}
   mixerGroup: {fileID: 0}
-  volume: 1
+  volume: 0.5
   range: 100
   playOnStart: 0
   loop: 0
