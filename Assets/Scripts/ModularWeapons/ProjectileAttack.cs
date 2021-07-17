@@ -18,7 +18,7 @@ public class ProjectileAttack : WeaponAttack
         weapon.TriggeringAnimation.Invoke("Fire");
 
         //Spawning new projectile
-        Projectile spawnedProjectile = Instantiate(projectile, cam.TransformPoint(spawnOffset), Quaternion.LookRotation(cam.forward)).GetComponent<Projectile>();
+        Projectile spawnedProjectile = Instantiate(projectile, cam.TransformPoint(spawnOffset) + (player.GetComponent<CharacterController>().velocity * Time.deltaTime), Quaternion.LookRotation(cam.forward)).GetComponent<Projectile>();
         spawnedProjectile.player = player;
         Physics.IgnoreCollision(spawnedProjectile.GetComponent<Collider>(), player.GetComponent<Collider>());
         spawnedProjectile.gameObject.SetActive(true);
