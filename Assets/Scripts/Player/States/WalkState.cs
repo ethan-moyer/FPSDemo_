@@ -47,6 +47,7 @@ public class WalkState : PlayerState
             {
                 player.SetY(player.Jump);
                 player.PlayClip(player.LandingLight);
+                player.SwitchState(new AirState(player, cc, cam, controls));
             }
             else if (player.SlopeAngle > 0f)
             {

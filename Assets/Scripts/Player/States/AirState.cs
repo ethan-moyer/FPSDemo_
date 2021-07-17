@@ -34,7 +34,7 @@ public class AirState : PlayerState
         player.MoveDirection = Vector3.Lerp(player.MoveDirection, velocity, player.Acceleration * 0.1f * Time.deltaTime);
         player.MoveDirection += Vector3.up * player.Gravity * Time.deltaTime;
 
-        if (player.IsGrounded() == true)
+        if (player.IsGrounded() == true && velocity.y <= 0f)
         {
             player.SwitchState(new WalkState(player, cc, cam, controls));
         }
