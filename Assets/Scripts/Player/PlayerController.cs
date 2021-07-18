@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
                 PropWeapon prop = hit.transform.GetComponent<PropWeapon>();
                 if (prop != null && controls.WeaponInteractDown && prop.WeaponID != combatController.CurrentWeapon.WeaponID && prop.WeaponID != combatController.SecondWeapon.WeaponID)
                 {
-                    Destroy(prop.gameObject);
+                    prop.RemoveWeapon();
 
                     //Drop old weapon if theres still ammo
                     if (combatController.CurrentWeapon.TotalAmmo != 0)
