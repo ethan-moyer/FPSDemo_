@@ -83,14 +83,14 @@ MonoBehaviour:
     type: 3}
   reticle: {fileID: 21300000, guid: 7905549c7892fc443a688573bcbf4cad, type: 3}
   reticleScale: 0.07
-  maxAmmo: 64
+  maxAmmo: 60
   attackRate: 2.86
   attack: {fileID: 2362018519490137687}
   zoomLevels:
   - 1
   - 0.5
   stayZoomed: 1
-  maxMagAmmo: 8
+  maxMagAmmo: 12
   reloadTime: 1
 --- !u!114 &2362018519490137687
 MonoBehaviour:
@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8fe8a143bdf354bb4eb0983b41b305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPDamage: 25
-  SPMultiplier: 1.2
+  HPDamage: 37.5
+  SPMultiplier: 0.6666667
   maxDistance: 300
   coneRadius: 2
   numberOfRays: 1

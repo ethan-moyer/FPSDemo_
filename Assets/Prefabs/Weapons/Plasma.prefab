@@ -153,5 +153,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   lifetime: 10
-  HPDamage: 10
-  SPMultiplier: 1.5
+  HPDamage: 6
+  SPMultiplier: 4

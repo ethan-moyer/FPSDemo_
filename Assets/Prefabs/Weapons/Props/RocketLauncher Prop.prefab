@@ -168,5 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c1114fc36fd594ca0491e91d979907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactClips: []
   weaponID: 3
   ammo: 8
+  shouldRespawn: 0
+  respawnTime: 60
