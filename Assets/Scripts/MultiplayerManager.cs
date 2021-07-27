@@ -10,6 +10,15 @@ public class MultiplayerManager : MonoBehaviour
     private void Awake()
     {
         players = new List<PlayerController>();
+        if (ConnectedDevices.SharedInstance != null)
+        {
+            PlayerInputManager playerInputManager = GetComponent<PlayerInputManager>();
+            playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
+            foreach (InputDevice[] player in ConnectedDevices.SharedInstance.devices)
+            {
+                playerInputManager.JoinPlayer(pairWithDevices: player);
+            }
+        }
     }
 
     public void OnPlayerJoined(PlayerInput input)
