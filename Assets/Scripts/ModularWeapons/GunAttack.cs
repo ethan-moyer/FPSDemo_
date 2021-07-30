@@ -6,8 +6,6 @@ public class GunAttack : WeaponAttack
 {
     [SerializeField] private float HPDamage = 0f;
     [SerializeField] private float SPMultiplier = 0f;
-    [SerializeField] private float maxDistance = 80f;
-    [SerializeField] private float coneRadius = 5f;
     [SerializeField] private int numberOfRays = 1;
     [SerializeField] private AudioClip firingClip = null;
     [SerializeField] private SniperTrail trail = null;
@@ -22,8 +20,8 @@ public class GunAttack : WeaponAttack
         RaycastHit hit;
         for (int i = 0; i < numberOfRays; i++)
         {
-            Vector3 randDir = (cam.forward * maxDistance) + (cam.right * Random.Range(-1f, 1f) * coneRadius) + (cam.up * Random.Range(-1f, 1f) * coneRadius);
-            if (Physics.Raycast(cam.position, randDir, out hit, maxDistance))
+            Vector3 randDir = (cam.forward * weapon.maxDistance) + (cam.right * Random.Range(-1f, 1f) * weapon.coneRadius) + (cam.up * Random.Range(-1f, 1f) * weapon.coneRadius);
+            if (Physics.Raycast(cam.position, randDir, out hit, weapon.maxDistance))
             {
                 if (hit.transform.gameObject.layer == 9) //Hit a player
                 {
@@ -58,7 +56,7 @@ public class GunAttack : WeaponAttack
             {
                 if (trail != null)
                 {
-                    trail.Positions = new Vector3[] { cam.TransformPoint(weapon.ViewModel.offset), weapon.ViewModel.offset + randDir * maxDistance };
+                    trail.Positions = new Vector3[] { cam.TransformPoint(weapon.ViewModel.offset), weapon.ViewModel.offset + randDir * weapon.maxDistance };
                     trail.gameObject.SetActive(true);
                 }
             }

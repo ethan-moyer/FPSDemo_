@@ -1999,36 +1999,6 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2017234851}
-        m_MethodName: OnLookX
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6059b8ed-00d0-42f0-a175-b84fda880a7e
-    m_ActionName: Player/LookX[/Mouse/delta/x]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2017234851}
-        m_MethodName: OnLookY
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 686b86f5-88e9-4279-b323-70613145cbb2
-    m_ActionName: Player/LookY[/Mouse/delta/y]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2017234851}
         m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
@@ -2146,6 +2116,65 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ae697648-86a0-4368-978a-6b3b6abab270
     m_ActionName: Player/SwitchGrenade[/Keyboard/2,/DualShock4GamepadHID/dpad/left,/DualShock4GamepadHID/dpad/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3947f121-6610-41ce-87d1-6a2f27a6d0c3
+    m_ActionName: UI/Navigate[/DualShock4GamepadHID/leftStick/up,/DualShock4GamepadHID/rightStick/up,/DualShock4GamepadHID/leftStick/down,/DualShock4GamepadHID/rightStick/down,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/rightStick/left,/DualShock4GamepadHID/leftStick/right,/DualShock4GamepadHID/rightStick/right,/DualShock4GamepadHID/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bf41475a-08c9-4a24-9038-09dcf0e57950
+    m_ActionName: UI/Submit[/Keyboard/e,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 886d7e7d-3331-4365-9161-f3ac4844ab11
+    m_ActionName: UI/Cancel[/Keyboard/escape,/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ef05387e-f9ed-4107-a0a4-acc1a379649c
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 11d31613-6758-4ac7-a858-3bca80115ce2
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e93fdfaa-28b0-420b-8b7c-63f2114a069e
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 898be111-70d7-4c5d-8abb-07472c68a881
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9ddee4fb-3f2d-4198-a641-6e9e9e08bc83
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 10da0eef-1685-46a6-a3c0-b91e53acdb68
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: edf83d4e-3fdb-489c-bc45-0f017aed8152
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1435d07d-d183-4fb4-95e8-bac8596e09cc
+    m_ActionName: UI/Start[/Keyboard/enter,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017234851}
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: adfaa419-ecc7-405b-a12f-d7342d465c4d
+    m_ActionName: Player/Look[/DualShock4GamepadHID/rightStick,/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2242,10 +2271,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomed: 0
-  xSensitivity: 10
-  ySensitivity: 10
+  mouseSensitivity: {x: 10, y: 10}
+  gamepadSensitivity: {x: 200, y: 150}
+  gamepadAccelerationStart: 0.2
+  gamepadAcceleration: 10
+  maxTurnRate: 1.1
   zoomedPercent: 0.6
   cam: {fileID: 1678176368984412462}
+  aimAssistMask:
+    serializedVersion: 2
+    m_Bits: 4608
+  reticle: {fileID: 1736392033}
 --- !u!114 &297861465
 MonoBehaviour:
   m_ObjectHideFlags: 0

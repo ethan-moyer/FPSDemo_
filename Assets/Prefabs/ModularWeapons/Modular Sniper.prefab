@@ -85,13 +85,15 @@ MonoBehaviour:
     type: 3}
   reticle: {fileID: 21300000, guid: e63e0a968875db44ea69d69bf113d301, type: 3}
   reticleScale: 0.05
+  maxDistance: 500
+  coneRadius: 0.01
   maxAmmo: 24
   attackRate: 1.714286
   attack: {fileID: 4817260567674628515}
   zoomLevels:
   - 1
   - 0.5
-  - 0.1
+  - 0.3
   stayZoomed: 1
   maxMagAmmo: 4
   reloadTime: 1.333333
@@ -109,8 +111,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPDamage: 75
   SPMultiplier: 1
-  maxDistance: 500
-  coneRadius: 0
   numberOfRays: 1
   firingClip: {fileID: 8300000, guid: 3288ae14ab6c7a84b999316eb3a46ae1, type: 3}
   trail: {fileID: 3111263692801206489}

@@ -83,6 +83,8 @@ MonoBehaviour:
     type: 3}
   reticle: {fileID: 21300000, guid: 7497536af9d41fe429cd167a41fd3f76, type: 3}
   reticleScale: 0.1
+  maxDistance: 100
+  coneRadius: 1
   maxAmmo: 8
   attackRate: 1
   attack: {fileID: 7429074805325444005}
@@ -106,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 2156091882128631284, guid: b3d4fc927f3d4304aae69013c46e2cbb,
     type: 3}
-  maxDistance: 100
+  _coneRadius: 1
+  _maxDistance: 100
   spawnOffset: {x: 0.8, y: 0, z: 0.4}
   firingClip: {fileID: 8300000, guid: 3288ae14ab6c7a84b999316eb3a46ae1, type: 3}

@@ -25,6 +25,8 @@ public abstract class ModularWeapon : MonoBehaviour
     [SerializeField] private Sprite reticle = null;
     [SerializeField] private float reticleScale = 0.1f;
     [Header("Attack")]
+    [SerializeField] public float maxDistance = 100f;
+    [SerializeField] public float coneRadius = 5f;
     [SerializeField] protected int maxAmmo = 100;
     [SerializeField] protected float attackRate = 1f;
     [SerializeField, SerializeReference] protected WeaponAttack attack = null;
@@ -37,6 +39,7 @@ public abstract class ModularWeapon : MonoBehaviour
     protected float attackTimer = 0f;
     protected int currentAmmo = 0;
     protected int currentZoomLevel = 0;
+    private float defaultRadius;
 
     public enum States { Idle, Busy, Firing };
     public States CurrentState { get; set; }
@@ -84,6 +87,7 @@ public abstract class ModularWeapon : MonoBehaviour
     {
         this.player = player;
         this.cam = cam;
+        defaultRadius = coneRadius;
         SetAmmo(ammo);
     }
 
@@ -128,6 +132,7 @@ public abstract class ModularWeapon : MonoBehaviour
         if (zoomLevels.Length > 0)
         {
             currentZoomLevel = level % zoomLevels.Length;
+            coneRadius = defaultRadius * zoomLevels[currentZoomLevel];
             ChangingFOV.Invoke(zoomLevels[currentZoomLevel]);
         }
     }

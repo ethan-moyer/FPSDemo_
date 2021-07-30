@@ -5,8 +5,6 @@ using UnityEngine;
 public class ProjectileAttack : WeaponAttack
 {
     [SerializeField] private Projectile projectile = null;
-    [SerializeField] private float coneRadius = 1f;
-    [SerializeField] private float maxDistance = 100f;
     [SerializeField] private Vector3 spawnOffset = Vector3.zero;
     [SerializeField] private AudioClip firingClip = null;
 
@@ -27,14 +25,14 @@ public class ProjectileAttack : WeaponAttack
         RaycastHit hit;
         Vector3 direction = cam.forward;
         player.layer = 2;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, maxDistance))
+        if (Physics.Raycast(cam.position, cam.forward, out hit, weapon.maxDistance))
         {
             direction = (hit.point - cam.TransformPoint(spawnOffset)).normalized;
         }
         player.layer = 9;
 
         //Randomize direction within reticle cone
-        Vector3 randDir = (direction * maxDistance) + (cam.right * Random.Range(-1f, 1f) * coneRadius) + (cam.up * Random.Range(-1f, 1f) * coneRadius);
+        Vector3 randDir = (direction * weapon.maxDistance) + (cam.right * Random.Range(-1f, 1f) * weapon.coneRadius) + (cam.up * Random.Range(-1f, 1f) * weapon.coneRadius);
         spawnedProjectile.direction = randDir.normalized;
     }
 }
