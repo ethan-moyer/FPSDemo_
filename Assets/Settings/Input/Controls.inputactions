@@ -14,18 +14,10 @@
                     "interactions": ""
                 },
                 {
-                    "name": "LookX",
+                    "name": "Look",
                     "type": "PassThrough",
-                    "id": "6059b8ed-00d0-42f0-a175-b84fda880a7e",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "LookY",
-                    "type": "PassThrough",
-                    "id": "686b86f5-88e9-4279-b323-70613145cbb2",
-                    "expectedControlType": "Axis",
+                    "id": "adfaa419-ecc7-405b-a12f-d7342d465c4d",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
@@ -202,94 +194,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "a6c5fe20-5f42-4cc5-b00e-a015d425dcae",
-                    "path": "<Mouse>/delta/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "LookX",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "Right Stick",
-                    "id": "0d33a330-aae0-4947-b736-2156df393240",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "Scale(factor=15)",
-                    "groups": "",
-                    "action": "LookX",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "6e471824-1814-445d-be86-718d2bfc6ca8",
-                    "path": "<Gamepad>/rightStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "LookX",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "e83419ef-1323-4286-a852-5312401b72e8",
-                    "path": "<Gamepad>/rightStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "LookX",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "5ac07851-d918-45bb-b466-46da07f86161",
-                    "path": "<Mouse>/delta/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "LookY",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "Right Stick",
-                    "id": "622ca8cc-a94e-46d1-849f-11e152c832b9",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "Scale(factor=15)",
-                    "groups": "",
-                    "action": "LookY",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "504e8e9a-23f0-4186-bd7c-4f6ef3b31b20",
-                    "path": "<Gamepad>/rightStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "LookY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "158fffba-5fb9-4da2-b3ab-b4b9ffca7d04",
-                    "path": "<Gamepad>/rightStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "LookY",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -477,6 +381,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SwitchGrenade",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d524401-3c1b-42c9-ab7e-8b9fd6ecb91a",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e00b4652-3d97-42ff-908a-e4999246449c",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

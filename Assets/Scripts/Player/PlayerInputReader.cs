@@ -24,14 +24,9 @@ public class PlayerInputReader : MonoBehaviour
         WalkDir = ctx.ReadValue<Vector2>();
     }
     
-    public void OnLookX(CallbackContext ctx)
+    public void OnLook(CallbackContext ctx)
     {
-        LookDir = new Vector2(ctx.ReadValue<float>(), LookDir.y);
-    }
-
-    public void OnLookY(CallbackContext ctx)
-    {
-        LookDir = new Vector2(LookDir.x, ctx.ReadValue<float>());
+        LookDir = ctx.ReadValue<Vector2>();
     }
 
     public void OnJump(CallbackContext ctx)
