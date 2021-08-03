@@ -112,4 +112,4 @@ MonoBehaviour:
   projectile: {fileID: 8719060252621274950, guid: 15645f8fcd6ce8d40bd2e46c263d5c82,
     type: 3}
   spawnOffset: {x: 0.18, y: -0.122, z: 0.36}
-  firingClip: {fileID: 0}
+  firingClip: {fileID: 8300000, guid: 086e3d3a05b788242a1679d156bdea49, type: 3}

@@ -138,8 +138,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7475227, y: 2.41011, z: 2.0521796}
-  m_Center: {x: -0.041677475, y: -0.7092881, z: 0.22500288}
+  m_Size: {x: 1.2200586, y: 2.5927107, z: 2.3686018}
+  m_Center: {x: -0.044932544, y: -0.70782626, z: 0.25161076}
 --- !u!54 &7162619686322849186
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -171,3 +171,5 @@ MonoBehaviour:
   impactClips: []
   weaponID: 0
   ammo: 20
+  shouldRespawn: 0
+  respawnTime: 20

@@ -110,5 +110,5 @@ MonoBehaviour:
   HPDamage: 10
   SPMultiplier: 1
   numberOfRays: 1
-  firingClip: {fileID: 8300000, guid: b0b164d96e45ce3469435d46ef254c47, type: 3}
+  firingClip: {fileID: 8300000, guid: e028fbbbca870a54caf9140648f3723a, type: 3}
   trail: {fileID: 0}

@@ -112,7 +112,7 @@ MonoBehaviour:
   HPDamage: 75
   SPMultiplier: 1
   numberOfRays: 1
-  firingClip: {fileID: 8300000, guid: 3288ae14ab6c7a84b999316eb3a46ae1, type: 3}
+  firingClip: {fileID: 8300000, guid: 65d4af48f6eda7347ab2fa60fb210dff, type: 3}
   trail: {fileID: 3111263692801206489}
 --- !u!1 &8110138341881047333
 GameObject:
