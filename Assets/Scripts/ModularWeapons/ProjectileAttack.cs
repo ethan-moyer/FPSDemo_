@@ -8,7 +8,7 @@ public class ProjectileAttack : WeaponAttack
     [SerializeField] private Vector3 spawnOffset = Vector3.zero;
     [SerializeField] private AudioClip firingClip = null;
 
-    public override void Attack(GameObject player, ModularWeapon weapon, Transform cam)
+    public override void Attack(PlayerController player, ModularWeapon weapon, Transform cam)
     {
         //Play visuals
         weapon.PlayingEffect.Invoke();
@@ -24,12 +24,12 @@ public class ProjectileAttack : WeaponAttack
         //Change direction if looking at an object
         RaycastHit hit;
         Vector3 direction = cam.forward;
-        player.layer = 2;
+        player.gameObject.layer = 2;
         if (Physics.Raycast(cam.position, cam.forward, out hit, weapon.maxDistance))
         {
             direction = (hit.point - cam.TransformPoint(spawnOffset)).normalized;
         }
-        player.layer = 9;
+        player.gameObject.layer = 9;
 
         //Randomize direction within reticle cone
         Vector3 randDir = (direction * weapon.maxDistance) + (cam.right * Random.Range(-1f, 1f) * weapon.coneRadius) + (cam.up * Random.Range(-1f, 1f) * weapon.coneRadius);

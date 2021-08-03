@@ -9,6 +9,7 @@ public class Explosive : MonoBehaviour
     [SerializeField] private int explosionEffect = 2;
     [SerializeField] private float sphereRadius;
     [SerializeField] private LayerMask targets;
+    public PlayerController player { get; set; }
 
     public void Explode()
     {
@@ -28,10 +29,10 @@ public class Explosive : MonoBehaviour
             {
                 if (collider.transform.gameObject.layer == 9)
                 {
-                    PlayerController player = collider.transform.GetComponent<PlayerController>();
-                    if (player != null)
+                    PlayerController hitPlayer = collider.transform.GetComponent<PlayerController>();
+                    if (hitPlayer != null)
                     {
-                        player.DamageHit(HPDamage, SPMultiplier, point);
+                        hitPlayer.DamageHit(HPDamage, SPMultiplier, point, player);
                         player.PhysicsHit(point - transform.position, HPDamage * 0.15f);
                     }
                 }
@@ -46,11 +47,11 @@ public class Explosive : MonoBehaviour
                     {
                         if (hit.transform.gameObject.layer == 9)
                         {
-                            PlayerController player = hit.transform.GetComponent<PlayerController>();
-                            if (player != null)
+                            PlayerController hitPlayer = hit.transform.GetComponent<PlayerController>();
+                            if (hitPlayer != null)
                             {
-                                player.DamageHit(HPDamage * falloff, SPMultiplier * falloff, hit.point);
-                                player.PhysicsHit(point - transform.position, falloff * HPDamage * 0.15f);
+                                hitPlayer.DamageHit(HPDamage * falloff, SPMultiplier * falloff, hit.point, player);
+                                hitPlayer.PhysicsHit(point - transform.position, falloff * HPDamage * 0.15f);
                             }
                         }
                         else if (hit.transform.gameObject.layer == 12)

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class WeaponAttack : MonoBehaviour
 {
-    public abstract void Attack(GameObject player, ModularWeapon weapon, Transform cam);
+    public abstract void Attack(PlayerController player, ModularWeapon weapon, Transform cam);
 }

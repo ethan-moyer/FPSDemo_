@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public int PlayerID { get; set; }
-    public IntEvent Die;
+    public IntIntEvent Die;
     [SerializeField] private Transform cam = null;
     [SerializeField] private LayerMask defaultCullingMask;
     [SerializeField] private Transform viewModels = null;
@@ -22,7 +23,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject hudCanvas = null;
     [SerializeField] private GameObject respawnCanvas = null;
     [SerializeField] private Image hudHealthBar = null;
+    [SerializeField] private Image hudShieldBar = null;
     [SerializeField] private Image[] damageIndicators = new Image[4];
+    [SerializeField] private TextMeshProUGUI score = null;
     [SerializeField] private GameObject shieldObject = null;
     [Header("Hit Points")]
     [SerializeField] private int maxHP = 75;
@@ -85,12 +88,17 @@ public class PlayerController : MonoBehaviour
         canvasScaler.referenceResolution = new Vector2(1920 / camera.rect.width, 1080 / camera.rect.width);
     }
 
+    public void UpdateScoreText(string newScore)
+    {
+        score.text = $"Score:\n{newScore}";
+    }
+
     public void PhysicsHit(Vector3 direction, float strength)
     {
         movementController.MoveDirection += direction * strength;
     }
 
-    public void DamageHit(float HPDamage, float SPMultiplier, Vector3 hitPos)
+    public void DamageHit(float HPDamage, float SPMultiplier, Vector3 hitPos, PlayerController otherPlayer)
     {
         //Apply Damage
         float remainingDamage = HPDamage;
@@ -106,14 +114,18 @@ public class PlayerController : MonoBehaviour
             currentHP -= remainingDamage;
             if (currentHP <= 0)
             {
-                Die.Invoke(PlayerID);
+                Die.Invoke(PlayerID, otherPlayer.PlayerID);
+                GameObject effect = ObjectPooler.SharedInstance.GetPooledObject(5);
+                effect.transform.position = transform.position;
+                effect.SetActive(true);
             }
             else
             {
                 HPRegenTimer = 0f;
             }
         }
-        hudHealthBar.fillAmount = (currentHP + currentSP) / (maxHP + maxSP);
+        hudHealthBar.fillAmount = currentHP / maxHP;
+        hudShieldBar.fillAmount = currentSP / maxSP;
 
         //Show Hit Indicator
         Vector3 hitDir = (hitPos - transform.position); hitDir.y = 0f; hitDir.Normalize();
@@ -151,6 +163,7 @@ public class PlayerController : MonoBehaviour
         currentHP = maxHP;
         currentSP = maxSP;
         hudHealthBar.fillAmount = 1;
+        hudShieldBar.fillAmount = 1;
         transform.rotation = Quaternion.Euler(newRotation);
         movementController.MoveDirection = Vector3.zero;
         cc.SimpleMove(Vector3.zero);
@@ -191,7 +204,7 @@ public class PlayerController : MonoBehaviour
             if (currentHP < maxHP)
             {
                 currentHP = Mathf.Min(currentHP + (HPRegenRate * Time.deltaTime), maxHP);
-                hudHealthBar.fillAmount = (currentHP + currentSP) / (maxHP + maxSP);
+                hudHealthBar.fillAmount = currentHP / maxHP;
             }
         }
         else
@@ -204,7 +217,7 @@ public class PlayerController : MonoBehaviour
             if (currentSP < maxSP)
             {
                 currentSP = Mathf.Min(currentSP + (SPRegenRate * Time.deltaTime), maxSP);
-                hudHealthBar.fillAmount = (currentHP + currentSP) / (maxHP + maxSP);
+                hudShieldBar.fillAmount = currentSP / maxSP;
             }
         }
         else
@@ -219,7 +232,7 @@ public class PlayerController : MonoBehaviour
             if (hit.transform.gameObject.layer == 12)
             {
                 PropWeapon prop = hit.transform.GetComponent<PropWeapon>();
-                if (prop != null && controls.WeaponInteractDown && prop.WeaponID != combatController.CurrentWeapon.WeaponID && prop.WeaponID != combatController.SecondWeapon.WeaponID)
+                if (prop != null && controls.WeaponInteractDown && prop.WeaponID >= 0 && prop.WeaponID != combatController.CurrentWeapon.WeaponID && prop.WeaponID != combatController.SecondWeapon.WeaponID)
                 {
                     prop.RemoveWeapon();
 
@@ -240,7 +253,15 @@ public class PlayerController : MonoBehaviour
 
     public bool OnHitWeaponProp(int weaponID, int ammo)
     {
-        if (combatController.CurrentWeapon.WeaponID == weaponID)
+        if (weaponID == -1)
+        {
+            return combatController.AddGrenade(0);
+        }
+        else if (weaponID == -2)
+        {
+            return combatController.AddGrenade(1);
+        }
+        else if (combatController.CurrentWeapon.WeaponID == weaponID)
         {
             bool addingAmmo = combatController.CurrentWeapon.AddAmmo(ammo);
             if (addingAmmo)

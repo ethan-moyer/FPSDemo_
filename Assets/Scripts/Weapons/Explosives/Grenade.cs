@@ -9,7 +9,7 @@ public class Grenade : MonoBehaviour
     private bool timerStarted = false;
     private Explosive explosive = null;
     private Rigidbody rb = null;
-    public GameObject player { get; set; }
+    public PlayerController player { get; set; }
 
     private void Awake()
     {
@@ -17,9 +17,10 @@ public class Grenade : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public void SetUp(GameObject player, Vector3 velocity)
+    public void SetUp(PlayerController player, Vector3 velocity)
     {
         this.player = player;
+        explosive.player = player;
         rb.velocity = velocity;
         Physics.IgnoreCollision(GetComponent<Collider>(), player.GetComponent<Collider>());
     }

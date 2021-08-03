@@ -17,7 +17,7 @@ public class Launcher : ReloadableWeapon
         combatController.UpdateAmmoText(AmmoToText());
 
         Rocket newProjectile = Instantiate(projectile, cam.TransformPoint(launchOffset), Quaternion.LookRotation(cam.forward)).GetComponent<Rocket>();
-        newProjectile.player = combatController.gameObject;
+        newProjectile.player = combatController.GetComponent<PlayerController>();
 
         RaycastHit hit;
         combatController.gameObject.layer = 2;

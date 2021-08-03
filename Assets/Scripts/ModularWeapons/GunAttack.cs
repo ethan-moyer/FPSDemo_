@@ -10,13 +10,13 @@ public class GunAttack : WeaponAttack
     [SerializeField] private AudioClip firingClip = null;
     [SerializeField] private SniperTrail trail = null;
 
-    public override void Attack(GameObject player, ModularWeapon weapon, Transform cam)
+    public override void Attack(PlayerController player, ModularWeapon weapon, Transform cam)
     {
         weapon.PlayingEffect.Invoke();
         weapon.PlayingAudioClip.Invoke(firingClip);
         weapon.TriggeringAnimation.Invoke("Fire");
 
-        player.layer = 2;
+        player.gameObject.layer = 2;
         RaycastHit hit;
         for (int i = 0; i < numberOfRays; i++)
         {
@@ -28,7 +28,7 @@ public class GunAttack : WeaponAttack
                     PlayerController otherPlayer = hit.transform.GetComponent<PlayerController>();
                     if (otherPlayer != null)
                     {
-                        otherPlayer.DamageHit(HPDamage, SPMultiplier, hit.point);
+                        otherPlayer.DamageHit(HPDamage, SPMultiplier, hit.point, player);
                     }
                 }
                 else if (hit.transform.gameObject.layer == 12) //Hit a prop
@@ -61,6 +61,6 @@ public class GunAttack : WeaponAttack
                 }
             }
         }
-        player.layer = 9;
+        player.gameObject.layer = 9;
     }
 }

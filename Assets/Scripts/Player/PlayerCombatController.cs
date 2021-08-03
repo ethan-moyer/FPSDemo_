@@ -48,7 +48,6 @@ public class PlayerCombatController : MonoBehaviour
     private Dictionary<int, ModularWeapon> weapons;
 
     public ModularWeapon CurrentWeapon { get; private set; }
-
     public ModularWeapon SecondWeapon
     {
         get { return weapons[secondID]; }
@@ -72,7 +71,7 @@ public class PlayerCombatController : MonoBehaviour
             ModularWeapon w = t.GetComponent<ModularWeapon>();
             if (w != null)
             {
-                w.Init(this.gameObject, cam.transform, -1);
+                w.Init(GetComponent<PlayerController>(), cam.transform, -1);
                 w.TriggeringAnimation.AddListener(this.OnTriggerAnimation);
                 w.UpdatingAmmoText.AddListener(this.UpdateAmmoText);
                 w.ChangingFOV.AddListener(this.OnChangeFOV);
@@ -231,6 +230,26 @@ public class PlayerCombatController : MonoBehaviour
         hudCooldownMeter.fillAmount = meterAmount;
     }
 
+    public bool AddGrenade(int type)
+    {
+        if (type == 0 && currentFragAmount < maxGrenadeAmount)
+        {
+            currentFragAmount += 1;
+            UpdateGrenadeCounters();
+            return true;
+        }
+        else if (type == 1 && currentStickyAmount < maxGrenadeAmount)
+        {
+            currentStickyAmount += 1;
+            UpdateGrenadeCounters();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void Update()
     {
         if (controls.WeaponSwitchDown && CurrentWeapon.CurrentState == ModularWeapon.States.Idle)
@@ -256,12 +275,12 @@ public class PlayerCombatController : MonoBehaviour
                 if (currentGrenadeType == 0 && currentFragAmount > 0)
                 {
                     currentFragAmount -= 1;
-                    Instantiate(fragPrefab, cam.transform.TransformPoint(grenadeSpawnOffset), Quaternion.LookRotation(cam.transform.forward)).GetComponent<Grenade>().SetUp(this.gameObject, cam.transform.forward * throwingForce);
+                    Instantiate(fragPrefab, cam.transform.TransformPoint(grenadeSpawnOffset), Quaternion.LookRotation(cam.transform.forward)).GetComponent<Grenade>().SetUp(GetComponent<PlayerController>(), cam.transform.forward * throwingForce);
                 }
                 else if (currentGrenadeType == 1 && currentStickyAmount > 0)
                 {
                     currentStickyAmount -= 1;
-                    Instantiate(stickyPrefab, cam.transform.TransformPoint(grenadeSpawnOffset), Quaternion.LookRotation(cam.transform.forward)).GetComponent<Grenade>().SetUp(this.gameObject, cam.transform.forward * throwingForce);
+                    Instantiate(stickyPrefab, cam.transform.TransformPoint(grenadeSpawnOffset), Quaternion.LookRotation(cam.transform.forward)).GetComponent<Grenade>().SetUp(GetComponent<PlayerController>(), cam.transform.forward * throwingForce);
                 }
                 UpdateGrenadeCounters();
             }

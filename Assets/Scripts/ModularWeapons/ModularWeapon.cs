@@ -35,7 +35,7 @@ public abstract class ModularWeapon : MonoBehaviour
     [SerializeField] protected bool stayZoomed = false;
 
     protected Transform cam = null;
-    protected GameObject player = null;
+    protected PlayerController player = null;
     protected float attackTimer = 0f;
     protected int currentAmmo = 0;
     protected int currentZoomLevel = 0;
@@ -83,7 +83,7 @@ public abstract class ModularWeapon : MonoBehaviour
     public Transform Cam => cam;
 
     //Methods
-    public virtual void Init(GameObject player, Transform cam, int ammo)
+    public virtual void Init(PlayerController player, Transform cam, int ammo)
     {
         this.player = player;
         this.cam = cam;

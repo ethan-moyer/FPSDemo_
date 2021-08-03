@@ -17,6 +17,11 @@ public class IntEvent : UnityEvent<int>
 }
 
 [System.Serializable]
+public class IntIntEvent : UnityEvent<int, int>
+{
+}
+
+[System.Serializable]
 public class AudioEvent : UnityEvent<AudioClip>
 {
 }

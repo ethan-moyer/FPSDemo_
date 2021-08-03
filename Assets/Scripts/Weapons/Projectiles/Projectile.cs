@@ -9,7 +9,7 @@ public abstract class Projectile : MonoBehaviour
     private Rigidbody rb = null;
     private float timer = 0f;
     public Vector3 direction { get; set; }
-    public GameObject player { get; set; }
+    public PlayerController player { get; set; }
 
     protected virtual void Awake()
     {
@@ -28,7 +28,7 @@ public abstract class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject != player)
+        if (col.gameObject != player.gameObject)
         {
             Hit(col);
         }
