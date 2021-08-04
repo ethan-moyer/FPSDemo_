@@ -15,6 +15,7 @@ public class Rocket : Projectile
 
     protected override void Hit(Collision collision)
     {
+        explosive.player = player;
         explosive.Explode();
     }
 }
