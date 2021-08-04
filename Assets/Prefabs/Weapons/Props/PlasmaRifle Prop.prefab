@@ -139,7 +139,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.80461663, y: 3.1023493, z: 1.9697387}
+  m_Size: {x: 1.15, y: 3.1023493, z: 2.15}
   m_Center: {x: 0.001178354, y: -0.1444931, z: 0.031029582}
 --- !u!54 &9118007424238657873
 Rigidbody:
@@ -198,3 +198,5 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5050221db38b7394bae6068735a601eb, type: 3}
   weaponID: 5
   ammo: 100
+  shouldRespawn: 0
+  respawnTime: 20

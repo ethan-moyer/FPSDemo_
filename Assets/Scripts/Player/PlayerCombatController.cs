@@ -46,6 +46,7 @@ public class PlayerCombatController : MonoBehaviour
     private FirstPersonCamera firstPersonCamera = null;
     private VirtualAudioSource audioSource = null;
     private Dictionary<int, ModularWeapon> weapons;
+    private int[] startingWeapons;
 
     public ModularWeapon CurrentWeapon { get; private set; }
     public ModularWeapon SecondWeapon
@@ -65,6 +66,7 @@ public class PlayerCombatController : MonoBehaviour
         firstPersonCamera = GetComponent<FirstPersonCamera>();
         audioSource = GetComponents<VirtualAudioSource>()[1];
         weapons = new Dictionary<int, ModularWeapon>();
+        startingWeapons = new int[] { currentID, secondID };
 
         foreach (Transform t in weaponsContainer)
         {
@@ -84,6 +86,17 @@ public class PlayerCombatController : MonoBehaviour
         }
 
         UpdateGrenadeCounters();
+        SwitchTo(currentID, -1);
+    }
+
+    public void ResetWeapons()
+    {
+        weapons[startingWeapons[0]].Init(GetComponent<PlayerController>(), cam.transform, -1);
+        weapons[startingWeapons[1]].Init(GetComponent<PlayerController>(), cam.transform, -1);
+
+        currentID = startingWeapons[0];
+        secondID = startingWeapons[1];
+
         SwitchTo(currentID, -1);
     }
 

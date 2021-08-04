@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,9 @@ public class MultiplayerManager : MonoBehaviour
     [SerializeField] private bool randomSpawns = false;
     [SerializeField] private GameObject spawnPointsRoot;
     [SerializeField] private int maxScore = 25;
+    [SerializeField] private GameObject previewCam;
+    [SerializeField] private TextMeshProUGUI previewText;
+    private PlayerInputManager playerInputManager;
     private List<PlayerController> players;
     private List<int> scores;
     private List<Transform> spawnPoints;
@@ -16,14 +20,11 @@ public class MultiplayerManager : MonoBehaviour
     {
         players = new List<PlayerController>();
         scores = new List<int>();
+        playerInputManager = GetComponent<PlayerInputManager>();
         if (ConnectedDevices.SharedInstance != null)
         {
-            PlayerInputManager playerInputManager = GetComponent<PlayerInputManager>();
             playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
-            foreach (InputDevice[] player in ConnectedDevices.SharedInstance.devices)
-            {
-                playerInputManager.JoinPlayer(pairWithDevices: player);
-            }
+            StartCoroutine(StartRound());
         }
 
         if (randomSpawns == true)
@@ -33,6 +34,18 @@ public class MultiplayerManager : MonoBehaviour
             {
                 spawnPoints.Add(child);
             }
+        }
+    }
+
+    private IEnumerator StartRound()
+    {
+        previewCam.SetActive(true);
+        previewText.text = $"First to {maxScore} Wins";
+        yield return new WaitForSeconds(2f);
+        previewCam.SetActive(false);
+        foreach (InputDevice[] player in ConnectedDevices.SharedInstance.devices)
+        {
+            playerInputManager.JoinPlayer(pairWithDevices: player);
         }
     }
 

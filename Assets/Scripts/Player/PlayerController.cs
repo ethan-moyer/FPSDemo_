@@ -168,6 +168,7 @@ public class PlayerController : MonoBehaviour
         movementController.MoveDirection = Vector3.zero;
         cc.SimpleMove(Vector3.zero);
         transform.position = spawnPoint;
+        combatController.ResetWeapons();
     }
 
     public void Enable()
