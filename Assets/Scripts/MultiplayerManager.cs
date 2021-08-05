@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MultiplayerManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MultiplayerManager : MonoBehaviour
     [SerializeField] private GameObject spawnPointsRoot;
     [SerializeField] private int maxScore = 25;
     [SerializeField] private GameObject previewCam;
+    [SerializeField] private GameObject previewButtons;
     [SerializeField] private TextMeshProUGUI previewText;
     private PlayerInputManager playerInputManager;
     private List<PlayerController> players;
@@ -40,6 +42,7 @@ public class MultiplayerManager : MonoBehaviour
     private IEnumerator StartRound()
     {
         previewCam.SetActive(true);
+        previewButtons.SetActive(false);
         previewText.text = $"First to {maxScore} Wins";
         yield return new WaitForSeconds(2f);
         previewCam.SetActive(false);
@@ -77,16 +80,43 @@ public class MultiplayerManager : MonoBehaviour
         }
     }
 
+    public void OnRematchClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void OnExitClicked()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     private void OnPlayerDie(int deadIndex, int killerIndex)
     {
         if (deadIndex != killerIndex)
         {
             scores[killerIndex] += 1;
             players[killerIndex].UpdateScoreText($"{scores[killerIndex]} / {maxScore}");
+            if (scores[killerIndex] >= maxScore)
+            {
+                EndGame(killerIndex);
+                return;
+            }
         }
         print($"Player #{deadIndex} has been slain by Player #{killerIndex}");
         players[deadIndex].Disable();
         StartCoroutine(Respawn(deadIndex));
+    }
+
+    private void EndGame(int winner)
+    {
+        foreach (PlayerController player in players)
+        {
+            player.gameObject.SetActive(false);
+        }
+        Cursor.lockState = CursorLockMode.None;
+        previewCam.SetActive(true);
+        previewButtons.SetActive(true);
+        previewText.text = $"Player {winner + 1} Wins!";
     }
 
     private IEnumerator Respawn(int index)
