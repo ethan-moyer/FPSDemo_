@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MultiplayerManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MultiplayerManager : MonoBehaviour
     [SerializeField] private GameObject previewCam;
     [SerializeField] private GameObject previewButtons;
     [SerializeField] private TextMeshProUGUI previewText;
+    [SerializeField] private Image blackScreen;
     private PlayerInputManager playerInputManager;
     private List<PlayerController> players;
     private List<int> scores;
@@ -43,8 +45,11 @@ public class MultiplayerManager : MonoBehaviour
     {
         previewCam.SetActive(true);
         previewButtons.SetActive(false);
+        blackScreen.CrossFadeAlpha(0f, 0.2f, false);
         previewText.text = $"First to {maxScore} Wins";
         yield return new WaitForSeconds(2f);
+        blackScreen.canvasRenderer.SetAlpha(1f);
+        yield return new WaitForEndOfFrame();
         previewCam.SetActive(false);
         foreach (InputDevice[] player in ConnectedDevices.SharedInstance.devices)
         {
@@ -65,7 +70,7 @@ public class MultiplayerManager : MonoBehaviour
             VirtualAudioPlayer.SharedInstance.listeners.Add(playerController.transform);
             foreach (PlayerController p in players)
             {
-                p.UpdateCanvasScale();
+                p.UpdateCanvasScale(players.Count);
                 p.UpdateScoreText($"0 / {maxScore}");
             }
 
@@ -87,7 +92,7 @@ public class MultiplayerManager : MonoBehaviour
 
     public void OnExitClicked()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Menu");
     }
 
     private void OnPlayerDie(int deadIndex, int killerIndex)

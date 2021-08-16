@@ -999,7 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: 3f08e1629da6c2546a64e4fd53b26f97, type: 2}
   m_StaticLightingSkyUniqueID: 1
-  m_SkySettings: {fileID: 714713514}
+  m_SkySettings: {fileID: 1254828721}
   m_SkySettingsFromProfile: {fileID: -9063089157937163334, guid: 3f08e1629da6c2546a64e4fd53b26f97,
     type: 2}
 --- !u!4 &264291640
@@ -2135,107 +2135,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d171cff0292f14469c69fe75bd61889, type: 3}
---- !u!114 &714713514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  rotation:
-    m_OverrideState: 0
-    m_Value: 287
-    min: 0
-    max: 360
-  skyIntensityMode:
-    m_OverrideState: 0
-    m_Value: 0
-  exposure:
-    m_OverrideState: 0
-    m_Value: 10
-  multiplier:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  upperHemisphereLuxValue:
-    m_OverrideState: 0
-    m_Value: 0.46607146
-    min: 0
-  upperHemisphereLuxColor:
-    m_OverrideState: 0
-    m_Value: {x: 0.18750611, y: 0.29181966, z: 0.5}
-  desiredLuxValue:
-    m_OverrideState: 0
-    m_Value: 20000
-  updateMode:
-    m_OverrideState: 0
-    m_Value: 0
-  updatePeriod:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  includeSunInBaking:
-    m_OverrideState: 0
-    m_Value: 0
-  hdriSky:
-    m_OverrideState: 0
-    m_Value: {fileID: 8900000, guid: 54a3a0570aebe8949bec4966f1376581, type: 3}
-  enableBackplate:
-    m_OverrideState: 0
-    m_Value: 0
-  backplateType:
-    m_OverrideState: 0
-    m_Value: 0
-  groundLevel:
-    m_OverrideState: 0
-    m_Value: 0
-  scale:
-    m_OverrideState: 0
-    m_Value: {x: 32, y: 32}
-  projectionDistance:
-    m_OverrideState: 0
-    m_Value: 16
-    min: 0.0000001
-  plateRotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  plateTexRotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  plateTexOffset:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: 0}
-  blendAmount:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 100
-  shadowTint:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  pointLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
-  dirLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
-  rectLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
 --- !u!1 &740836353 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4747262084856500887, guid: 0a136853202eaf3408726e3e29a39b29,
@@ -2634,10 +2533,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomSpawns: 1
   spawnPointsRoot: {fileID: 1554034962}
-  maxScore: 1
+  maxScore: 25
   previewCam: {fileID: 1408602549}
   previewButtons: {fileID: 2011719291}
   previewText: {fileID: 43326824}
+  blackScreen: {fileID: 1831785888}
 --- !u!114 &841669447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2684,7 +2584,7 @@ MonoBehaviour:
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 1678176370222012916, guid: d1f3dd8fd3923e64f96b5a712c7af8fe,
     type: 3}
-  m_SplitScreen: 1
+  m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 1
   m_FixedNumberOfSplitScreens: -1
   m_SplitScreenRect:
@@ -3152,7 +3052,7 @@ MonoBehaviour:
   m_ShadowResolution:
     m_Override: 512
     m_UseOverride: 0
-    m_Level: 1
+    m_Level: 2
   m_ShadowDimmer: 1
   m_VolumetricShadowDimmer: 1
   m_ShadowFadeDistance: 10000
@@ -4296,6 +4196,107 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1360446614}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1254828721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  rotation:
+    m_OverrideState: 0
+    m_Value: 287
+    min: 0
+    max: 360
+  skyIntensityMode:
+    m_OverrideState: 0
+    m_Value: 0
+  exposure:
+    m_OverrideState: 0
+    m_Value: 10
+  multiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  upperHemisphereLuxValue:
+    m_OverrideState: 0
+    m_Value: 0.46607146
+    min: 0
+  upperHemisphereLuxColor:
+    m_OverrideState: 0
+    m_Value: {x: 0.18750611, y: 0.29181966, z: 0.5}
+  desiredLuxValue:
+    m_OverrideState: 0
+    m_Value: 20000
+  updateMode:
+    m_OverrideState: 0
+    m_Value: 0
+  updatePeriod:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  includeSunInBaking:
+    m_OverrideState: 0
+    m_Value: 0
+  hdriSky:
+    m_OverrideState: 0
+    m_Value: {fileID: 8900000, guid: 54a3a0570aebe8949bec4966f1376581, type: 3}
+  enableBackplate:
+    m_OverrideState: 0
+    m_Value: 0
+  backplateType:
+    m_OverrideState: 0
+    m_Value: 0
+  groundLevel:
+    m_OverrideState: 0
+    m_Value: 0
+  scale:
+    m_OverrideState: 0
+    m_Value: {x: 32, y: 32}
+  projectionDistance:
+    m_OverrideState: 0
+    m_Value: 16
+    min: 0.0000001
+  plateRotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  plateTexRotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  plateTexOffset:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0}
+  blendAmount:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 100
+  shadowTint:
+    m_OverrideState: 0
+    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  pointLightShadow:
+    m_OverrideState: 0
+    m_Value: 0
+  dirLightShadow:
+    m_OverrideState: 0
+    m_Value: 0
+  rectLightShadow:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!1 &1300538941 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8745771422342765347, guid: 0a136853202eaf3408726e3e29a39b29,
@@ -4628,7 +4629,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0a136853202eaf3408726e3e29a39b29,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0a136853202eaf3408726e3e29a39b29,
         type: 3}
@@ -6061,7 +6062,7 @@ Transform:
   m_Children:
   - {fileID: 1879715185}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 4.329, y: 144.714, z: 0}
 --- !u!1 &1417668181
 GameObject:
@@ -6100,6 +6101,186 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].passNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].m_Name
+      value: UI Pass
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].targetColorBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].targetDepthBuffer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].clearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].passFoldout
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].m_Version
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].fullscreenPassMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].materialPassIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].materialPassName
+      value: Custom Pass 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].fetchColorBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].filterFoldout
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].rendererFoldout
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].renderQueueType
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].passNames.Array.data[0]
+      value: Forward
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].layerMask.m_Bits
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].sortingCriteria
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].overrideMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].overrideMaterialPassIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].overrideMaterialPassName
+      value: Forward
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].overrideDepthState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].depthCompareFunction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].depthWrite
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[1].shaderPass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[0].passFoldout
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[0].enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[0].overrideDepthState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[0].clearFlags
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[0].renderQueueType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[0].sortingCriteria
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[0].targetDepthBuffer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: customPasses.Array.data[0].shaderPass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706631463017117324, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6706631463017117325, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6163,7 +6344,7 @@ PrefabInstance:
     - target: {fileID: 6706631463017117327, guid: 0e9cb15e27a7c5b41ac12b065139fa9b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e9cb15e27a7c5b41ac12b065139fa9b, type: 3}
@@ -7835,6 +8016,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fc988c8dfc63374fac22451c33f66d9, type: 3}
+--- !u!1 &1831785886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831785887}
+  - component: {fileID: 1831785889}
+  - component: {fileID: 1831785888}
+  m_Layer: 5
+  m_Name: Black
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1831785887
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831785886}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1879715185}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1831785888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831785886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4b99d53ca901fcd4292a72c49ce2103b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1831785889
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831785886}
+  m_CullTransparentMesh: 0
 --- !u!1 &1833720265
 GameObject:
   m_ObjectHideFlags: 0
@@ -8133,6 +8388,7 @@ RectTransform:
   m_Children:
   - {fileID: 43326823}
   - {fileID: 2011719292}
+  - {fileID: 1831785887}
   m_Father: {fileID: 1408602552}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

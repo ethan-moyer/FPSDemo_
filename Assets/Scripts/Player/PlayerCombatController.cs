@@ -201,6 +201,11 @@ public class PlayerCombatController : MonoBehaviour
         viewModelAnimator.SetTrigger(parameter);
     }
 
+    public void SetStartingFOV(float newFOV)
+    {
+        startingFOV = newFOV;
+    }
+
     private void OnChangeFOV(float fovMultiplier)
     {
         if (fovMultiplier == 1)

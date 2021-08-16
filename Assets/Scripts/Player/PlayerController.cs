@@ -16,12 +16,20 @@ public class PlayerController : MonoBehaviour
 {
     public int PlayerID { get; set; }
     public IntIntEvent Die;
+    [Header("Controllers")]
+    [SerializeField] private PlayerCombatController combatController = null;
+    [SerializeField] private PlayerMovementController movementController = null;
+    [SerializeField] private PlayerInputReader controls = null;
+    [SerializeField] private CharacterController cc = null;
+    [Header("HUD")]
     [SerializeField] private Transform cam = null;
     [SerializeField] private LayerMask defaultCullingMask;
     [SerializeField] private Transform viewModels = null;
     [SerializeField] private Transform worldModels = null;
     [SerializeField] private GameObject hudCanvas = null;
     [SerializeField] private GameObject respawnCanvas = null;
+    [SerializeField] private RectTransform hudViewport = null;
+    [SerializeField] private RectTransform respawnViewport = null;
     [SerializeField] private Image hudHealthBar = null;
     [SerializeField] private Image hudShieldBar = null;
     [SerializeField] private Image[] damageIndicators = new Image[4];
@@ -34,10 +42,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float HPRegenRate = 9;
     [SerializeField] private float SPRegenDelay = 5f;
     [SerializeField] private float SPRegenRate = 50;
-    private PlayerCombatController combatController = null;
-    private PlayerMovementController movementController = null;
-    private PlayerInputReader controls = null;
-    private CharacterController cc = null;
+    
     private float currentHP;
     private float currentSP;
     private float HPRegenTimer = 0f;
@@ -45,11 +50,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        combatController = GetComponent<PlayerCombatController>();
-        movementController = GetComponent<PlayerMovementController>();
-        controls = GetComponent<PlayerInputReader>();
-        cc = GetComponent<CharacterController>();
-
         currentHP = maxHP;
         currentSP = maxSP;
 
@@ -81,11 +81,71 @@ public class PlayerController : MonoBehaviour
         ChangeLayerRecursive(viewModels, viewLayer);
     }
 
-    public void UpdateCanvasScale()
+    public void UpdateCanvasScale(int numOfPlayers)
     {
         CanvasScaler canvasScaler = hudCanvas.GetComponent<CanvasScaler>();
         Camera camera = cam.GetComponent<Camera>();
-        canvasScaler.referenceResolution = new Vector2(1920 / camera.rect.width, 1080 / camera.rect.width);
+
+        //Scale hud to fit camera viewport
+        if (numOfPlayers == 2)
+        {
+            camera.fieldOfView = 65f;
+            combatController.SetStartingFOV(65f);
+            hudViewport.sizeDelta = new Vector2(canvasScaler.referenceResolution.x * 1.6f, canvasScaler.referenceResolution.y);
+            hudViewport.localScale = new Vector3(0.5f, 0.5f, 1f);
+            respawnViewport.sizeDelta = new Vector2(canvasScaler.referenceResolution.x * 0.8f, canvasScaler.referenceResolution.y * 0.5f);
+            respawnViewport.localScale = Vector3.one;
+
+            if (PlayerID == 0)
+            {
+                camera.rect = new Rect(0.1f, 0.5f, 0.8f, 0.5f);
+                hudViewport.localPosition = new Vector3(0f, canvasScaler.referenceResolution.y * 0.25f, 0f);
+                respawnViewport.localPosition = new Vector3(0f, canvasScaler.referenceResolution.y * 0.25f, 0f);
+            }
+            else if (PlayerID == 1)
+            {
+                camera.rect = new Rect(0.1f, 0f, 0.8f, 0.5f);
+                hudViewport.localPosition = new Vector3(0f, -canvasScaler.referenceResolution.y * 0.25f, 0f);
+                respawnViewport.localPosition = new Vector3(0f, -canvasScaler.referenceResolution.y * 0.25f, 0f);
+            }
+        }
+        else if (numOfPlayers > 2)
+        {
+            camera.fieldOfView = 80f;
+            combatController.SetStartingFOV(80f);
+            hudViewport.sizeDelta = canvasScaler.referenceResolution;
+            hudViewport.localScale = new Vector3(0.5f, 0.5f, 1f);
+            respawnViewport.sizeDelta = canvasScaler.referenceResolution;
+            respawnViewport.localScale = new Vector3(0.5f, 0.5f, 1f);
+
+            if (PlayerID == 0)
+            {
+                camera.rect = new Rect(0f, 0.5f, 0.5f, 0.5f);
+                hudViewport.localPosition = new Vector3(-canvasScaler.referenceResolution.x * 0.25f, canvasScaler.referenceResolution.y * 0.25f);
+                respawnViewport.localPosition = new Vector3(-canvasScaler.referenceResolution.x * 0.25f, canvasScaler.referenceResolution.y * 0.25f);
+            }
+            else if (PlayerID == 1)
+            {
+                camera.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+                hudViewport.localPosition = new Vector3(canvasScaler.referenceResolution.x * 0.25f, canvasScaler.referenceResolution.y * 0.25f);
+                respawnViewport.localPosition = new Vector3(canvasScaler.referenceResolution.x * 0.25f, canvasScaler.referenceResolution.y * 0.25f);
+            }
+            else if (PlayerID == 2)
+            {
+                camera.rect = new Rect(0f, 0f, 0.5f, 0.5f);
+                hudViewport.localPosition = new Vector3(-canvasScaler.referenceResolution.x * 0.25f, -canvasScaler.referenceResolution.y * 0.25f);
+                respawnViewport.localPosition = new Vector3(-canvasScaler.referenceResolution.x * 0.25f, -canvasScaler.referenceResolution.y * 0.25f);
+            }
+            else if (PlayerID == 3)
+            {
+                camera.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
+                hudViewport.localPosition = new Vector3(canvasScaler.referenceResolution.x * 0.25f, -canvasScaler.referenceResolution.y * 0.25f);
+                respawnViewport.localPosition = new Vector3(canvasScaler.referenceResolution.x * 0.25f, -canvasScaler.referenceResolution.y * 0.25f);
+            }
+        }
+
+        //Update reference resolution
+        //canvasScaler.referenceResolution = new Vector2(1920 / camera.rect.width, 1080 / camera.rect.width);
     }
 
     public void UpdateScoreText(string newScore)
