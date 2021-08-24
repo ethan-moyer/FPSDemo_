@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7735174272625293115}
   - component: {fileID: 7186639726354726164}
   - component: {fileID: 9027015265498790526}
+  - component: {fileID: 3077848920440398455}
   m_Layer: 12
   m_Name: Sniper Prop
   m_TagString: Untagged
@@ -28,14 +29,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68692482473394754}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.14057289, w: 0.9900704}
+  m_LocalPosition: {x: 0.11273475, y: -0.016614676, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 3060258916353088563}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16.162}
 --- !u!33 &4327959564901046109
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -124,11 +125,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c1114fc36fd594ca0491e91d979907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactClips: []
+  impactClips:
+  - threshold: 0.3
+    clips:
+    - {fileID: 8300000, guid: 2fd8dabd99f2f064ab835d2750d9520e, type: 3}
+  - threshold: 100
+    clips:
+    - {fileID: 8300000, guid: 081c2eddb140ddd42aab69dc0bc5ecce, type: 3}
   weaponID: 4
   ammo: -1
   shouldRespawn: 0
   respawnTime: 20
+--- !u!114 &3077848920440398455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68692482473394754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6a4f223e643f149ba9e6d986300434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  mixerGroup: {fileID: -823178921040504914, guid: 192832ae567ce254d90673950bfc1b28,
+    type: 2}
+  volume: 0.5
+  range: 100
+  playOnStart: 0
+  loop: 0
 --- !u!1 &1491174648446192054
 GameObject:
   m_ObjectHideFlags: 0

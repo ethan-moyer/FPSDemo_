@@ -8,9 +8,23 @@ public class PropWeapon : Prop
     [SerializeField] public int ammo;
     [SerializeField] private bool shouldRespawn = false;
     [SerializeField] private float respawnTime = 20f;
+    [SerializeField] private float lifetime = 30f;
 
     public int WeaponID => weaponID;
     public int Ammo { get { return ammo; } set { value = ammo; } }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (shouldRespawn == false)
+            StartCoroutine(DestroyAfterSeconds(lifetime));
+    }
+
+    private IEnumerator DestroyAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(this.gameObject);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

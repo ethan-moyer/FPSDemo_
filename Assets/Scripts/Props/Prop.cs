@@ -10,7 +10,7 @@ public class Prop : MonoBehaviour
     private Rigidbody rb;
     private VirtualAudioSource audioSource;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<VirtualAudioSource>();
@@ -28,7 +28,10 @@ public class Prop : MonoBehaviour
         {
             if (magnitude <= group.threshold)
             {
-                audioSource.Play(group.clips[Random.Range(0, group.clips.Length)]);
+                if (group.clips.Length == 1)
+                    audioSource.Play(group.clips[0]);
+                else
+                    audioSource.Play(group.clips[Random.Range(0, group.clips.Length)]);
                 break;
             }
         }

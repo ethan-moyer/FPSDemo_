@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 3452930213226781905}
   - component: {fileID: 6190845041374874689}
   - component: {fileID: 5408885326529907499}
+  - component: {fileID: 7204974246780542659}
   m_Layer: 12
   m_Name: RocketLauncher Prop
   m_TagString: Untagged
@@ -72,14 +73,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3936802965480223511}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.2313041, w: 0.9728815}
+  m_LocalPosition: {x: -0.2325075, y: -0.054174334, z: 0}
   m_LocalScale: {x: 0.35586, y: 0.42703202, z: 0.35586}
   m_Children:
   - {fileID: 1488375557}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.748001}
 --- !u!33 &740382859471644168
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -168,8 +169,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c1114fc36fd594ca0491e91d979907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactClips: []
+  impactClips:
+  - threshold: 100
+    clips:
+    - {fileID: 8300000, guid: 081c2eddb140ddd42aab69dc0bc5ecce, type: 3}
   weaponID: 3
   ammo: 8
   shouldRespawn: 0
   respawnTime: 60
+--- !u!114 &7204974246780542659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3936802965480223511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6a4f223e643f149ba9e6d986300434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  mixerGroup: {fileID: -823178921040504914, guid: 192832ae567ce254d90673950bfc1b28,
+    type: 2}
+  volume: 0.5
+  range: 100
+  playOnStart: 0
+  loop: 0

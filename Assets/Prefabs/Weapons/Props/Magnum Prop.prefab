@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 7162619686322849187}
   - component: {fileID: 7162619686322849186}
   - component: {fileID: 4084008757622111902}
+  - component: {fileID: 5433159537236479529}
   m_Layer: 12
   m_Name: Magnum Prop
   m_TagString: Untagged
@@ -72,14 +73,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7162619686322849193}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.36297503, w: 0.93179893}
+  m_LocalPosition: {x: 0.10867149, y: -0.07494019, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1238825264402347627}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -42.566}
 --- !u!33 &7162619686322849191
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -168,8 +169,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c1114fc36fd594ca0491e91d979907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactClips: []
+  impactClips:
+  - threshold: 100
+    clips:
+    - {fileID: 8300000, guid: 2fd8dabd99f2f064ab835d2750d9520e, type: 3}
   weaponID: 0
   ammo: 20
   shouldRespawn: 0
   respawnTime: 20
+  lifetime: 30
+--- !u!114 &5433159537236479529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7162619686322849193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6a4f223e643f149ba9e6d986300434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  mixerGroup: {fileID: -823178921040504914, guid: 192832ae567ce254d90673950bfc1b28,
+    type: 2}
+  volume: 1
+  range: 100
+  playOnStart: 0
+  loop: 0
