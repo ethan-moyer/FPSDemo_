@@ -120,6 +120,7 @@ public class MultiplayerManager : MonoBehaviour
         }
         Cursor.lockState = CursorLockMode.None;
         previewCam.SetActive(true);
+        blackScreen.gameObject.SetActive(false);
         previewButtons.SetActive(true);
         previewText.text = $"Player {winner + 1} Wins!";
     }
