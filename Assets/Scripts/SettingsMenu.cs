@@ -9,9 +9,10 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown presetDropdown = null;
     [SerializeField] private TMP_Dropdown resolutionsDropdown = null;
     [SerializeField] private TMP_Dropdown displayDropdown = null;
+    [SerializeField] private TMP_Dropdown physicsDropdown = null;
     private Resolution[] resolutions;
 
-    private void Awake()
+    public void LoadSettings()
     {
         resolutions = Screen.resolutions;
         resolutionsDropdown.ClearOptions();
@@ -53,6 +54,16 @@ public class SettingsMenu : MonoBehaviour
         {
             OnChangeDisplayMode(PlayerPrefs.GetInt("DisplayMode"));
         }
+
+        if (PlayerPrefs.HasKey("PhysicsMode"))
+        {
+            print(PlayerPrefs.GetInt("PhysicsMode"));
+            physicsDropdown.value = PlayerPrefs.GetInt("PhysicsMode");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("PhysicsMode", 0);
+        }
     }
 
     public void OnChangePreset(int preset)
@@ -81,5 +92,15 @@ public class SettingsMenu : MonoBehaviour
             Screen.fullScreenMode = FullScreenMode.Windowed;
         }
         PlayerPrefs.SetInt("DisplayMode", mode);
+    }
+
+    public void OnChangePhysicsMode(int mode)
+    {
+        PlayerPrefs.SetInt("PhysicsMode", mode);
+    }
+
+    public void OnReturnToMenu()
+    {
+        PlayerPrefs.Save();
     }
 }

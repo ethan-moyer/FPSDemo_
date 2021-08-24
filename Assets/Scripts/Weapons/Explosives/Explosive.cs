@@ -33,7 +33,12 @@ public class Explosive : MonoBehaviour
                     if (hitPlayer != null)
                     {
                         hitPlayer.DamageHit(HPDamage, SPMultiplier, point, player);
-                        player.PhysicsHit(point - transform.position, HPDamage * 0.15f);
+                        int physicsMode = PlayerPrefs.HasKey("PhysicsMode") ? PlayerPrefs.GetInt("PhysicsMode") : 0;
+                        print(physicsMode);
+                        if (physicsMode == 0)
+                            player.PhysicsHit(point - transform.position, HPDamage * 0.01f);
+                        else
+                            player.PhysicsHit(point - transform.position, HPDamage * 0.10f);
                     }
                 }
             }
@@ -51,7 +56,12 @@ public class Explosive : MonoBehaviour
                             if (hitPlayer != null)
                             {
                                 hitPlayer.DamageHit(HPDamage * falloff, SPMultiplier * falloff, hit.point, player);
-                                hitPlayer.PhysicsHit(point - transform.position, falloff * HPDamage * 0.15f);
+                                int physicsMode = PlayerPrefs.HasKey("PhysicsMode") ? PlayerPrefs.GetInt("PhysicsMode") : 0;
+                                print(physicsMode);
+                                if (physicsMode == 0)
+                                    hitPlayer.PhysicsHit(point - transform.position, falloff * HPDamage * 0.01f);
+                                else
+                                    hitPlayer.PhysicsHit(point - transform.position, falloff * HPDamage * 0.1f);
                             }
                         }
                         else if (hit.transform.gameObject.layer == 12)

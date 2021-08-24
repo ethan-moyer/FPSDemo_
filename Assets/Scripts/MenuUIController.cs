@@ -14,6 +14,11 @@ public class MenuUIController : MonoBehaviour
     {
         foreach (GameObject panel in panels)
         {
+            SettingsMenu settingsMenu = panel.GetComponent<SettingsMenu>();
+            if (settingsMenu != null)
+            {
+                settingsMenu.LoadSettings();
+            }
             panel.SetActive(false);
         }
         panels[currentPanel].SetActive(true);
