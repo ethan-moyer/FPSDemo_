@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour
             currentHP -= remainingDamage;
             if (currentHP <= 0)
             {
+                DropWeapon();
                 Die.Invoke(PlayerID, otherPlayer.PlayerID);
                 GameObject effect = ObjectPooler.SharedInstance.GetPooledObject(5);
                 effect.transform.position = transform.position;
@@ -248,6 +249,7 @@ public class PlayerController : MonoBehaviour
 
     public void Disable()
     {
+        combatController.CurrentWeapon.ChangingFOV.Invoke(1);
         movementController.enabled = false;
         combatController.enabled = false;
         cc.enabled = false;
@@ -296,19 +298,22 @@ public class PlayerController : MonoBehaviour
                 if (prop != null && controls.WeaponInteractDown && prop.WeaponID >= 0 && prop.WeaponID != combatController.CurrentWeapon.WeaponID && prop.WeaponID != combatController.SecondWeapon.WeaponID)
                 {
                     prop.RemoveWeapon();
-
-                    //Drop old weapon if theres still ammo
-                    if (combatController.CurrentWeapon.TotalAmmo != 0)
-                    {
-                        GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + 0.5f * Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
-                        newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.TotalAmmo;
-                        newProp.GetComponent<Rigidbody>().AddForce(cam.forward * 10000f);
-                    }
-
+                    DropWeapon();
                     combatController.CurrentWeapon.gameObject.SetActive(false);
                     combatController.SwitchTo(prop.WeaponID, prop.Ammo);
                 }
             }
+        }
+    }
+
+    private void DropWeapon()
+    {
+        //Drop old weapon if theres still ammo
+        if (combatController.CurrentWeapon.TotalAmmo != 0)
+        {
+            GameObject newProp = Instantiate(combatController.CurrentWeapon.PropPrefab, transform.position + 0.5f * Vector3.up, combatController.CurrentWeapon.PropPrefab.transform.rotation);
+            newProp.GetComponent<PropWeapon>().ammo = combatController.CurrentWeapon.TotalAmmo;
+            newProp.GetComponent<Rigidbody>().AddForce(cam.up * -100f);
         }
     }
 

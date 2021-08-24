@@ -87,6 +87,7 @@ public abstract class ModularWeapon : MonoBehaviour
     {
         this.player = player;
         this.cam = cam;
+        currentZoomLevel = 0;
         defaultRadius = coneRadius;
         SetAmmo(ammo);
     }
