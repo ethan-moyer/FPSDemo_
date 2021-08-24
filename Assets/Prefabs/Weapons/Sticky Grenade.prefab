@@ -331,7 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPDamage: 600
   SPMultiplier: 1
-  explosionEffect: 2
+  explosionEffect: 6
   sphereRadius: 2
   targets:
     serializedVersion: 2

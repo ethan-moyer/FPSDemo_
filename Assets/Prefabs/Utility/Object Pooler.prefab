@@ -64,4 +64,12 @@ MonoBehaviour:
       type: 3}
     amountToPool: 100
     shouldExpand: 1
+  - objectToPool: {fileID: 5257837783342826441, guid: b37118bb8bfe76448a23368cac39f328,
+      type: 3}
+    amountToPool: 4
+    shouldExpand: 1
+  - objectToPool: {fileID: 4293971637457538665, guid: e166df0a4877a3a42866642e8c869765,
+      type: 3}
+    amountToPool: 16
+    shouldExpand: 1
   pooledObjects: []
