@@ -2257,6 +2257,7 @@ MonoBehaviour:
   combatController: {fileID: 297861465}
   movementController: {fileID: 1678176370222012912}
   controls: {fileID: 2017234851}
+  fpsCam: {fileID: 1678176370222012915}
   cc: {fileID: 1678176370222012917}
   cam: {fileID: 1678176368984412462}
   defaultCullingMask:
@@ -2326,6 +2327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomed: 0
+  magnetismDir: {x: 0, y: 0, z: 0}
   mouseSensitivity: {x: 10, y: 10}
   gamepadSensitivity: {x: 200, y: 150}
   gamepadAccelerationStart: 0.2
@@ -2337,6 +2339,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4608
   reticle: {fileID: 1736392033}
+  weaponModel: {fileID: 8880841638537281153}
 --- !u!114 &297861465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,7 +2354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponsContainer: {fileID: 768296828}
   currentID: 0
-  secondID: 5
+  secondID: 1
   fragPrefab: {fileID: 7064059461981977702, guid: e1b4a57b8927ca340a62e45a884257b2,
     type: 3}
   stickyPrefab: {fileID: 2284277317478230508, guid: 5eb48d5128505794ab470fd2b38da0fb,
@@ -2990,7 +2993,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8256043463921888416}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.564, y: 0.187, z: -0.243}
+  m_LocalPosition: {x: 0.535, y: 0.243, z: 0.007}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 1678176369222646586}
@@ -3003,7 +3006,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8256043463921888416}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -6712515009374007970, guid: 1dfe7dce3a0255c4ca4de7cdc674cc5b, type: 3}
 --- !u!23 &322287533788606935
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3022,7 +3025,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: b2314e3fc12cbc44197951f177c2d3af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3124,6 +3127,52 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 768296828}
     m_Modifications:
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.mesh
+      value: 
+      objectReference: {fileID: -1928178662584927812, guid: 1c8b97d4318c1e8479c97d3b047957b6,
+        type: 3}
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c58723e470ca5394d8d894590502fc00, type: 2}
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.offset.x
+      value: 0.534
+      objectReference: {fileID: 0}
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.offset.y
+      value: 0.269
+      objectReference: {fileID: 0}
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.offset.z
+      value: -0.211
+      objectReference: {fileID: 0}
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.scale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.scale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3038137141392442618, guid: 6edb100fde70d7741bbc4192370517b8,
+        type: 3}
+      propertyPath: worldModel.scale.z
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6949729372992679738, guid: 6edb100fde70d7741bbc4192370517b8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3509,6 +3558,52 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 768296828}
     m_Modifications:
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.mesh
+      value: 
+      objectReference: {fileID: 157429885028697517, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+        type: 3}
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b2314e3fc12cbc44197951f177c2d3af, type: 2}
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.offset.x
+      value: 0.566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.offset.y
+      value: 0.187
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.offset.z
+      value: -0.056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.scale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.scale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706465917339135962, guid: 1b8059bdfcc57944896a7ebddbac585d,
+        type: 3}
+      propertyPath: worldModel.scale.z
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4899938842183091178, guid: 1b8059bdfcc57944896a7ebddbac585d,
         type: 3}
       propertyPath: m_Name

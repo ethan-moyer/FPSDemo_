@@ -87,6 +87,8 @@ MonoBehaviour:
   reticleScale: 0.05
   maxDistance: 500
   coneRadius: 0.01
+  assistDistance: 500
+  assistRadius: 0.01
   maxAmmo: 24
   attackRate: 1.714286
   attack: {fileID: 4817260567674628515}

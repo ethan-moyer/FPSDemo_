@@ -98,6 +98,11 @@ public class PlayerCombatController : MonoBehaviour
         secondID = startingWeapons[1];
 
         SwitchTo(currentID, -1);
+
+        currentFragAmount = maxGrenadeAmount;
+        currentStickyAmount = maxGrenadeAmount;
+
+        UpdateGrenadeCounters();
     }
 
     public void SwitchTo(int index, int ammo)

@@ -69,11 +69,12 @@ MonoBehaviour:
     offset: {x: 0.15, y: -0.11, z: 0.1714}
     scale: {x: 0.1, y: 0.1, z: 0.1}
   worldModel:
-    mesh: {fileID: 0}
-    materials: []
+    mesh: {fileID: -6712515009374007970, guid: 1dfe7dce3a0255c4ca4de7cdc674cc5b, type: 3}
+    materials:
+    - {fileID: 2100000, guid: c0b14fba9352e8044915e66ca9fe1d54, type: 2}
     animator: {fileID: 0}
-    offset: {x: 0, y: 0, z: 0}
-    scale: {x: 0, y: 0, z: 0}
+    offset: {x: 0.535, y: 0.243, z: 0.007}
+    scale: {x: 0.25, y: 0.25, z: 0.25}
   particleEffect:
     visualEffect: {fileID: 0}
     offset: {x: 0.15, y: -1.88, z: 0.66}
@@ -84,6 +85,8 @@ MonoBehaviour:
   reticleScale: 0.1
   maxDistance: 100
   coneRadius: 5
+  assistDistance: 100
+  assistRadius: 5
   maxAmmo: 100
   attackRate: 8.8
   attack: {fileID: 1865693735301138342}

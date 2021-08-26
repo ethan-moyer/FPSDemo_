@@ -73,7 +73,7 @@ MonoBehaviour:
     materials:
     - {fileID: 2100000, guid: a5589f44cddf4734b8d3fddd5cc6c9dc, type: 2}
     animator: {fileID: 22100000, guid: a359a42b907578642b20a85e74f9566e, type: 2}
-    offset: {x: 0.564, y: 0.187, z: -0.243}
+    offset: {x: 0.564, y: 0.187, z: -0.077}
     scale: {x: 0.25, y: 0.25, z: 0.25}
   particleEffect:
     visualEffect: {fileID: 8926484042661614526, guid: 7e6eb7595322c5242af3e639057d9a3b,
@@ -86,6 +86,8 @@ MonoBehaviour:
   reticleScale: 0.17
   maxDistance: 120
   coneRadius: 7
+  assistDistance: 100
+  assistRadius: 5
   maxAmmo: 24
   attackRate: 1.43
   attack: {fileID: 675733675037107211}

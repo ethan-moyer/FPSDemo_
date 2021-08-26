@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerCombatController combatController = null;
     [SerializeField] private PlayerMovementController movementController = null;
     [SerializeField] private PlayerInputReader controls = null;
+    [SerializeField] private FirstPersonCamera fpsCam = null;
     [SerializeField] private CharacterController cc = null;
     [Header("HUD")]
     [SerializeField] private Transform cam = null;
@@ -47,6 +48,8 @@ public class PlayerController : MonoBehaviour
     private float currentSP;
     private float HPRegenTimer = 0f;
     private float SPRegenTimer = 0f;
+
+    public FirstPersonCamera FPSCam => fpsCam;
 
     private void Awake()
     {

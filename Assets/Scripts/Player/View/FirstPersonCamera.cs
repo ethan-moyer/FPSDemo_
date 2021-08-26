@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class FirstPersonCamera : MonoBehaviour
 {
     [HideInInspector] public bool zoomed = false;
+    [HideInInspector] public Vector3 magnetismDir = Vector3.zero;
     [SerializeField] private Vector2 mouseSensitivity = Vector2.one * 100f;
     [SerializeField] private Vector2 gamepadSensitivity = Vector2.one * 100f;
     [SerializeField] private float gamepadAccelerationStart = 0.2f;
@@ -16,6 +17,7 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] private Transform cam = null;
     [SerializeField] private LayerMask aimAssistMask;
     [SerializeField] private Image reticle;
+    [SerializeField] private Transform weaponModel = null;
 
     private PlayerInputReader controls;
     private PlayerInput playerInput;
@@ -65,26 +67,29 @@ public class FirstPersonCamera : MonoBehaviour
             }
         }
 
+        magnetismDir = cam.forward;
+
         //Reticle Change & Aim Assist
-        Collider[] colliders = Physics.OverlapSphere(cam.position, combatController.CurrentWeapon.maxDistance, aimAssistMask);
+        Collider[] colliders = Physics.OverlapSphere(cam.position, combatController.CurrentWeapon.assistDistance, aimAssistMask);
         reticle.color = Color.white;
-        this.gameObject.layer = 2;
+        gameObject.layer = 2;
         foreach (Collider col in colliders)
         {
             RaycastHit hit;
             if (ConeCast(col, out hit))
             {
                 reticle.color = Color.red;
+                magnetismDir = (hit.point - cam.position).normalized;
 
                 //Aim Assist
-                if (playerInput.currentControlScheme == "Gamepad" && ((xAxis != 0f && yAxis != 0f) || controls.WalkDir.magnitude > 0f))
+                /*if (playerInput.currentControlScheme == "Gamepad" && ((xAxis != 0f && yAxis != 0f) || controls.WalkDir.magnitude > 0f))
                 {
                     Vector3 towardsPoint = (hit.point - cam.position).normalized;
                     Vector3 difference = towardsPoint - cam.forward;
                     Vector3 localDifference = cam.transform.InverseTransformDirection(difference);
                     xAxis += localDifference.x * 2f;
                     yAxis += localDifference.y * 2f;
-                }
+                }*/
             }
         }
         this.gameObject.layer = 9;
@@ -95,19 +100,21 @@ public class FirstPersonCamera : MonoBehaviour
 
         cam.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * xAxis);
+
+        weaponModel.localRotation = Quaternion.Euler(xRotation - 90f, 0f, 0f);
     }
 
     private bool ConeCast(Collider col, out RaycastHit hit)
     {
         //Check if closest point to camera is in cone
         Vector3 target = col.ClosestPoint(cam.position + cam.forward * Vector3.Distance(cam.position, col.transform.position));
-        if (Physics.Raycast(cam.position, target - cam.position, out hit, combatController.CurrentWeapon.maxDistance))
+        if (Physics.Raycast(cam.position, target - cam.position, out hit, combatController.CurrentWeapon.assistDistance))
         {
             if (hit.transform == col.transform)
             {
                 //point = hit.point;
                 float distance = Vector3.Dot(hit.point - cam.position, cam.forward);
-                float radius = (distance / combatController.CurrentWeapon.maxDistance) * combatController.CurrentWeapon.coneRadius;
+                float radius = (distance / combatController.CurrentWeapon.assistDistance) * combatController.CurrentWeapon.assistRadius;
                 float orthDistance = Vector3.Magnitude((hit.point - cam.position) - (cam.forward * distance));
                 bool inCone = orthDistance < radius;
                 return inCone;
