@@ -86,8 +86,9 @@ MonoBehaviour:
   reticleScale: 0.15
   maxDistance: 300
   coneRadius: 18
-  assistDistance: 100
-  assistRadius: 5
+  magnetismRadius: 8
+  assistDistance: 15
+  assistRadius: 1.5
   maxAmmo: 240
   attackRate: 10
   attack: {fileID: 760755005687188508}
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8fe8a143bdf354bb4eb0983b41b305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPDamage: 10
+  HPDamage: 12
   SPMultiplier: 1
   numberOfRays: 1
   firingClip: {fileID: 8300000, guid: e028fbbbca870a54caf9140648f3723a, type: 3}

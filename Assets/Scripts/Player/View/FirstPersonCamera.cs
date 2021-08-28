@@ -8,6 +8,7 @@ public class FirstPersonCamera : MonoBehaviour
 {
     [HideInInspector] public bool zoomed = false;
     [HideInInspector] public Vector3 magnetismDir = Vector3.zero;
+    [HideInInspector] public bool usingMagnetism = false;
     [SerializeField] private Vector2 mouseSensitivity = Vector2.one * 100f;
     [SerializeField] private Vector2 gamepadSensitivity = Vector2.one * 100f;
     [SerializeField] private float gamepadAccelerationStart = 0.2f;
@@ -68,6 +69,7 @@ public class FirstPersonCamera : MonoBehaviour
         }
 
         magnetismDir = cam.forward;
+        usingMagnetism = false;
 
         //Reticle Change & Aim Assist
         Collider[] colliders = Physics.OverlapSphere(cam.position, combatController.CurrentWeapon.assistDistance, aimAssistMask);
@@ -80,6 +82,7 @@ public class FirstPersonCamera : MonoBehaviour
             {
                 reticle.color = Color.red;
                 magnetismDir = (hit.point - cam.position).normalized;
+                usingMagnetism = true;
 
                 //Aim Assist
                 /*if (playerInput.currentControlScheme == "Gamepad" && ((xAxis != 0f && yAxis != 0f) || controls.WalkDir.magnitude > 0f))

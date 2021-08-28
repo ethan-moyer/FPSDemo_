@@ -27,6 +27,7 @@ public abstract class ModularWeapon : MonoBehaviour
     [Header("Attack")]
     [SerializeField] public float maxDistance = 100f;
     [SerializeField] public float coneRadius = 5f;
+    [SerializeField] public float magnetismRadius = 3f;
     [SerializeField] public float assistDistance = 100f;
     [SerializeField] public float assistRadius = 5f;
     [SerializeField] protected int maxAmmo = 100;

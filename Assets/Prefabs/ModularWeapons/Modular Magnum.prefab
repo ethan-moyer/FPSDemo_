@@ -85,8 +85,9 @@ MonoBehaviour:
   reticleScale: 0.07
   maxDistance: 300
   coneRadius: 7
+  magnetismRadius: 3
   assistDistance: 30
-  assistRadius: 1
+  assistRadius: 1.5
   maxAmmo: 60
   attackRate: 2.86
   attack: {fileID: 2362018519490137687}

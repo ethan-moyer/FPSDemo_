@@ -86,16 +86,17 @@ MonoBehaviour:
   reticleScale: 0.17
   maxDistance: 120
   coneRadius: 7
-  assistDistance: 100
-  assistRadius: 5
-  maxAmmo: 24
+  magnetismRadius: 5
+  assistDistance: 10
+  assistRadius: 1.5
+  maxAmmo: 18
   attackRate: 1.43
   attack: {fileID: 675733675037107211}
   zoomLevels:
   - 1
   - 0.8
   stayZoomed: 0
-  maxMagAmmo: 12
+  maxMagAmmo: 6
   reloadTime: 1.8
 --- !u!114 &675733675037107211
 MonoBehaviour:

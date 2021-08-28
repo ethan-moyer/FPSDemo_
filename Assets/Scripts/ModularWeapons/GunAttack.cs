@@ -20,7 +20,16 @@ public class GunAttack : WeaponAttack
         RaycastHit hit;
         for (int i = 0; i < numberOfRays; i++)
         {
-            Vector3 randDir = (player.FPSCam.magnetismDir * weapon.maxDistance) + (cam.right * Random.Range(-1f, 1f) * weapon.coneRadius) + (cam.up * Random.Range(-1f, 1f) * weapon.coneRadius);
+            Vector3 randDir;
+            if (player.FPSCam.usingMagnetism)
+            {
+                randDir = (player.FPSCam.magnetismDir * weapon.maxDistance) + (cam.right * Random.Range(-1f, 1f) * weapon.magnetismRadius) + (cam.up * Random.Range(-1f, 1f) * weapon.magnetismRadius);
+            }
+            else
+            {
+                randDir = (player.FPSCam.magnetismDir * weapon.maxDistance) + (cam.right * Random.Range(-1f, 1f) * weapon.coneRadius) + (cam.up * Random.Range(-1f, 1f) * weapon.coneRadius);
+            }
+
             if (Physics.Raycast(cam.position, randDir, out hit, weapon.maxDistance))
             {
                 if (hit.transform.gameObject.layer == 9) //Hit a player
