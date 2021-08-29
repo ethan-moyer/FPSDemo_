@@ -9,12 +9,14 @@ public class Grenade : MonoBehaviour
     private bool timerStarted = false;
     private Explosive explosive = null;
     private Rigidbody rb = null;
+    private VirtualAudioSource audioSource = null;
     public PlayerController player { get; set; }
 
     private void Awake()
     {
         explosive = GetComponent<Explosive>();
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<VirtualAudioSource>();
     }
 
     public void SetUp(PlayerController player, Vector3 velocity)
@@ -34,6 +36,7 @@ public class Grenade : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        audioSource.Play();
         if (timerStarted == false)
             StartCoroutine(ExplodeTimer());
     }

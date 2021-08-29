@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 2284277317478230505}
   - component: {fileID: 2284277317478230510}
   - component: {fileID: 4740866659191021989}
+  - component: {fileID: 5639362218507883345}
   m_Layer: 0
   m_Name: Sticky Grenade
   m_TagString: Untagged
@@ -349,6 +350,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explodeTime: 1
+--- !u!114 &5639362218507883345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284277317478230508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6a4f223e643f149ba9e6d986300434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 5050221db38b7394bae6068735a601eb, type: 3}
+  mixerGroup: {fileID: -823178921040504914, guid: 192832ae567ce254d90673950bfc1b28,
+    type: 2}
+  volume: 1
+  range: 100
+  playOnStart: 0
+  loop: 0
 --- !u!1 &5798780707832435889
 GameObject:
   m_ObjectHideFlags: 0
