@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MenuUIController : MonoBehaviour
 {
     [SerializeField] private GameObject[] panels;
-    [SerializeField] private Button[] defaultButtons;
+    [SerializeField] private Selectable[] defaultButtons;
     [SerializeField] private int currentPanel;
 
     private void Awake()

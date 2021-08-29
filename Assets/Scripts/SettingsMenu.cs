@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void LoadSettings()
     {
-        resolutions = Screen.resolutions;
+        resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
         resolutionsDropdown.ClearOptions();
 
         List<string> resolutionStrings = new List<string>();
