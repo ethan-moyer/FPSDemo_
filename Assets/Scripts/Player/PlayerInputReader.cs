@@ -15,9 +15,11 @@ public class PlayerInputReader : MonoBehaviour
     public bool WeaponZoomDown { get; private set; }
     public bool WeaponFireHeld { get; private set; }
     public bool WeaponReloadDown { get; private set; }
+    public bool WeaponMeleeDown { get; private set; }
     public bool WeaponInteractDown { get; private set; }
     public bool ThrowGrenadeDown { get; private set; }
     public bool SwitchGrenadeDown { get; private set; }
+    public bool PauseDown { get; private set; }
 
     public void OnWalk(CallbackContext ctx)
     {
@@ -66,6 +68,12 @@ public class PlayerInputReader : MonoBehaviour
             WeaponReloadDown = true;
     }
 
+    public void OnWeaponMeleeDown(CallbackContext ctx)
+    {
+        if (ctx.started)
+            WeaponMeleeDown = true;
+    }
+
     public void OnInteract(CallbackContext ctx)
     {
         if (ctx.performed)
@@ -84,6 +92,12 @@ public class PlayerInputReader : MonoBehaviour
             SwitchGrenadeDown = true;
     }
 
+    public void OnPause(CallbackContext ctx)
+    {
+        if (ctx.started)
+            PauseDown = true;
+    }
+
     private void LateUpdate()
     {
         JumpDown = false;
@@ -91,8 +105,10 @@ public class PlayerInputReader : MonoBehaviour
         WeaponFireDown = false;
         WeaponZoomDown = false;
         WeaponReloadDown = false;
+        WeaponMeleeDown = false;
         WeaponInteractDown = false;
         ThrowGrenadeDown = false;
         SwitchGrenadeDown = false;
+        PauseDown = false;
     }
 }

@@ -6,26 +6,26 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sniper
+  m_Name: PlasmaGun
   m_Controller: {fileID: 9100000, guid: cec04f3b06100ef49a178c3a29de85dc, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: -5154504331251089435, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
       type: 3}
-    m_OverrideClip: {fileID: 4288813698691813929, guid: 357526183e088b34bb972d3119ed0b91,
+    m_OverrideClip: {fileID: -4761320727336426216, guid: 78275277f16564a4dbb9a716ba46f14d,
       type: 3}
   - m_OriginalClip: {fileID: -4154900423893413223, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
       type: 3}
-    m_OverrideClip: {fileID: 1146587211066288471, guid: 357526183e088b34bb972d3119ed0b91,
+    m_OverrideClip: {fileID: 7087153982308362123, guid: 78275277f16564a4dbb9a716ba46f14d,
       type: 3}
   - m_OriginalClip: {fileID: -5533726921053159883, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
       type: 3}
-    m_OverrideClip: {fileID: 4506395972180861494, guid: 357526183e088b34bb972d3119ed0b91,
-      type: 3}
-  - m_OriginalClip: {fileID: -7793019629155364369, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
-      type: 3}
-    m_OverrideClip: {fileID: 5667503427913166158, guid: 357526183e088b34bb972d3119ed0b91,
+    m_OverrideClip: {fileID: -5533726921053159883, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
       type: 3}
   - m_OriginalClip: {fileID: 8950074320712168217, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
       type: 3}
-    m_OverrideClip: {fileID: -4904430110375923297, guid: 78275277f16564a4dbb9a716ba46f14d,
+    m_OverrideClip: {fileID: 8950074320712168217, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+      type: 3}
+  - m_OriginalClip: {fileID: -7793019629155364369, guid: dc7c3db8ad41d014bb3483b5e2d4192f,
+      type: 3}
+    m_OverrideClip: {fileID: -5311678509150948424, guid: 78275277f16564a4dbb9a716ba46f14d,
       type: 3}

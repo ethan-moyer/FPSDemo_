@@ -33,6 +33,11 @@ public abstract class ModularWeapon : MonoBehaviour
     [SerializeField] protected int maxAmmo = 100;
     [SerializeField] protected float attackRate = 1f;
     [SerializeField, SerializeReference] protected WeaponAttack attack = null;
+    [Header("Melee")]
+    [SerializeField] private float meleeDamage;
+    [SerializeField] private float meleeRange;
+    [SerializeField] private float meleeActiveLength;
+    [SerializeField] private float meleeAnimLength;
     [Header("FOV")]
     [SerializeField] protected float[] zoomLevels;
     [SerializeField] protected bool stayZoomed = false;
@@ -40,9 +45,11 @@ public abstract class ModularWeapon : MonoBehaviour
     protected Transform cam = null;
     protected PlayerController player = null;
     protected float attackTimer = 0f;
+    protected float meleeTimer = 0f;
     protected int currentAmmo = 0;
     protected int currentZoomLevel = 0;
     private float defaultRadius;
+    private bool meleeActive;
 
     public enum States { Idle, Busy, Firing };
     public States CurrentState { get; set; }
@@ -112,6 +119,8 @@ public abstract class ModularWeapon : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         attackTimer = 0f;
+        meleeTimer = 0f;
+        meleeActive = false;
         CurrentState = States.Busy;
         UpdateAmmoText();
 
@@ -165,6 +174,33 @@ public abstract class ModularWeapon : MonoBehaviour
                 attackTimer = 0f;
                 CurrentState = States.Idle;
             }
+
+            if (meleeActive)
+            {
+                if (meleeTimer < meleeActiveLength)
+                    meleeTimer += Time.deltaTime;
+                else
+                    meleeActive = false;
+
+                player.gameObject.layer = 2;
+                RaycastHit hit;
+                if (Physics.Raycast(cam.position, cam.forward, out hit, meleeRange*2))
+                {
+                    if (hit.transform.gameObject.layer == 9)
+                    {
+                        PlayerController enemyController = hit.transform.GetComponent<PlayerController>();
+                        if (enemyController != null)
+                        {
+                            if (Vector3.Dot(player.transform.forward, hit.transform.forward) >= 0.8f)
+                                enemyController.DamageHit(meleeDamage * 2, 1, cam.position, player);
+                            else
+                                enemyController.DamageHit(meleeDamage, 1, cam.position, player);
+                            meleeActive = false;
+                        }
+                    }
+                }
+                player.gameObject.layer = 9;
+            }
         }
     }
 
@@ -177,4 +213,16 @@ public abstract class ModularWeapon : MonoBehaviour
     public abstract void SecondaryAction();
 
     public abstract void TertiaryAction();
+
+    public void MeleeAction()
+    {
+        if (CurrentState == States.Idle)
+        {
+            meleeActive = true;
+            TriggeringAnimation.Invoke("Melee");
+            attackTimer = meleeAnimLength;
+            meleeTimer = 0f;
+            CurrentState = States.Firing;
+        }
+    }
 }

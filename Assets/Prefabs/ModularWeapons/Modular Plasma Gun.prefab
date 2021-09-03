@@ -65,7 +65,7 @@ MonoBehaviour:
     mesh: {fileID: -6712515009374007970, guid: 1dfe7dce3a0255c4ca4de7cdc674cc5b, type: 3}
     materials:
     - {fileID: 2100000, guid: c0b14fba9352e8044915e66ca9fe1d54, type: 2}
-    animator: {fileID: 22100000, guid: 0fce681a79cad7d48abd4298a6c905de, type: 2}
+    animator: {fileID: 22100000, guid: 1657a08f05788e3469616f24c6dab450, type: 2}
     offset: {x: 0.15, y: -0.11, z: 0.1714}
     scale: {x: 0.1, y: 0.1, z: 0.1}
   worldModel:
@@ -85,11 +85,16 @@ MonoBehaviour:
   reticleScale: 0.1
   maxDistance: 100
   coneRadius: 5
+  magnetismRadius: 3
   assistDistance: 100
   assistRadius: 5
   maxAmmo: 100
   attackRate: 8.8
   attack: {fileID: 1865693735301138342}
+  meleeDamage: 100
+  meleeRange: 0.85
+  meleeActiveLength: 0.1833333
+  meleeAnimLength: 0.35
   zoomLevels:
   - 1
   - 0.8

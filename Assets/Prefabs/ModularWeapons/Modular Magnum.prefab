@@ -91,6 +91,10 @@ MonoBehaviour:
   maxAmmo: 60
   attackRate: 2.86
   attack: {fileID: 2362018519490137687}
+  meleeDamage: 100
+  meleeRange: 0.85
+  meleeActiveLength: 0.18333334
+  meleeAnimLength: 0.35
   zoomLevels:
   - 1
   - 0.5

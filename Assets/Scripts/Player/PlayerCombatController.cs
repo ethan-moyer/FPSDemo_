@@ -291,6 +291,10 @@ public class PlayerCombatController : MonoBehaviour
         {
             CurrentWeapon.TertiaryAction();
         }
+        if (controls.WeaponMeleeDown)
+        {
+            CurrentWeapon.MeleeAction();
+        }
         if (controls.ThrowGrenadeDown)
         {
             if (CurrentWeapon.CurrentState == ModularWeapon.States.Idle)

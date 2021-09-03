@@ -2222,6 +2222,36 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: adfaa419-ecc7-405b-a12f-d7342d465c4d
     m_ActionName: Player/Look[/DualShock4GamepadHID/rightStick,/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017234851}
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 94d8804a-095e-43d9-9236-d34d2453759f
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017234851}
+        m_MethodName: OnWeaponMeleeDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5fa072e6-1120-4835-b6e9-9dfa38cdf6a6
+    m_ActionName: Player/Melee[/Keyboard/q,/DualShock4GamepadHID/rightShoulder]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2269,6 +2299,7 @@ MonoBehaviour:
   respawnCanvas: {fileID: 1454019112}
   hudViewport: {fileID: 234137294481444585}
   respawnViewport: {fileID: 6237391565425405478}
+  pausePanel: {fileID: 0}
   hudHealthBar: {fileID: 551314692035593463}
   hudShieldBar: {fileID: 69121785}
   damageIndicators:
@@ -2328,6 +2359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomed: 0
   magnetismDir: {x: 0, y: 0, z: 0}
+  usingMagnetism: 0
   mouseSensitivity: {x: 10, y: 10}
   gamepadSensitivity: {x: 200, y: 150}
   gamepadAccelerationStart: 0.2
@@ -2789,7 +2821,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5543532003259128607}
-  m_Mesh: {fileID: -6712515009374007970, guid: 1dfe7dce3a0255c4ca4de7cdc674cc5b, type: 3}
+  m_Mesh: {fileID: -6850817020174738761, guid: 78275277f16564a4dbb9a716ba46f14d, type: 3}
 --- !u!23 &5210475540504641825
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2839,7 +2871,7 @@ Animator:
   m_GameObject: {fileID: 5543532003259128607}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cec04f3b06100ef49a178c3a29de85dc, type: 2}
+  m_Controller: {fileID: 22100000, guid: 0fce681a79cad7d48abd4298a6c905de, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3487,6 +3519,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Modular Auto Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177203043372056065, guid: 5b8999b2fd53e104c9c1b732e8c85082,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3177203043372056071, guid: 5b8999b2fd53e104c9c1b732e8c85082,
         type: 3}

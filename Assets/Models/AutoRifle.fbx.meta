@@ -27,6 +27,9 @@ ModelImporter:
   - first:
       74: -5311678509150948424
     second: AutoRifle|Reload
+  - first:
+      74: -4904430110375923297
+    second: AutoRifle|Melee
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -114,18 +117,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: AutoRifle|Idle
-      takeName: AutoRifle|Idle
+      name: AutoRifle|Melee
+      takeName: AutoRifle|Melee
       internalID: 0
       firstFrame: 0
-      lastFrame: 120
+      lastFrame: 22
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
