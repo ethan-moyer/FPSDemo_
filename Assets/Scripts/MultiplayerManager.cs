@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MultiplayerManager : MonoBehaviour
 {
+    public static MultiplayerManager SharedInstance;
     [SerializeField] private bool randomSpawns = false;
     [SerializeField] private GameObject spawnPointsRoot;
     [SerializeField] private int maxScore = 25;
@@ -15,13 +17,20 @@ public class MultiplayerManager : MonoBehaviour
     [SerializeField] private GameObject previewButtons;
     [SerializeField] private TextMeshProUGUI previewText;
     [SerializeField] private Image blackScreen;
+    [SerializeField] private GameObject pauseCanvas;
     private PlayerInputManager playerInputManager;
     private List<PlayerController> players;
     private List<int> scores;
     private List<Transform> spawnPoints;
+    private bool paused;
 
     private void Awake()
     {
+        if (SharedInstance == null)
+            SharedInstance = this;
+        else
+            Destroy(gameObject);
+
         players = new List<PlayerController>();
         scores = new List<int>();
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -93,6 +102,33 @@ public class MultiplayerManager : MonoBehaviour
     public void OnExitClicked()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void OnPausePressed()
+    {
+        if (!paused)
+        {
+            pauseCanvas.SetActive(true);
+            EventSystem ev = pauseCanvas.GetComponent<EventSystem>();
+            ev.SetSelectedGameObject(null);
+            ev.SetSelectedGameObject(ev.firstSelectedGameObject);
+            foreach (PlayerController player in players)
+            {
+                player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+            }
+            Cursor.lockState = CursorLockMode.None;
+            paused = true;
+        }
+        else
+        {
+            pauseCanvas.SetActive(false);
+            foreach (PlayerController player in players)
+            {
+                player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+            }
+            Cursor.lockState = CursorLockMode.Locked;
+            paused = false;
+        }
     }
 
     private void OnPlayerDie(int deadIndex, int killerIndex)

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -48,11 +50,14 @@ public class PlayerController : MonoBehaviour
     private float currentSP;
     private float HPRegenTimer = 0f;
     private float SPRegenTimer = 0f;
+    private PlayerInput playerInput = null;
 
     public FirstPersonCamera FPSCam => fpsCam;
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
+
         currentHP = maxHP;
         currentSP = maxSP;
 
@@ -289,6 +294,12 @@ public class PlayerController : MonoBehaviour
         else
         {
             SPRegenTimer += Time.deltaTime;
+        }
+
+        //Pause
+        if (controls.PauseDown)
+        {
+            MultiplayerManager.SharedInstance.OnPausePressed();
         }
 
         //Looking at Weapon Props
