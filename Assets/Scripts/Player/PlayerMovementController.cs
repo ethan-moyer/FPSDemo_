@@ -57,7 +57,6 @@ public class PlayerMovementController : MonoBehaviour
         //Update State & Apply Motion
         currentState.Update();
         cc.Move(MoveDirection * Time.deltaTime);
-        
         //Debug.Log($"CC: {cc.velocity}. MoveDir: {moveDirection}. CC: {IsGrounded()}.");
     }
 

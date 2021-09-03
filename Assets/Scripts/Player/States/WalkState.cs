@@ -13,7 +13,6 @@ public class WalkState : PlayerState
 
     public override void OnStateEnter()
     {
-        Debug.Log("Walking");
         player.SetY(-4f);
     }
 
@@ -49,7 +48,7 @@ public class WalkState : PlayerState
                 player.PlayClip(player.LandingLight);
                 player.SwitchState(new AirState(player, cc, cam, controls));
             }
-            else if (player.SlopeAngle > 0f)
+            else
             {
                 player.SetY(-player.SlopeForce);
             }
