@@ -86,7 +86,7 @@ public class MultiplayerManager : MonoBehaviour
             if (randomSpawns == true)
             {
                 playerController.GetComponent<CharacterController>().enabled = false;
-                Transform point = spawnPoints[Random.Range(0, spawnPoints.Count - 1)];
+                Transform point = FindSpawnPoint();
                 playerController.transform.position = point.position;
                 playerController.transform.rotation = point.rotation;
                 playerController.GetComponent<CharacterController>().enabled = true;
@@ -167,12 +167,32 @@ public class MultiplayerManager : MonoBehaviour
         players[index].gameObject.SetActive(true);
         if (randomSpawns == true)
         {
-            Transform point = spawnPoints[Random.Range(0, spawnPoints.Count - 1)];
+            Transform point = FindSpawnPoint();
             players[index].Respawn(point.position, point.rotation.eulerAngles);
         }
         else
         {
             players[index].Respawn(new Vector3(0f, 50f, 0f), Vector3.zero);
         }
+    }
+
+    private Transform FindSpawnPoint()
+    {
+        Transform point = spawnPoints[Random.Range(0, spawnPoints.Count - 1)];
+        bool validPoint = true;
+
+        foreach (PlayerController player in players)
+        {
+            if (Vector3.Distance(player.transform.position, point.position) <= 5f)
+            {
+                validPoint = false;
+                break;
+            }
+        }
+
+        if (validPoint)
+            return point;
+        else
+            return FindSpawnPoint();
     }
 }
