@@ -97,6 +97,7 @@ MonoBehaviour:
   meleeRange: 0.85
   meleeActiveLength: 0.1166667
   meleeAnimLength: 0.3666667
+  meleeSound: {fileID: 8300000, guid: 5050221db38b7394bae6068735a601eb, type: 3}
   zoomLevels:
   - 1
   - 0.5

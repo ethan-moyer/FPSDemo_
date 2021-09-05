@@ -38,6 +38,7 @@ public abstract class ModularWeapon : MonoBehaviour
     [SerializeField] private float meleeRange;
     [SerializeField] private float meleeActiveLength;
     [SerializeField] private float meleeAnimLength;
+    [SerializeField] private AudioClip meleeSound;
     [Header("FOV")]
     [SerializeField] protected float[] zoomLevels;
     [SerializeField] protected bool stayZoomed = false;
@@ -186,6 +187,12 @@ public abstract class ModularWeapon : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(cam.position, cam.forward, out hit, meleeRange*2))
                 {
+                    if (hit.transform.gameObject.layer == 9 || hit.transform.gameObject.layer == 10 || hit.transform.gameObject.layer == 12)
+                    {
+                        PlayingAudioClip.Invoke(meleeSound);
+                        meleeActive = false;
+                    }
+
                     if (hit.transform.gameObject.layer == 9)
                     {
                         PlayerController enemyController = hit.transform.GetComponent<PlayerController>();
@@ -195,7 +202,6 @@ public abstract class ModularWeapon : MonoBehaviour
                                 enemyController.DamageHit(meleeDamage * 2, 1, cam.position, player);
                             else
                                 enemyController.DamageHit(meleeDamage, 1, cam.position, player);
-                            meleeActive = false;
                         }
                     }
                 }
