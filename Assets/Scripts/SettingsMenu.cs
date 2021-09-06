@@ -92,6 +92,7 @@ public class SettingsMenu : MonoBehaviour
         {
             Screen.fullScreenMode = FullScreenMode.Windowed;
         }
+        displayDropdown.value = mode;
         PlayerPrefs.SetInt("DisplayMode", mode);
     }
 
