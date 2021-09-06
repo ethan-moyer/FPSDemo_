@@ -17,7 +17,10 @@ public class MultiplayerManager : MonoBehaviour
     [SerializeField] private GameObject previewButtons;
     [SerializeField] private TextMeshProUGUI previewText;
     [SerializeField] private Image blackScreen;
-    [SerializeField] private GameObject pauseCanvas;
+    [SerializeField] private GameObject blackBarLeft;
+    [SerializeField] private GameObject blackBarRight;
+    [SerializeField] private GameObject blackCorner;
+    [SerializeField] private GameObject pausePanel;
     private PlayerInputManager playerInputManager;
     private List<PlayerController> players;
     private List<int> scores;
@@ -91,6 +94,25 @@ public class MultiplayerManager : MonoBehaviour
                 playerController.transform.rotation = point.rotation;
                 playerController.GetComponent<CharacterController>().enabled = true;
             }
+
+            if (players.Count == 2)
+            {
+                blackBarLeft.SetActive(true);
+                blackBarRight.SetActive(true);
+                blackCorner.SetActive(false);
+            }
+            else if (players.Count == 3)
+            {
+                blackBarLeft.SetActive(false);
+                blackBarRight.SetActive(false);
+                blackCorner.SetActive(true);
+            }
+            else
+            {
+                blackBarLeft.SetActive(false);
+                blackBarRight.SetActive(false);
+                blackCorner.SetActive(false);
+            }
         }
     }
 
@@ -108,8 +130,8 @@ public class MultiplayerManager : MonoBehaviour
     {
         if (!paused)
         {
-            pauseCanvas.SetActive(true);
-            EventSystem ev = pauseCanvas.GetComponent<EventSystem>();
+            pausePanel.SetActive(true);
+            EventSystem ev = pausePanel.GetComponent<EventSystem>();
             ev.SetSelectedGameObject(null);
             ev.SetSelectedGameObject(ev.firstSelectedGameObject);
             foreach (PlayerController player in players)
@@ -121,7 +143,7 @@ public class MultiplayerManager : MonoBehaviour
         }
         else
         {
-            pauseCanvas.SetActive(false);
+            pausePanel.SetActive(false);
             foreach (PlayerController player in players)
             {
                 player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
