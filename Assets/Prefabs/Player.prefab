@@ -2299,7 +2299,6 @@ MonoBehaviour:
   respawnCanvas: {fileID: 1454019112}
   hudViewport: {fileID: 234137294481444585}
   respawnViewport: {fileID: 6237391565425405478}
-  pausePanel: {fileID: 0}
   hudHealthBar: {fileID: 551314692035593463}
   hudShieldBar: {fileID: 69121785}
   damageIndicators:
@@ -2391,6 +2390,7 @@ MonoBehaviour:
     type: 3}
   stickyPrefab: {fileID: 2284277317478230508, guid: 5eb48d5128505794ab470fd2b38da0fb,
     type: 3}
+  grenadeThrowTime: 0.3
   currentFragAmount: 2
   currentStickyAmount: 2
   maxGrenadeAmount: 2

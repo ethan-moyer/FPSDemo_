@@ -15,7 +15,9 @@ public class PlayerCombatController : MonoBehaviour
     [Header("Grenades")]
     [SerializeField] private GameObject fragPrefab = null;
     [SerializeField] private GameObject stickyPrefab = null;
+    [SerializeField] private float grenadeThrowTime;
     private int currentGrenadeType = 0;
+    private float grenadeCooldown;
     [SerializeField] private int currentFragAmount = 2;
     [SerializeField] private int currentStickyAmount = 0;
     [SerializeField] private int maxGrenadeAmount = 2;
@@ -101,6 +103,7 @@ public class PlayerCombatController : MonoBehaviour
 
         currentFragAmount = maxGrenadeAmount;
         currentStickyAmount = maxGrenadeAmount;
+        grenadeCooldown = 0f;
 
         UpdateGrenadeCounters();
     }
@@ -275,6 +278,9 @@ public class PlayerCombatController : MonoBehaviour
 
     private void Update()
     {
+        if (grenadeCooldown > 0f)
+            grenadeCooldown -= Time.deltaTime;
+
         if (controls.WeaponSwitchDown && CurrentWeapon.CurrentState == ModularWeapon.States.Idle)
         {
             StartCoroutine(SwapWeapons());
@@ -297,7 +303,7 @@ public class PlayerCombatController : MonoBehaviour
         }
         if (controls.ThrowGrenadeDown)
         {
-            if (CurrentWeapon.CurrentState == ModularWeapon.States.Idle)
+            if (CurrentWeapon.CurrentState == ModularWeapon.States.Idle && grenadeCooldown <= 0f)
             {
                 if (currentGrenadeType == 0 && currentFragAmount > 0)
                 {
@@ -309,6 +315,7 @@ public class PlayerCombatController : MonoBehaviour
                     currentStickyAmount -= 1;
                     Instantiate(stickyPrefab, cam.transform.TransformPoint(grenadeSpawnOffset), Quaternion.LookRotation(cam.transform.forward)).GetComponent<Grenade>().SetUp(GetComponent<PlayerController>(), cam.transform.forward * throwingForce);
                 }
+                grenadeCooldown = grenadeThrowTime;
                 UpdateGrenadeCounters();
             }
         }
