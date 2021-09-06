@@ -6,6 +6,7 @@ public abstract class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed = 1f;
     [SerializeField] private float lifetime = 10f;
+    [SerializeField] private bool pooled = false;
     private Rigidbody rb = null;
     private float timer = 0f;
     public Vector3 direction { get; set; }
@@ -22,7 +23,10 @@ public abstract class Projectile : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= lifetime)
         {
-            Destroy(this.gameObject);
+            if (pooled)
+                gameObject.SetActive(false);
+            else
+                Destroy(this.gameObject);
         }
     }
 

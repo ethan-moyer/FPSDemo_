@@ -20,7 +20,6 @@ public class Plasma : Projectile
         else if (collision.gameObject.layer == 10 || collision.gameObject.layer == 12) //Hit terrain or a prop
         {
             ModularWeapon.PlaceEffect(4, collision.contacts[0].point, collision.contacts[0].normal);
-            
         }
 
         Destroy(this.gameObject);

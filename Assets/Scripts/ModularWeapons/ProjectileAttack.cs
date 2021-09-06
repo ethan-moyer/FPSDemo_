@@ -7,6 +7,8 @@ public class ProjectileAttack : WeaponAttack
     [SerializeField] private Projectile projectile = null;
     [SerializeField] private Vector3 spawnOffset = Vector3.zero;
     [SerializeField] private AudioClip firingClip = null;
+    [SerializeField] private bool usePooledProjectile = false;
+    [SerializeField] private int poolIndex;
 
     public override void Attack(PlayerController player, ModularWeapon weapon, Transform cam)
     {
@@ -16,7 +18,18 @@ public class ProjectileAttack : WeaponAttack
         weapon.TriggeringAnimation.Invoke("Fire");
 
         //Spawning new projectile
-        Projectile spawnedProjectile = Instantiate(projectile, cam.TransformPoint(spawnOffset) + (player.GetComponent<CharacterController>().velocity * Time.deltaTime), Quaternion.LookRotation(cam.forward)).GetComponent<Projectile>();
+        Projectile spawnedProjectile;
+        if (usePooledProjectile)
+        {
+            spawnedProjectile = ObjectPooler.SharedInstance.GetPooledObject(poolIndex).GetComponent<Projectile>();
+            spawnedProjectile.transform.position = cam.TransformPoint(spawnOffset) + (player.GetComponent<CharacterController>().velocity * Time.deltaTime);
+            spawnedProjectile.transform.rotation = Quaternion.LookRotation(cam.forward);
+        }
+        else
+        {
+            spawnedProjectile = Instantiate(projectile, cam.TransformPoint(spawnOffset) + (player.GetComponent<CharacterController>().velocity * Time.deltaTime), Quaternion.LookRotation(cam.forward)).GetComponent<Projectile>();
+        }
+
         spawnedProjectile.player = player;
         Physics.IgnoreCollision(spawnedProjectile.GetComponent<Collider>(), player.GetComponent<Collider>());
         spawnedProjectile.gameObject.SetActive(true);

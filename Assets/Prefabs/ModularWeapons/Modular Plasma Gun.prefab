@@ -122,3 +122,5 @@ MonoBehaviour:
     type: 3}
   spawnOffset: {x: 0.18, y: -0.122, z: 0.36}
   firingClip: {fileID: 8300000, guid: 086e3d3a05b788242a1679d156bdea49, type: 3}
+  usePooledProjectile: 1
+  poolIndex: 7
