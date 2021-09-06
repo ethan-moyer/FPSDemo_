@@ -22,6 +22,6 @@ public class Plasma : Projectile
             ModularWeapon.PlaceEffect(4, collision.contacts[0].point, collision.contacts[0].normal);
         }
 
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 }
