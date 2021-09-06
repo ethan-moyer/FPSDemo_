@@ -228,7 +228,6 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn(Vector3 spawnPoint, Vector3 newRotation)
     {
-        Enable();
         currentHP = maxHP;
         currentSP = maxSP;
         hudHealthBar.fillAmount = 1;
@@ -237,6 +236,7 @@ public class PlayerController : MonoBehaviour
         movementController.MoveDirection = Vector3.zero;
         cc.SimpleMove(Vector3.zero);
         transform.position = spawnPoint;
+        Enable();
         combatController.ResetWeapons();
     }
 

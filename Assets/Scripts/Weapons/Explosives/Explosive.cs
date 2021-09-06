@@ -34,7 +34,6 @@ public class Explosive : MonoBehaviour
                     {
                         hitPlayer.DamageHit(HPDamage, SPMultiplier, point, player);
                         int physicsMode = PlayerPrefs.HasKey("PhysicsMode") ? PlayerPrefs.GetInt("PhysicsMode") : 0;
-                        print(physicsMode);
                         if (physicsMode == 0)
                             player.PhysicsHit(point - transform.position, HPDamage * 0.01f);
                         else
@@ -57,7 +56,6 @@ public class Explosive : MonoBehaviour
                             {
                                 hitPlayer.DamageHit(HPDamage * falloff, SPMultiplier * falloff, hit.point, player);
                                 int physicsMode = PlayerPrefs.HasKey("PhysicsMode") ? PlayerPrefs.GetInt("PhysicsMode") : 0;
-                                print(physicsMode);
                                 if (physicsMode == 0)
                                     hitPlayer.PhysicsHit(point - transform.position, falloff * HPDamage * 0.01f);
                                 else

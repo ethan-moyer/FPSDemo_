@@ -139,6 +139,7 @@ public class MultiplayerManager : MonoBehaviour
                 player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
             }
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             paused = true;
         }
         else
@@ -149,6 +150,7 @@ public class MultiplayerManager : MonoBehaviour
                 player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
             }
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             paused = false;
         }
     }
@@ -174,11 +176,15 @@ public class MultiplayerManager : MonoBehaviour
     {
         foreach (PlayerController player in players)
         {
-            player.gameObject.SetActive(false);
+            Destroy(player.gameObject);
         }
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         previewCam.SetActive(true);
         blackScreen.gameObject.SetActive(false);
+        blackBarLeft.SetActive(false);
+        blackBarRight.SetActive(false);
+        blackCorner.SetActive(false);
         previewButtons.SetActive(true);
         previewText.text = $"Player {winner + 1} Wins!";
     }

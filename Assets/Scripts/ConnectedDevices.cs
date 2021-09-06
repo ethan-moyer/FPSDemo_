@@ -11,13 +11,12 @@ public class ConnectedDevices : MonoBehaviour
     private void Awake()
     {
         if (SharedInstance != null)
-            Destroy(this.gameObject);
-        else
         {
-            SharedInstance = this;
-            devices = new List<InputDevice[]>();
-            DontDestroyOnLoad(this.gameObject);
+            Destroy(SharedInstance.gameObject);
         }
+        SharedInstance = this;
+        devices = new List<InputDevice[]>();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void OnPlayerJoined(PlayerInput input)

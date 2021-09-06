@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class PropWeapon : Prop
@@ -23,7 +24,7 @@ public class PropWeapon : Prop
     private IEnumerator DestroyAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        Destroy(this.gameObject);
+        RemoveWeapon();
     }
 
     private void OnTriggerEnter(Collider other)

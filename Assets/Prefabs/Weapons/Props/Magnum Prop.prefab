@@ -177,7 +177,7 @@ MonoBehaviour:
   ammo: 20
   shouldRespawn: 0
   respawnTime: 20
-  lifetime: 30
+  lifetime: 15
 --- !u!114 &5433159537236479529
 MonoBehaviour:
   m_ObjectHideFlags: 0
